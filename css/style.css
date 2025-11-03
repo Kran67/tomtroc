@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@font-face {
+    font-family: playfair;
+    /* set name */
+    src: url('../font/playfair-display.regular.ttf');
+    /* url of the font */
+}
+
 /**
  * Reset css.
  */
@@ -15,6 +24,7 @@
     --lightGray: #F5F3EF;
     --primary: #00AB6C;
     --textGray: #A6A6A6;
+    --backgroundLight: #FAF9F7;
 }
 
 /**
@@ -23,6 +33,12 @@
 body {
     background-color: var(--lightGray);
     font-family: 'inter';
+}
+
+a {
+    border: none;
+    outline: none;
+    text-decoration: none;
 }
 
 header nav {
@@ -37,11 +53,11 @@ header nav a,
 header nav a:visited {
     border: none;
     color: var(--darkGray);
-    font-family: inter;
     font-size: 14px;
     outline: none;
     text-decoration: none;
     white-space: nowrap;
+    font-weight: 400;
 }
 
 header nav a:hover,
@@ -60,7 +76,6 @@ header nav .home {
 
 header nav .exchangeBooks {
     margin-left: 37px;
-    width: 130px;
 }
 
 header nav .line {
@@ -79,7 +94,7 @@ header nav .messaging {
 
 header nav .messagingTxt {
     display: inline-block;
-    width: 64px;
+    width: 80px;
 }
 
 header nav .messaging img,
@@ -94,6 +109,7 @@ header nav .messaging .bubble {
     height: 15px;
     text-align: center;
     width: 10.5px;
+    vertical-align: bottom;
 }
 
 header nav .messaging .bubbleText {
@@ -102,8 +118,9 @@ header nav .messaging .bubbleText {
     font-size: 8.25px;
     font-weight: 700;
     height: 10px;
-    vertical-align: middle;
+    vertical-align: top;
     width: 5px;
+    padding-top: 3px;
 }
 
 header nav .account {
@@ -150,4 +167,168 @@ footer .logo-min {
 
 main {
     background-color: #fff;
+}
+
+.title {
+    font-family: playfair;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--darkGray);
+}
+
+.home-top-part {
+    display: flex;
+    padding: 80px 0 128px;
+    flex-direction: row;
+    background-color: var(--lightGray);
+    justify-content: center;
+}
+
+.home-top-part .left-part {
+    width: 404px;
+    display: flex;
+    padding-right: 75px;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.home-top-part-title {
+    font-size: 36px;
+}
+
+.home-top-part-desc {
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.cta {
+    display: inline-block;
+    background-color: var(--primary);
+    padding: 22px 38px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+}
+
+.cta2 {
+    background-color: var(--lightGray);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.home-top-part-button {
+    width: 152px;
+    margin: 39px 0 71px;
+}
+
+.home-top-part .right-part {
+    width: 404px;
+    height: 539px;
+    background-image: url("../img/hamza-nouasria.jpg");
+    position: relative;
+}
+
+.home-top-part .right-part::after {
+    content: 'Hamza';
+    position: absolute;
+    right: 0;
+    bottom: -28px;
+    font-size: 12px;
+    color: var(--textGray);
+    transform: skewX(-15deg);
+}
+
+.home-middle-part {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--backgroundLight);
+    padding-top: 79px;
+    padding-bottom: 64px;
+    align-items: center;
+}
+
+.home-middle-part-books {
+    margin-top: 79px;
+}
+
+.home-middle-part-button {
+    margin-top: 48px;
+}
+
+.home-bottom-part {
+    display: flex;
+    padding: 79px 0 88px;
+    flex-direction: row;
+    background-color: var(--lightGray);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-bottom-part-desc {
+    margin-top: 22px;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--darkGray);
+    width: 397px;
+}
+
+.home-bottom-part-steps {
+    display: flex;
+    margin-top: 38px;
+    gap: 36px;
+}
+
+.home-bottom-part-step {
+    background-color: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 30px;
+    text-align: center;
+    width: 215px;
+    display: flex;
+    align-items: center;
+}
+
+.home-bottom-part-button {
+    margin-top: 48px;
+}
+
+.home-bottom-part-image {
+    margin-top: 80px;
+    background-image: url(../img/our_values.jpg);
+    height: 230px;
+    align-self: normal;
+}
+
+.home-bottom-part-our-values {
+    margin-top: 77px;
+    position: relative;
+}
+
+.home-bottom-part-our-values::after {
+    position: absolute;
+    content: url(../img/heart.svg);
+    right: -70px;
+    bottom: -79px;
+}
+
+.home-bottom-part-desc2 {
+    margin-top: 27px;
+    width: 392px;
+    align-self: flex-start;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--darkGray);
+}
+
+.home-bottom-part-signature {
+    margin-top: 37px;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--textGray);
 }
