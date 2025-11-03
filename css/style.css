@@ -1,0 +1,153 @@
+/**
+ * Reset css.
+ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/**
+ * Déclaration des couleurs.
+ */
+:root {
+    --darkGray: #292929;
+    --lightGray: #F5F3EF;
+    --primary: #00AB6C;
+    --textGray: #A6A6A6;
+}
+
+/**
+ * Valeur par défaut pour les balises.
+ */
+body {
+    background-color: var(--lightGray);
+    font-family: 'inter';
+}
+
+header nav {
+    align-items: center;
+    background-color: var(--lightGray);
+    display: flex;
+    height: 80px;
+    min-height: 80px;
+}
+
+header nav a,
+header nav a:visited {
+    border: none;
+    color: var(--darkGray);
+    font-family: inter;
+    font-size: 14px;
+    outline: none;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+header nav a:hover,
+header nav a.active {
+    font-weight: 600;
+}
+
+header nav .logo {
+    margin-left: 120px;
+}
+
+header nav .home {
+    margin-left: 63px;
+    width: 45px;
+}
+
+header nav .exchangeBooks {
+    margin-left: 37px;
+    width: 130px;
+}
+
+header nav .line {
+    background-color: var(--textGray);
+    height: 19px;
+    width: 1px;
+    margin-left: auto;
+    margin-right: 46px;
+    opacity: 20%;
+}
+
+header nav .messaging {
+    margin-right: 47px;
+    width: 100px;
+}
+
+header nav .messagingTxt {
+    display: inline-block;
+    width: 64px;
+}
+
+header nav .messaging img,
+header nav .account img {
+    vertical-align: text-bottom;
+}
+
+header nav .messaging .bubble {
+    background-color: var(--darkGray);
+    border-radius: 6.75px;
+    display: inline-block;
+    height: 15px;
+    text-align: center;
+    width: 10.5px;
+}
+
+header nav .messaging .bubbleText {
+    color: var(--lightGray);
+    display: inline-block;
+    font-size: 8.25px;
+    font-weight: 700;
+    height: 10px;
+    vertical-align: middle;
+    width: 5px;
+}
+
+header nav .account {
+    margin-right: 48px;
+}
+
+header nav .accountTxt {
+    display: inline-block;
+    width: 86px;
+}
+
+header nav .signin {
+    margin-right: 120px;
+    display: inline-block;
+    width: 65px;
+}
+
+footer {
+    align-items: center;
+    background-color: #fff;
+    color: var(--darkGray);
+    display: flex;
+    font-size: 12px;
+    height: 61px;
+    justify-content: flex-end;
+    min-height: 61px;
+}
+
+footer .privacy-policy {
+    margin-right: 33px;
+}
+
+footer .legal-notice {
+    margin-right: 33px;
+}
+
+footer .title {
+    margin-right: 33px;
+}
+
+footer .logo-min {
+    margin-right: 36px;
+}
+
+main {
+    background-color: #fff;
+}

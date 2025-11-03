@@ -13,7 +13,8 @@ try {
     switch ($action) {
         // Pages accessibles à tous.
         case 'home':
-            echo 'Welcome to the TomTroc Web Site';
+            $bookController = new BookController();
+            $bookController->showHome();
             break;
 
         default:
