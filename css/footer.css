@@ -1,0 +1,26 @@
+footer {
+    align-items: center;
+    background-color: #fff;
+    color: var(--darkGray);
+    display: flex;
+    font-size: 12px;
+    height: 61px;
+    justify-content: flex-end;
+    min-height: 61px;
+}
+
+footer .privacy-policy {
+    margin-right: 33px;
+}
+
+footer .legal-notice {
+    margin-right: 33px;
+}
+
+footer .copyright {
+    margin-right: 33px;
+}
+
+footer .logo-min {
+    margin-right: 36px;
+}

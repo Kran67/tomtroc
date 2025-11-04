@@ -1,0 +1,41 @@
+.exchange-books-main {
+    display: flex;
+    background-color: var(--backgroundLight);
+    align-items: center;
+    padding: 130px 0 80px;
+    flex-direction: column;
+}
+
+.exchange-books-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 914px;
+}
+
+.exchange-books-title {
+    font-family: playfair;
+    font-size: 36px;
+    color: #000;
+}
+
+.exchange-books-searchbar {
+    background-color: #fff;
+    border: 1px solid #F0F0F0;
+    font-size: 14px;
+    color: var(--textGray);
+    padding-left: 38px;
+    width: 322px;
+    position: relative;
+    background-image: url('../img/union.png');
+    background-repeat: no-repeat;
+    background-position: 11px center;
+    border-radius: 6px;
+}
+
+.exchange-books_grid {
+    margin-top: 70px;
+    display: flex;
+    gap: 48px 38px;
+    width: 914px;
+    flex-wrap: wrap;
+}

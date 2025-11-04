@@ -1,0 +1,53 @@
+.book-card {
+    position: relative;
+    display: flex;
+    box-shadow: 0px 4px 24px 0px #00000003;
+    flex-direction: column;
+}
+
+.book-card .book-tag {
+    background-color: var(--availableTab);
+    position: absolute;
+    z-index: 1;
+    top: 16px;
+    right: 12px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 8.88px;
+    text-align: center;
+    padding: 3.7px 13.31px;
+    border-radius: 29.58px;
+    display: none;
+}
+
+.book-card .book-tag.indisponible {
+    background-color: var(--unavailableTab);
+    display: block;
+}
+
+.book-card .book-content {
+    display: flex;
+    width: 200;
+    height: 124;
+    gap: 10px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 21px 15px;
+}
+
+.book-card .book-content .book-title {
+    font-size: 16px;
+    color: #000;
+}
+
+.book-card .book-content .book-author {
+    font-size: 14px;
+    color: var(--textGray);
+}
+
+.book-card .book-content .book-seller {
+    font-style: Italic;
+    font-size: 10px;
+    color: var(--textGray);
+    margin-top: 14px;
+}

@@ -1,0 +1,96 @@
+header nav {
+    align-items: center;
+    background-color: var(--lightGray);
+    display: flex;
+    height: 80px;
+    min-height: 80px;
+}
+
+header nav a,
+header nav a:visited {
+    border: none;
+    color: var(--darkGray);
+    font-size: 14px;
+    outline: none;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: 400;
+}
+
+header nav a:hover,
+header nav a.active {
+    font-weight: 600;
+}
+
+header nav .logo {
+    margin-left: 120px;
+}
+
+header nav .home {
+    margin-left: 63px;
+    width: 45px;
+}
+
+header nav .exchangeBooks {
+    margin-left: 37px;
+}
+
+header nav .line {
+    background-color: var(--textGray);
+    height: 19px;
+    width: 1px;
+    margin-left: auto;
+    margin-right: 46px;
+    opacity: 20%;
+}
+
+header nav .messaging {
+    margin-right: 47px;
+    width: 100px;
+}
+
+header nav .messagingTxt {
+    display: inline-block;
+    width: 80px;
+}
+
+header nav .messaging img,
+header nav .account img {
+    vertical-align: text-bottom;
+}
+
+header nav .messaging .bubble {
+    background-color: var(--darkGray);
+    border-radius: 6.75px;
+    display: inline-block;
+    height: 15px;
+    text-align: center;
+    width: 10.5px;
+    vertical-align: bottom;
+}
+
+header nav .messaging .bubbleText {
+    color: var(--lightGray);
+    display: inline-block;
+    font-size: 8.25px;
+    font-weight: 700;
+    height: 10px;
+    vertical-align: top;
+    width: 5px;
+    padding-top: 3px;
+}
+
+header nav .account {
+    margin-right: 48px;
+}
+
+header nav .accountTxt {
+    display: inline-block;
+    width: 86px;
+}
+
+header nav .signin {
+    margin-right: 120px;
+    display: inline-block;
+    width: 65px;
+}
