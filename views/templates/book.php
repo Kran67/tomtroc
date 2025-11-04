@@ -6,7 +6,7 @@
 <div class="book-detail-breadcrumb"><a href="./?action=books">Nos livres</a>&nbsp;> <?= Utils::format($book->getTitle()) ?></div>
 <div class="book-detail-main">
     <div class="book-detail-img-container">    
-        <img class="book-detail-img" src="<?= IMG_BOOKS.$book->getImage() ?>" />
+        <img class="book-detail-img" src="<?= Utils::format(IMG_BOOKS.$book->getImage()) ?>" />
     </div>
     <div class="book-detail-detail">
         <div class="book-detail-title"><?= Utils::format($book->getTitle()) ?></div>

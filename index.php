@@ -29,6 +29,16 @@ try {
             $bookController->showBookDetail($bookId);
             break;
 
+        case 'signup':
+            $signController = new SignController();
+            $signController->showSignForm();
+            break;
+
+        case 'signin':
+            $signController = new SignController();
+            $signController->showSignForm(false);
+            break;
+
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

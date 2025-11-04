@@ -96,8 +96,8 @@ class User extends AbstractEntity
     {
         return 
             "<a href='./?action=profile&id={$this->id}' class='avatar'>
-                <img src='".IMG_AVATARS.$this->avatar."' class='avatar-image' />
-                <span class='avatar-nickname'>{$this->nickname}</span>
+                <img src='".Utils::format(IMG_AVATARS.$this->avatar)."' class='avatar-image' />
+                <span class='avatar-nickname'>".Utils::format($this->nickname)."</span>
             </a>";
     }
 

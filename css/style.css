@@ -5,6 +5,7 @@
 @import url(./bookCard.css);
 @import url(./books.css);
 @import url(./bookDetail.css);
+@import url(./sign.css);
 
 @font-face {
     font-family: playfair;
@@ -94,15 +95,16 @@ main .title {
 .avatar {
     display: flex;
     align-items: center;
-    width: 157px;
     height: 60px;
     opacity: 1;
     border-radius: 114px;
     padding-top: 6px;
     padding-bottom: 6px;
     padding-left: 5px;
+    padding-right: 17px;
     gap: 12px;
     background-color: #fff;
+    justify-self: flex-start;
 }
 
 .avatar-image {

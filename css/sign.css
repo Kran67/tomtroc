@@ -1,0 +1,64 @@
+.sign {
+    display: flex;
+    background-color: var(--backgroundLight);
+    justify-content: center;
+}
+
+.sign-form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 130px 248px 0 150px;
+}
+
+.sign-title {
+    font-family: playfair;
+    font-size: 36px;
+}
+
+.sign-form {
+    margin-top: 10px;
+}
+
+.sign-form-row {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.sign-form-row:first-of-type {
+    margin-top: 55px;
+}
+
+.sign-form-row label {
+    font-size: 14px;
+    color: var(--textGray);
+}
+
+.sign-form-row input {
+    margin-top: 10px;
+    width: 322px;
+    height: 50px;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background-color: #fff;
+    outline: none;
+    padding: 0 5px;
+}
+
+.sign-submit-btn {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.sign-ask {
+    font-size: 14px;
+    color: var(--textGray);
+    margin-top: 40px;
+}
+
+.sign-ask a {
+    font-size: 14px;
+    color: var(--textGray);
+    text-decoration: underline;
+    text-decoration-style: solid;
+}

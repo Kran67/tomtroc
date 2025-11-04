@@ -26,17 +26,17 @@ $action = Utils::request('action', 'home');
             <a href="./" class="home <?php if ($action === 'home') echo 'active'; ?>">Accueil</a>
             <a href="./?action=books" class="exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</a>
             <div class="line"></div>
-            <a href="./" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
+            <a href="./?action=messaging" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
                 <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie" />
                 <span class="messagingTxt">Messagerie</span><span class="bubble">
                     <span class="bubbleText">0</span>
                 </span>
             </a>
-            <a href="./" class="account <?php if ($action === 'account') echo 'active'; ?>">
+            <a href="./?action=account" class="account <?php if ($action === 'account') echo 'active'; ?>">
                 <img src="<?= IMG . 'account.svg' ?>" alt="compte" />
                 <span class="accountTxt">Mon compte</span>
             </a>
-            <a href="./" class="signin" <?php if ($action === 'signin') echo 'active'; ?>">Connexion</a>
+            <a href="./?action=signin" class="signin" <?php if ($action === 'signin') echo 'active'; ?>">Connexion</a>
         </nav>
     </header>
 
