@@ -13,7 +13,13 @@
 </div>
 <div class="home-middle-part">
     <div class="home-middle-part-title">Les derniers livres ajoutés</div>
-    <div class="home-middle-part-books"></div>
+    <div class="home-middle-part-books">
+        <?php
+            foreach($books as $book) {
+                echo $book;
+            }
+        ?>
+    </div>
     <a href="./?action=home" class="cta home-middle-part-button">Voir tous les livres</a>
 </div>
 <div class="home-bottom-part">

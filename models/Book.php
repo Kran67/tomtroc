@@ -2,36 +2,55 @@
 
 /**
  * Entité Book, un livre est défini par les champs
- * id, user_id, title, author, image, description, status, created_at, updated_at
+ * id, user, title, author, image, description, status, created_at, updated_at
  */
  class Book extends AbstractEntity 
  {
-    private int $userId;
+    private int $user_id;
     private string $title = "";
     private string $author = "";
     private string $image = "";
     private string $description = "";
     private string $status = "";
     private DateTime $created_at;
-    private DateTime $update_at ;
+    private DateTime $update_at;
+    private string $user_nickname;
 
 
     /**
-     * Setter pour le propriétaire du livre.
-     * @param int $userId
+     * Setter pour l'identifiant du propriétaire du livre.
+     * @param int $user_id
      */
-    public function setUser(int $userId) : void 
+    public function setUserId(int $user_id) : void 
     {
-        $this->userId = $userId;
+        $this->user_id = $user_id;
     }
 
     /**
-     * Getter pour le propriétaire du livre.
+     * Getter pour l'identifiant du propriétaire du livre.
      * @return int
      */
-    public function getUSer() : int
+    public function getUserId() : int
     {
-        return $this->userId;
+        return $this->user_id;
+    }
+
+    /**
+     * Setter pour le pseudo de propriétaire du livre.
+     * @param string $user_nickname
+     */
+    public function setUserNickname(string $user_nickname) : void 
+    {
+        $this->user_nickname = $user_nickname;
+    }
+
+    /**
+     * Getter pour le pseudo de propriétaire du livre.
+     * @return string
+     */
+    public function getUserNickname() : string
+    {
+        return $this->user_nickname;
     }
 
     /**
@@ -110,7 +129,7 @@
      * Setter pour la descritpion du livre.
      * @param string $status
      */
-    public function setStatut(string $status) : void 
+    public function setStatus(string $status) : void 
     {
         $this->status = $status;
     }
@@ -171,5 +190,20 @@
     public function getUpdateAt() : ?DateTime 
     {
         return $this->updated_at;
+    }
+
+    public function __toString() : string
+    {
+        $status = $this->status === 'indisponible' ? 'non dispo.' : $this->status;
+        return 
+        "<div class='book-card'>
+            <img src='./img/books/min/{$this->image}' alt='' />
+            <span class='book-tag {$status}'>{$status}</span>
+            <div class='book-content'>
+                <div class='book-title'>{$this->title}</div>
+                <div class='book-author'>{$this->author}</div>
+                <div class='book-seller'>Vendu par : {$this->user_nickname}</div>
+            </div>
+         </div>";
     }
 }

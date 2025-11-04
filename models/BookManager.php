@@ -27,7 +27,7 @@ class BookManager extends AbstractEntityManager
      */
     public function getLastBooks() : array
     {
-        $sql = "SELECT * FROM book ORDER BY created_at LIMIT 0, 4";
+        $sql = "SELECT b.*, u.nickname as user_nickname FROM book b LEFT JOIN user u ON u.id = b.user_id ORDER BY created_at LIMIT 0, 4";
         $result = $this->db->query($sql);
         $books = [];
 
