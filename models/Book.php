@@ -196,14 +196,16 @@
     {
         $status = $this->status === 'indisponible' ? 'non dispo.' : $this->status;
         return 
-        "<div class='book-card'>
-            <img src='./img/books/min/". Utils::format($this->image). "' alt='' />
-            <span class='book-tag {$status}'>{$status}</span>
-            <div class='book-content'>
-                <div class='book-title'>". Utils::format($this->title). "</div>
-                <div class='book-author'>". Utils::format($this->author). "</div>
-                <div class='book-seller'>Vendu par : ". Utils::format($this->user_nickname). "</div>
+        "<a href='./?action=book?id={$this->id}'>
+            <div class='book-card'>
+                <img src='./img/books/min/". Utils::format($this->image). "' alt='' />
+                <span class='book-tag {$status}'>{$status}</span>
+                <div class='book-content'>
+                    <div class='book-title'>". Utils::format($this->title). "</div>
+                    <div class='book-author'>". Utils::format($this->author). "</div>
+                    <div class='book-seller'>Vendu par : ". Utils::format($this->user_nickname). "</div>
+                </div>
             </div>
-         </div>";
+        </a>";
     }
 }
