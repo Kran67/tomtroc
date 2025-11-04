@@ -11,7 +11,7 @@ class BookManager extends AbstractEntityManager
      */
     public function getAllBooks(string $bookTitle) : array
     {
-        $sql = "SELECT b.*, u.nickname as user_nickname FROM book b LEFT JOIN user u ON u.id = b.user_id ";
+        $sql = BASE_BOOK_QUERY;
         if (!empty($bookTitle)) {
             $sql = $sql . " WHERE b.title like '%" . $bookTitle . "%' ";
         }
@@ -30,7 +30,7 @@ class BookManager extends AbstractEntityManager
      */
     public function getLastBooks() : array
     {
-        $sql = "SELECT b.*, u.nickname as user_nickname FROM book b LEFT JOIN user u ON u.id = b.user_id ORDER BY created_at LIMIT 0, 4";
+        $sql = BASE_BOOK_QUERY ." ORDER BY created_at LIMIT 0, 4";
         $result = $this->db->query($sql);
         $books = [];
 
@@ -47,7 +47,7 @@ class BookManager extends AbstractEntityManager
      */
     public function getBookById(int $id) : ?Book
     {
-        $sql = "SELECT * FROM book WHERE id = :id";
+        $sql = BASE_BOOK_QUERY ." WHERE b.id = :id";
         $result = $this->db->query($sql, ['id' => $id]);
         $book = $result->fetch();
         if ($book) {

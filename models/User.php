@@ -91,4 +91,27 @@ class User extends AbstractEntity
     {
         return $this->created_at;
     }
+
+    public function __toString() : string
+    {
+        return 
+            "<a href='./?action=profile&id={$this->id}' class='avatar'>
+                <img src='".IMG_AVATARS.$this->avatar."' class='avatar-image' />
+                <span class='avatar-nickname'>{$this->nickname}</span>
+            </a>";
+    }
+
+    public function getCard() : string
+    {
+        return 
+        "<a href='./?action=&id={$this->id}'>
+        </a>";
+    }
+
+    public function getMessageAvatar() : string
+    {
+        return 
+        "<a href='./?action=book&id={$this->id}'>
+        </a>";
+    }
 }

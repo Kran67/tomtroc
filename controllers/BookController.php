@@ -27,4 +27,24 @@ class BookController
         $view = new View("Books");
         $view->render("books", ['books' => $books]);
     }
+
+    /**
+     * Affiche du détail d'un livre.
+     * @return void
+     */
+    public function showBookDetail(int $bookId) : void
+    {
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById($bookId);
+
+        if (!$book) {
+            throw new Exception("Le livre demandé n'existe pas.");
+        }
+
+        $userManager = new USerManager();
+        $user = $userManager->getUserById($book->getUserId());
+
+        $view = new View("Book");
+        $view->render("book", ['book' => $book, 'user' => $user]);
+    }
 }

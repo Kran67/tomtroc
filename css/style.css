@@ -4,6 +4,7 @@
 @import url(./home.css);
 @import url(./bookCard.css);
 @import url(./books.css);
+@import url(./bookDetail.css);
 
 @font-face {
     font-family: playfair;
@@ -49,6 +50,11 @@ a {
     text-decoration: none;
 }
 
+a:visited {
+    outline: none;
+    text-decoration: none;
+}
+
 main {
     background-color: #fff;
 }
@@ -83,4 +89,29 @@ main .title {
     background-color: var(--secondary);
     color: #fff;
     border-color: var(--primary);
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    width: 157px;
+    height: 60px;
+    opacity: 1;
+    border-radius: 114px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 5px;
+    gap: 12px;
+    background-color: #fff;
+}
+
+.avatar-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.avatar-nickname {
+    font-size: 14px;
+    color: var(--darkGray);
 }

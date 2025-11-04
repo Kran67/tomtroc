@@ -23,7 +23,7 @@ header nav a.active {
 }
 
 header nav .logo {
-    margin-left: 120px;
+    margin-left: 150px;
 }
 
 header nav .home {
@@ -90,7 +90,7 @@ header nav .accountTxt {
 }
 
 header nav .signin {
-    margin-right: 120px;
+    margin-right: 150px;
     display: inline-block;
     width: 65px;
 }

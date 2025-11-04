@@ -1,0 +1,86 @@
+.book-detail-breadcrumb {
+    padding-left: 150px;
+    color: var(--textGray);
+    font-size: 10px;
+    background-color: var(--lightGray);
+    height: 43px;
+    display: flex;
+    align-items: center;
+}
+
+.book-detail-breadcrumb a:visited {
+    color: var(--textGray);
+}
+
+.book-detail-main {
+    display: flex;
+}
+
+.book-detail-img-container {
+    position: relative;
+    min-width: 720px;
+    min-height: 863px;
+    overflow: hidden;
+}
+
+.book-detail-img {
+    position: absolute;
+    top: -312px;
+    left: -38px;
+}
+
+.book-detail-detail {
+    padding: 59px 144px 37px 85px;
+    background-color: var(--backgroundLight);
+    width: 100%;
+}
+
+.book-detail-title {
+    font-family: playfair;
+    font-weight: 400;
+    font-size: 36px;
+}
+
+.book-detail-author {
+    margin-top: 15px;
+    font-size: 16px;
+    color: var(--textGray);
+}
+
+.book-detail-sep {
+    margin: 32px 0;
+    width: 27px;
+    height: 0px;
+    border: none;
+    border-top: 1px solid var(--textGray);
+}
+
+.book-detail-desc-title,
+.book-detail-owner-title {
+    font-weight: 600;
+    font-size: 8px;
+    color: var(--darkGray);
+    letter-spacing: 0.6px;
+}
+
+.book-detail-desc {
+    margin-top: 16px;
+}
+
+.book-detail-desc p {
+    font-size: 14px;
+    margin-bottom: 17px;
+}
+
+.book-detail-owner-title {
+    margin-top: 31px;
+}
+
+.book-detail-owner {
+    margin-top: 15px;
+}
+
+.book-detail-button {
+    margin-top: 81px;
+    width: 100%;
+}

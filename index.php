@@ -23,6 +23,12 @@ try {
             $bookController->showBooks($title);
             break;
 
+        case 'book':
+            $bookId = Utils::request('id', '-1');
+            $bookController = new BookController();
+            $bookController->showBookDetail($bookId);
+            break;
+
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

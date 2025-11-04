@@ -192,11 +192,20 @@
         return $this->updated_at;
     }
 
+    /**
+     * Getter pour le pseudo du propriétaire.
+     * @return string
+     */
+    public function getOwnerNickName() : string
+    {
+        return $this->user_nickname;
+    }
+
     public function __toString() : string
     {
         $status = $this->status === 'indisponible' ? 'non dispo.' : $this->status;
         return 
-        "<a href='./?action=book?id={$this->id}'>
+        "<a href='./?action=book&id={$this->id}'>
             <div class='book-card'>
                 <img src='./img/books/min/". Utils::format($this->image). "' alt='' />
                 <span class='book-tag {$status}'>{$status}</span>
