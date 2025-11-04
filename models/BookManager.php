@@ -11,7 +11,6 @@ class BookManager extends AbstractEntityManager
      */
     public function getAllBooks(string $bookTitle) : array
     {
-        var_dump($bookTitle);
         $sql = "SELECT b.*, u.nickname as user_nickname FROM book b LEFT JOIN user u ON u.id = b.user_id ";
         if (!empty($bookTitle)) {
             $sql = $sql . " WHERE b.title like '%" . $bookTitle . "%' ";

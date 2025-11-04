@@ -7,7 +7,7 @@
     <div class="left-part">
         <div class="title home-top-part-title">Rejoignez nos lecteurs passionnés</div>
         <div class="home-top-part-desc">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</div>
-        <a href="./?action=home" class="cta home-top-part-button">Découvrir</a>
+        <a href="./?action=books" class="cta home-top-part-button">Découvrir</a>
     </div>
     <div class="right-part"></div>
 </div>
@@ -20,7 +20,7 @@
             }
         ?>
     </div>
-    <a href="./?action=home" class="cta home-middle-part-button">Voir tous les livres</a>
+    <a href="./?action=books" class="cta home-middle-part-button">Voir tous les livres</a>
 </div>
 <div class="home-bottom-part">
     <div class="title">Comment ça marche ?</div>
@@ -31,7 +31,7 @@
         <div class="home-bottom-part-step">Parcourez les livres disponibles chez d'autres membres.</div>
         <div class="home-bottom-part-step">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
     </div>
-    <a href="./?action=home" class="cta cta2 home-bottom-part-button">Voir tous les livres</a>
+    <a href="./?action=books" class="cta cta2 home-bottom-part-button">Voir tous les livres</a>
     <div class="home-bottom-part-image"></div>
     <div class="home-bottom-part-our-values">
         <div class="title">Nos valeurs</div>

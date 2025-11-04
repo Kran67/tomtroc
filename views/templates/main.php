@@ -24,7 +24,7 @@ $action = Utils::request('action', 'home');
                 <img src="<?= IMG . 'logo.png' ?>" alt="logo" />
             </a>
             <a href="./" class="home <?php if ($action === 'home') echo 'active'; ?>">Accueil</a>
-            <a href="./" class="exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</a>
+            <a href="./?action=books" class="exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</a>
             <div class="line"></div>
             <a href="./" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
                 <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie" />
