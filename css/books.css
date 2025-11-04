@@ -12,6 +12,10 @@
     width: 914px;
 }
 
+.exchange-books-bar form {
+    display: flex;
+}
+
 .exchange-books-title {
     font-family: playfair;
     font-size: 36px;
