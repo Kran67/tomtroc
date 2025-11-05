@@ -67,7 +67,7 @@
 
 .home-bottom-part {
     display: flex;
-    padding: 79px 0 88px;
+    padding: 79px 0 163px;
     flex-direction: row;
     background-color: var(--lightGray);
     justify-content: center;

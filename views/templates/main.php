@@ -36,7 +36,7 @@ $action = Utils::request('action', 'home');
                 <img src="<?= IMG . 'account.svg' ?>" alt="compte" />
                 <span class="accountTxt">Mon compte</span>
             </a>
-            <a href="./?action=signin" class="signin" <?php if ($action === 'signin') echo 'active'; ?>">Connexion</a>
+            <a href="./?action=<?= isset($_SESSION['idUser']) ? "logout" : "signin" ?>" class="signin" <?php if ($action === 'signin') echo 'active'; ?>"><?= isset($_SESSION['idUser']) ? "Déconnexion" : "Connexion" ?></a>
         </nav>
     </header>
 

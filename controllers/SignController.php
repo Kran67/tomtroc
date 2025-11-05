@@ -8,8 +8,17 @@ class SignController
      */
     public function showSignForm(bool $signup = true) : void
     {
-        $view = new View("sign");
-        $view->render("sign", ['signup' => $signup]);
+        $user = new User();
+        if (isset($_SESSION['idUser'])) {
+            echo "checkIfUserIsConnected";
+            $userManager = new UserManager();
+            $user = $userManager->getUserById($_SESSION['idUser']);
+            $view = new View("account");
+            $view->render("account", ['user' => $user]);
+        } else {
+            $view = new View("sign");
+            $view->render("sign", ['signup' => $signup, 'user' => $user]);
+        }
     }
 
     /**
@@ -31,12 +40,12 @@ class SignController
     public function connectUser() : void 
     {
         // On récupère les données du formulaire.
-        $login = Utils::request("login");
+        $login = Utils::request("email");
         $password = Utils::request("password");
 
         // On vérifie que les données sont valides.
         if (empty($login) || empty($password)) {
-            throw new Exception("Tous les champs sont obligatoires. 1");
+            throw new Exception("Tous les champs sont obligatoires.");
         }
 
         // On vérifie que l'utilisateur existe.
@@ -72,5 +81,90 @@ class SignController
 
         // On redirige vers la page d'accueil.
         Utils::redirect("home");
+    }
+
+    /**
+     * Connexion de l'utilisateur.
+     * @return User
+     */
+    public function addUser() : ?User
+    {
+        // On récupère les données du formulaire.
+        $login = Utils::request("email");
+        $password = Utils::request("password");
+        $nickname = Utils::request("nickname");
+
+        // On vérifie que les données sont valides.
+        if (empty($login) || empty($password) || empty($nickname)) {
+            throw new Exception("Tous les champs sont obligatoires.");
+        }
+
+        // On vérifie que l'utilisateur n'existe pas.
+        $userManager = new UserManager();
+        $user = $userManager->getUserByLogin($login);
+        if ($user) {
+            throw new Exception("L'utilisateur existe déjà.");
+        }
+
+        $user = new User(['login' => $login, 'password' => password_hash($password, PASSWORD_DEFAULT), 'nickname' => $nickname]);
+
+        // On enregistre le nouvel utilisateur
+        $user = $userManager->addUser($user);
+
+        // On connecte l'utilisateur.
+        $_SESSION['user'] = $user;
+        $_SESSION['idUser'] = $user->getId();
+
+        // On redirige vers la page du compte.
+        Utils::redirect("account");
+    }
+
+    /**
+     * Modification d'un utilisateur. 
+     * @return void
+     */
+    public function updateAccount() : void 
+    {
+        // On récupère les données du formulaire.
+        $password = Utils::request("password");
+        $nickname = Utils::request("nickname");
+
+        // On vérifie que les données sont valides.
+        if (empty($password) || empty($nickname)) {
+            throw new Exception("Tous les champs sont obligatoires.");
+        }
+
+        // On crée l'objet User.
+        $user = new User([
+            'id' => $_SESSION['idUser'],
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'nickname' => $nickname
+        ]);
+
+        $userManager = new UserManager();
+        $userManager->updateUser($user);
+
+        // On redirige vers la page du compte.
+        Utils::redirect("account");
+    }
+
+    /**
+     * Affichage de la page du compte de l'utilisateur.
+     * @return User
+     */
+    public function showAccount(): void
+    {
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("signin");
+        }
+
+        $userManager = new UserManager();
+        $user = $userManager->getUserById($_SESSION['idUser']);
+
+        $bookManager = new BookManager();
+        $userBooks = $bookManager->getAllBooksFromUserId($user->getId());
+
+        $view = new View("account");
+        $view->render("account", ["user" => $user, "books" => $userBooks]);
     }
 }

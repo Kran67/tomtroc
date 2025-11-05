@@ -120,8 +120,16 @@
      * Getter pour la descritpion du livre.
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(int $length = -1) : string
     {
+        if ($length > 0) {
+            // Ici, on utilise mb_substr et pas substr pour éviter de couper un caractère en deux (caractère multibyte comme les accents).
+            $description = mb_substr($this->description, 0, $length);
+            if (strlen($this->description) > $length) {
+                $description .= "...";
+            }
+            return $description;
+        }
         return $this->description;
     }
  
@@ -208,7 +216,7 @@
         "<a href='./?action=book&id={$this->id}'>
             <div class='book-card'>
                 <img src='./img/books/min/". Utils::format($this->image). "' alt='' />
-                <span class='book-tag {$status}'>{$status}</span>
+                <span class='book-tag {$this->status}'>{$status}</span>
                 <div class='book-content'>
                     <div class='book-title'>". Utils::format($this->title). "</div>
                     <div class='book-author'>". Utils::format($this->author). "</div>

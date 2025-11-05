@@ -10,6 +10,7 @@ class User extends AbstractEntity
     private string $nickname;
     private string $avatar;
     private ?DateTime $created_at;
+    private int $book_count;
 
     /**
      * Setter pour le login.
@@ -84,12 +85,39 @@ class User extends AbstractEntity
     }
 
     /**
+     * Setter pour la date de création.
+     * @param DateTime $created_at
+     */
+    public function setCreatedAt(string $created_at) : void
+    {
+        $this->created_at = new DateTime($created_at);
+    }
+
+    /**
      * Getter pour la date de création.
      * @return DateTime
      */
     public function getCreatedAt() : DateTime 
     {
         return $this->created_at;
+    }
+
+    /**
+     * Setter pour le nombre de livre.
+     * @param int $bookCount
+     */
+    public function setBookCount(int $bookCount) : void 
+    {
+        $this->book_count = $bookCount;
+    }
+
+    /**
+     * Getter pour le nombre de livre.
+     * @return int
+     */
+    public function getBookCount() : int 
+    {
+        return $this->book_count;
     }
 
     public function __toString() : string
@@ -103,9 +131,71 @@ class User extends AbstractEntity
 
     public function getCard() : string
     {
-        return 
-        "<a href='./?action=&id={$this->id}'>
-        </a>";
+        $accountMemberSince = Utils::differenceDate($this->created_at);
+        return "<div class='account-card'>
+            <img src='". IMG_AVATARS.$this->getAvatar() ."' alt='avatar' />
+            <a href=''>modifier</a>
+            <hr />
+            <div class='account-nickname'>". Utils::format($this->nickname) ."</div>
+            <div class='account-member-since'>Membre ".$accountMemberSince["texte"]."</div>
+            <div class='account-library'>BIBLIOTHEQUE</div>
+            <div class='account-book-count'><img src='". IMG."livres.svg' alt='' />". $this->book_count ." livre".($this->book_count > 1 ? "s" : "")."</div>
+        </div>";
+    }
+
+    public function getUpdateForm() : string
+    {
+        return "<div class='account-update-form'>
+            <div class='account-update-form-title'></div>
+            <form class='sign-form' action='index.php' method='post'>
+                <input type='hidden' name='action' value='updateAccount' />
+                <div class='sign-form-row'>
+                    <label for='email'>Adresse email</label>
+                    <input name='email' id='email' type='text' value='".$this->login."' readonly />
+                </div>
+                <div class='sign-form-row'>
+                    <label for='password'>Mot de passe</label>
+                    <input name='password' id='password' type='password' required />
+                </div>
+                <div class='sign-form-row'>
+                    <label for='nickname'>Pseudo</label>
+                    <input name='nickname' id='nickname' type='text' value='".$this->nickname."' />
+                </div>
+                <button class='cta cta2 sign-submit-btn'>Enregistrer</button>
+            </form>
+        </div>";
+    }
+
+    public function getBooks(array $books) : string
+    {
+        $result = "<div class='account-detail-books'>
+            <div class='user-books-header'>
+                <div class='user-books-column-image'>PHOTO</div>
+                <div class='user-books-column-title'>TITRE</div>
+                <div class='user-books-column-author'>AUTEUR</div>
+                <div class='user-books-column-desc'>DESCRIPTION</div>
+                <div class='user-books-column-availability'>DISPONIBILITE</div>
+                <div class='user-books-column-action'>ACTION</div>
+            </div>";
+            if (count($books) === 0) {
+                $result .= "<div class='user-books-no-book'>Aucun livre à afficher<br />";
+                $result .= "<a href='./action=addBook' class='user-books-add-book'>Ajouter un livre</a>";
+            } else {
+                $i = 0;
+                foreach($books as $book) {
+                    $result .= "<div class='user-books-row'>";
+                    $result .= "<div class='user-books-column-image user-books-image-container'><img src='".IMG_BOOKS.$book->getImage()."' class='user-books-image' /></div>";
+                    $result .= "<div class='user-books-column-title'>".$book->getTitle()."</div>";
+                    $result .= "<div class='user-books-column-author'>".$book->getAuthor()."</div>";
+                    $result .= "<div class='user-books-column-desc'>".$book->getDescription(82)."</div>";
+                    $status = $book->getStatus() === 'indisponible' ? 'non dispo.' : $book->getStatus();
+                    $result .= "<div class='user-books-column-availability'><span class='book-tag ".$book->getStatus()."'>".$status."</span></div>";
+                    $result .= "<div class='user-books-column-action'><a href='./?action=editBook'>Éditer</a><a href='./?action=deleteBook' class='delete'>Supprimer</a></div>";
+                    $result .= "</div>";
+                }
+            }
+        $result .= "</div>";
+        return $result;
     }
 
     public function getMessageAvatar() : string

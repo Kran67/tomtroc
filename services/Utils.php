@@ -1,5 +1,5 @@
 <?php
-
+    date_default_timezone_set("europe/paris");
 /**
  * Classe utilitaire : cette classe ne contient que des méthodes statiques qui peuvent être appelées
  * directement sans avoir besoin d'instancier un objet Utils.
@@ -93,5 +93,77 @@ class Utils {
     {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
+
+    /**
+     * A noter qu'il vous faudra configurer le timezone pour afficher la bonne différence, à la minute prés
+     * Le timezone pour la France:
+     * date_default_timezone_set("europe/paris");
+     * A utiliser en haut du document
+     */
+    public static function differenceDate(DateTime $firstDate, ?DateTime $lastDate = null){
+        //on part du principe que $firstDate et $lastDate peut être envoyé sous deux formats: un timestamp ou une date formatée
+        
+        //on vérifie donc le format envoyé, pour le mettre en date formatée si c'est un timestamp:
+        //is_numeric vérifie si c'est un nombre entier (un timestamp est un nombre entier)
+        //$firstDate = is_numeric($firstDate) ? date("d-m-Y H:i:s", $firstDate) : $firstDate;
+        
+        //on crée ensuite la date via date_create (Retourne un nouvel objet DateTime (DateTime: Représentation d'une date et heure))
+        //$firstDate = date_create($firstDate);
+        $maintenant = !isset($lastDate) ? date_create("now") : $lastDate;
+        
+        //si jamais la date formatée qui à été envoyée est incorrect, on retourne un message d'erreur
+        if (!$firstDate)
+        {
+            echo "La date envoyée à differenceDate() est incorrecte.";
+            return;
+        }
+        //date_diff nous donne maintenant des valeurs sur les représentations ci-dessus
+        $interval = date_diff($maintenant, $firstDate);
+        
+        //on récupère les valeurs d'$interval qui nous intéresse
+        $y = $interval->y;//années
+        $m = $interval->m;//mois
+        $d = $interval->d;//jours
+        $h = $interval->h;//heures
+        $i = $interval->i;//minutes
+        $s = $interval->s;//secondes
+        $invert = $interval->invert;//0 = $firstDate est dans le futur, 1 = $firstDate est dans la passé
+        $texte_invert = $invert === (!isset($lastDate) ? 1 : 0) ? "depuis" : "Dans";//il y a une différence lorsqu'on demande un interval ou si on demande "depuis $firstDate seulement":
+        //depuis $firstDate seulement: 1 = $firstDate est dans le futur, 0 = $firstDate est dans la passé
+        //interval entre $firstDate et $lastDate: 0 = $firstDate est dans le futur, 1 = $firstDate est dans la passé
+        $days = $interval->days;//nombre de jours écoulés (depuis combien ou dans combien, nombre entier positif)
+        
+        //enfin, on retourne les différences pour les afficher:
+        
+        //si il y a plus d'un an, on affiche le nombre d'année plus le nombre de jours ("5 ans et 18 jours" par exemple)
+        if ($y > 0) $texte = "$texte_invert $y an".($y > 1 ? "s" : "").($d > 0 ? " et ".$d." jour".($d > 1 ? "s" : "") : "");
+        //si il y a moins d'un an, on affiche les mois et les jours ("5 mois et 24 jours" par exemple)
+        elseif ($m > 0) $texte = "$texte_invert $m mois".($d > 0 ? " et $d jour".($d > 1 ? "s" : "") : "");
+        //si il y a moins d'un mois, on affiche les jours, évidemment
+        elseif ($d > 0) $texte = "$texte_invert $d jour".($d > 1 ? "s" : "");
+        //les heures si il y a moins d'un jour
+        elseif ($h > 0) $texte = "$texte_invert $h heure".($h > 1 ? "s" : "");
+        //les minutes si il y a moins d'une heure
+        elseif ($i > 0) $texte = "$texte_invert $i minute".($i > 1 ? "s" : "");
+        // et les secondes si il y a moins d'une minute
+        elseif ($s > 0) $texte = "$texte_invert $s seconde".($s > 1 ? "s" : "");
+        
+        //si toutes les précédentes valeurs précédentes sont à 0, c'est forcément que c'est maintenant/aujourd'hui (s'affiche seulement si les heures et minutes ne sont pas précisées)
+        else $texte = "Depuis aujourd'hui!";
+        
+        //on retourne un tableau, au moins on pourra afficher la ou les valeurs voulues
+        return [
+                "texte" => $texte,//notre texte formaté du genre "Il y a 5 heures" ou "Dans 1 mois et 12 jours", par exemple
+                "y" => $y,
+                "m" => $m,
+                "d" => $d,
+                "h" => $h,
+                "i" => $i,
+                "s" => $s,
+                "invert" => $invert,
+                "texte_invert" => $texte_invert,
+                "days" => $days,
+            ];
+        }    
 
 }

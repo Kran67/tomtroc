@@ -38,6 +38,43 @@ try {
             $signController = new SignController();
             $signController->showSignForm(false);
             break;
+        
+        case 'addUser':
+            $signController = new SignController();
+            $signController->addUser();
+            break;
+
+        case 'login':
+            $signController = new SignController();
+            $signController->connectUser();
+            break;
+
+        case 'logout':
+            $signController = new SignController();
+            $signController->disconnectUser();
+            break;
+
+        case 'account':
+            $signController = new SignController();
+            $signController->showAccount();
+            break;
+        
+        case 'updateAccount':
+            $signController = new SignController();
+            $signController->updateAccount();
+            break;
+
+        case 'editBook':
+            $bookId = Utils::request('id', '-1');
+            $bookManager = new BookManager();
+            $bookManager->editBook($bookId);
+            break;
+
+        case 'deleteBook':
+            $bookId = Utils::request('id', '-1');
+            $bookManager = new BookManager();
+            $bookManager->deleteBook($bookId);
+            break;
 
         default:
             throw new Exception("La page demandée n'existe pas.");

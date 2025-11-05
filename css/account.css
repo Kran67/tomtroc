@@ -1,0 +1,203 @@
+.account-main {
+    display: flex;
+    flex-direction: column;
+    padding: 90px 150px;
+    background-color: var(--backgroundLight);
+}
+
+.account-title {
+    font-family: playfair;
+    font-size: 26px;
+}
+
+.account-detail {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.account-card,
+.account-update-form {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 547px;
+    height: 508px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.account-card>img {
+    margin-top: 48px;
+    width: 135px;
+    height: 135px;
+}
+
+.account-card a,
+.account-card a:visited {
+    margin-top: 5px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: underline;
+    outline: none;
+    color: var(--textGray);
+}
+
+.account-card hr {
+    margin-top: 47px;
+    width: 242px;
+    height: 0;
+    border: none;
+    border-bottom: 1px solid var(--lightGray);
+}
+
+.account-nickname {
+    margin-top: 48px;
+    font-family: playfair;
+    font-size: 24px;
+    text-align: center;
+    color: var(--darkGray);
+}
+
+.account-member-since {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--textGray);
+}
+
+.account-library {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 8px;
+    text-align: center;
+    color: var(--darkGray);
+}
+
+.account-book-count {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    color: var(--darkGray);
+    font-size: 14px;
+    text-align: center;
+    gap: 4px;
+}
+
+.account-book-count img {
+    width: 10.41px;
+    height: 13.71px;
+}
+
+.account-update-form input {
+    background-color: #EDF2F6;
+}
+
+.account-update-form button {
+    width: 150px;
+}
+
+.account-detail-books {
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--backgroundLight);
+}
+
+.user-books-header {
+    display: flex;
+    padding: 33px 66px;
+    font-weight: 600;
+    font-size: 8px;
+    color: var(--darkGray);
+    background-color: #fff;
+    margin-bottom: 1px;
+}
+
+.user-books-column-image {
+    min-width: 158px;
+}
+
+.user-books-column-title {
+    min-width: 158px;
+}
+
+.user-books-column-author {
+    min-width: 181px;
+}
+
+.user-books-column-desc {
+    min-width: 175px;
+    width: 100%;
+}
+
+.user-books-column-availability {
+    min-width: 213px;
+}
+
+.user-books-column-action {
+    min-width: 202px;
+}
+
+.user-books-no-book {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--darkGray);
+    width: 100%;
+    background-color: #fff;
+}
+
+.account-detail-books a {
+    outline: none;
+    color: var(--darkGray);
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.user-books-row {
+    display: flex;
+    background-color: #fff;
+    height: 130px;
+    padding-left: 66px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--darkGray);
+}
+
+.user-books-row:nth-child(odd) {
+    background-color: #EDF2F6;
+}
+
+.user-books-image-container {
+    position: relative;
+    width: 78px;
+    height: 78px;
+    overflow: hidden;
+}
+
+.user-books-image {
+    position: absolute;
+    left: -12px;
+    top: -62px;
+    width: 105px;
+    height: 158px;
+}
+
+.user-books-column-desc {
+    padding-right: 45px;
+    font-style: italic;
+}
+
+.user-books-column-action {
+    display: flex;
+    gap: 28px;
+}
+
+.user-books-column-action .delete {
+    color: #CB2D2D;
+}

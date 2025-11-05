@@ -5,24 +5,30 @@
     flex-direction: column;
 }
 
-.book-card .book-tag {
-    background-color: var(--availableTab);
-    position: absolute;
-    z-index: 1;
-    top: 16px;
-    right: 12px;
+.book-tag {
+    background-color: var(--availableTag);
     color: #fff;
     font-weight: 500;
     font-size: 8.88px;
     text-align: center;
     padding: 3.7px 13.31px;
     border-radius: 29.58px;
-    display: none;
+}
+
+.book-tag.indisponible {
+    background-color: var(--unavailableTag);
 }
 
 .book-card .book-tag.indisponible {
-    background-color: var(--unavailableTab);
     display: block;
+}
+
+.book-card .book-tag {
+    position: absolute;
+    z-index: 1;
+    top: 16px;
+    right: 12px;
+    display: none;
 }
 
 .book-card .book-content {
