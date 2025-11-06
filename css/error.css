@@ -1,0 +1,35 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--backgroundLight);
+    height: calc(100vh - 80px - 61px);
+    justify-content: center;
+}
+
+.error-code {
+    font-family: playfair;
+    font-size: 100px;
+}
+
+.error-title {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--darkGray);
+}
+
+.error-link {
+    margin-top: 5px;
+    color: var(--textGray);
+}
+
+.error-page-removed {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.error-go-home {
+    margin-top: 30px;
+
+}

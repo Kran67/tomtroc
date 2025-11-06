@@ -8,6 +8,7 @@
 .account-title {
     font-family: playfair;
     font-size: 26px;
+    margin-bottom: 48px;
 }
 
 .account-detail {
@@ -19,12 +20,11 @@
 
 .account-card,
 .account-update-form {
-    margin-top: 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 547px;
-    height: 508px;
+    min-height: 508px;
     background-color: #fff;
     border-radius: 20px;
 }
@@ -33,16 +33,21 @@
     margin-top: 48px;
     width: 135px;
     height: 135px;
+    border-radius: 50%;
 }
 
-.account-card a,
-.account-card a:visited {
+.account-card .account-image-update,
+.account-card .account-image-update:visited {
     margin-top: 5px;
     font-size: 14px;
     text-align: center;
     text-decoration: underline;
     outline: none;
     color: var(--textGray);
+}
+
+.account-spacer {
+    height: 22px;
 }
 
 .account-card hr {
@@ -91,7 +96,14 @@
     height: 13.71px;
 }
 
-.account-update-form input {
+.account-button {
+    margin: 45px 0 56px;
+}
+
+.account-update-form input,
+.book-form input,
+.book-form textarea,
+.book-form select {
     background-color: #EDF2F6;
 }
 
@@ -107,7 +119,7 @@
 
 .user-books-header {
     display: flex;
-    padding: 33px 66px;
+    padding: 33px 66px 7px;
     font-weight: 600;
     font-size: 8px;
     color: var(--darkGray);
@@ -159,11 +171,18 @@
     text-decoration: underline;
 }
 
+.user-books-row-container {
+    height: 530px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--textGray) var(--backgroundLight);
+}
+
 .user-books-row {
     display: flex;
     background-color: #fff;
     height: 130px;
-    padding-left: 66px;
+    padding: 0 66px;
     align-items: center;
     font-size: 12px;
     color: var(--darkGray);
@@ -190,6 +209,9 @@
 
 .user-books-column-desc {
     padding-right: 45px;
+}
+
+.user-books-row .user-books-column-desc {
     font-style: italic;
 }
 

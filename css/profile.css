@@ -1,0 +1,10 @@
+.profile-main {
+    display: flex;
+    background-color: var(--backgroundLight);
+    gap: 28px;
+    padding: 103px 130px;
+}
+
+.profile-main .account-card {
+    min-width: 341px;
+}

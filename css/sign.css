@@ -19,7 +19,8 @@
     margin-top: 10px;
 }
 
-.sign-form-row {
+.sign-form-row,
+.book-form-row {
     display: flex;
     flex-direction: column;
     margin-top: 32px;
@@ -29,14 +30,17 @@
     margin-top: 55px;
 }
 
-.sign-form-row label {
+.sign-form-row label,
+.book-form-row label {
     font-size: 14px;
     color: var(--textGray);
 }
 
-.sign-form-row input {
+.sign-form-row input,
+.book-form-row input,
+.book-form-row textarea,
+.book-form select {
     margin-top: 10px;
-    width: 322px;
     height: 50px;
     border-radius: 6px;
     border: 1px solid #F0F0F0;
@@ -47,7 +51,8 @@
     color: var(--darkGray);
 }
 
-.sign-submit-btn {
+.sign-submit-btn,
+.book-submit-btn {
     width: 100%;
     margin-top: 30px;
     cursor: pointer;
@@ -60,7 +65,9 @@
     margin-top: 40px;
 }
 
-.sign-ask a {
+.sign-ask a,
+.book-form-back,
+.book-form-image-upload {
     font-size: 14px;
     color: var(--textGray);
     text-decoration: underline;

@@ -11,11 +11,13 @@ class BookManager extends AbstractEntityManager
      */
     public function getAllBooks(string $bookTitle) : array
     {
+        $sqlParams = [];
         $sql = BASE_BOOK_QUERY;
         if (!empty($bookTitle)) {
-            $sql = $sql . " WHERE b.title like '%:bookTitle%' ";
+            $sql .= " WHERE b.title like :bookTitle ";
+            $sqlParams = ['bookTitle' => "%".Utils::format($bookTitle)."%"];
         }
-        $result = $this->db->query($sql, ['bookTitle' => $bookTitle]);
+        $result = $this->db->query($sql, $sqlParams);
         $books = [];
 
         while ($book = $result->fetch()) {

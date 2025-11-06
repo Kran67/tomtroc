@@ -65,7 +65,7 @@ header nav .messaging .bubble {
     display: inline-block;
     height: 15px;
     text-align: center;
-    width: 10.5px;
+    width: 11px;
     vertical-align: bottom;
 }
 
@@ -76,7 +76,7 @@ header nav .messaging .bubbleText {
     font-weight: 700;
     height: 10px;
     vertical-align: top;
-    width: 5px;
+    width: 6px;
     padding-top: 3px;
 }
 

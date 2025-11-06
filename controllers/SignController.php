@@ -167,4 +167,45 @@ class SignController
         $view = new View("account");
         $view->render("account", ["user" => $user, "books" => $userBooks]);
     }
+
+    /**
+     * Edition d'un livre.
+     * @return void
+     */
+    public function editBook() : void
+    {
+        $this->checkIfUserIsConnected();
+
+        $id = Utils::request("id", -1);
+
+
+        // On récupère l'article associé.
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById($id);
+       
+        if (!$book) {
+            throw new Exception("Le livre demandé n'existe pas.");
+        } else {
+            $view = new View("updateBookForm");
+            $view->render("updateBookForm", ["book" => $book]);
+        }
+    }
+
+    /**
+     * Suppression d'un livre.
+     * @return void
+     */
+    public function deleteBook() : void
+    {
+        $this->checkIfUserIsConnected();
+
+        $id = Utils::request("id", -1);
+
+        // On supprime le livre.
+        $bookManager = new BookManager();
+        $bookManager->deleteBook($id);
+       
+        // On redirige vers la page du compte.
+        Utils::redirect("account");
+    }
 }

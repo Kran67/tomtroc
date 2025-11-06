@@ -129,18 +129,31 @@ class User extends AbstractEntity
             </a>";
     }
 
+    private function isConnected() : bool
+    {
+        return isset($_SESSION) && isset($_SESSION['idUser']) && $_SESSION['idUser'] === $this->id;
+    }
+
     public function getCard() : string
     {
         $accountMemberSince = Utils::differenceDate($this->created_at);
-        return "<div class='account-card'>
-            <img src='". IMG_AVATARS.$this->getAvatar() ."' alt='avatar' />
-            <a href=''>modifier</a>
-            <hr />
+        $result = "<div class='account-card'>
+            <img src='". IMG_AVATARS.$this->getAvatar() ."' alt='avatar' />";
+        if ($this->isConnected()) {
+            $result .= "<a class='account-image-update' href='#'>modifier</a>";
+        } else {
+            $result .= "<div class='account-spacer'></div>";
+        }
+        $result .= "<hr />
             <div class='account-nickname'>". Utils::format($this->nickname) ."</div>
             <div class='account-member-since'>Membre ".$accountMemberSince["texte"]."</div>
             <div class='account-library'>BIBLIOTHEQUE</div>
-            <div class='account-book-count'><img src='". IMG."livres.svg' alt='' />". $this->book_count ." livre".($this->book_count > 1 ? "s" : "")."</div>
-        </div>";
+            <div class='account-book-count'><img src='". IMG."livres.svg' alt='' />". $this->book_count ." livre".($this->book_count > 1 ? "s" : "")."</div>";
+        if (!$this->isConnected()) {
+            $result .= "<a href='./?action=sendmessage' class='cta cta2 account-button'>Écrire un message</a>";
+        }
+        $result .= "</div>";
+        return $result;
     }
 
     public function getUpdateForm() : string
@@ -173,15 +186,21 @@ class User extends AbstractEntity
                 <div class='user-books-column-image'>PHOTO</div>
                 <div class='user-books-column-title'>TITRE</div>
                 <div class='user-books-column-author'>AUTEUR</div>
-                <div class='user-books-column-desc'>DESCRIPTION</div>
-                <div class='user-books-column-availability'>DISPONIBILITE</div>
-                <div class='user-books-column-action'>ACTION</div>
-            </div>";
+                <div class='user-books-column-desc'>DESCRIPTION</div>";
+                if ($this->isConnected()) {
+                    $result .= "<div class='user-books-column-availability'>DISPONIBILITE</div>
+                        <div class='user-books-column-action'>ACTION</div>";
+                }
+            $result .= "</div>";
             if (count($books) === 0) {
                 $result .= "<div class='user-books-no-book'>Aucun livre à afficher<br />";
-                $result .= "<a href='./action=addBook' class='user-books-add-book'>Ajouter un livre</a>";
+                if ($this->isConnected()) {
+                    $result .= "<a href='./action=addBook' class='user-books-add-book'>Ajouter un livre</a>";
+                }
             } else {
-                $i = 0;
+                if (!$this->isConnected()) {
+                    $result .= "<div class='user-books-row-container'>";
+                }
                 foreach($books as $book) {
                     $result .= "<div class='user-books-row'>";
                     $result .= "<div class='user-books-column-image user-books-image-container'><img src='".IMG_BOOKS.$book->getImage()."' class='user-books-image' /></div>";
@@ -189,8 +208,13 @@ class User extends AbstractEntity
                     $result .= "<div class='user-books-column-author'>".$book->getAuthor()."</div>";
                     $result .= "<div class='user-books-column-desc'>".$book->getDescription(82)."</div>";
                     $status = $book->getStatus() === 'indisponible' ? 'non dispo.' : $book->getStatus();
-                    $result .= "<div class='user-books-column-availability'><span class='book-tag ".$book->getStatus()."'>".$status."</span></div>";
-                    $result .= "<div class='user-books-column-action'><a href='./?action=editBook'>Éditer</a><a href='./?action=deleteBook' class='delete'>Supprimer</a></div>";
+                    if ($this->isConnected()) {
+                        $result .= "<div class='user-books-column-availability'><span class='book-tag ".$book->getStatus()."'>".$status."</span></div>";
+                        $result .= "<div class='user-books-column-action'><a href='./?action=editBook&id=".$book->getId()."'>Éditer</a><a href='./?action=deleteBook&id=".$book->getId()."' class='delete' ".Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?").">Supprimer</a></div>";
+                    }
+                    $result .= "</div>";
+                }
+                if (!$this->isConnected()) {
                     $result .= "</div>";
                 }
             }

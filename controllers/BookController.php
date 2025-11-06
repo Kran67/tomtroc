@@ -25,7 +25,7 @@ class BookController
         $books = $bookManager->getAllBooks($bookTitle);
 
         $view = new View("Books");
-        $view->render("books", ['books' => $books]);
+        $view->render("books", ['books' => $books, 'filter' => $bookTitle]);
     }
 
     /**

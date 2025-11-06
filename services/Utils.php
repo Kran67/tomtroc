@@ -50,6 +50,15 @@ class Utils {
     }
 
     /**
+     * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
+     * retour en arrière.
+     */
+    public static function back() : string
+    {
+        return "onclick=\"history.back();\"";
+    }
+
+    /**
      * Cette méthode protège une chaine de caractères contre les attaques XSS.
      * @param string $string : la chaine à protéger.
      * @return string : la chaine protégée.

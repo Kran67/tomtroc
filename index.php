@@ -66,17 +66,22 @@ try {
 
         case 'editBook':
             $bookId = Utils::request('id', '-1');
-            $bookManager = new BookManager();
-            $bookManager->editBook($bookId);
+            $signController = new SignController();
+            $signController->editBook($bookId);
             break;
 
         case 'deleteBook':
             $bookId = Utils::request('id', '-1');
-            $bookManager = new BookManager();
-            $bookManager->deleteBook($bookId);
+            $signController = new SignController();
+            $signController->deleteBook($bookId);
             break;
 
-        default:
+        case 'profile':
+            $profileController = new ProfileController();
+            $profileController->showProfile(Utils::request('id', '-1'));
+            break;
+
+    default:
             throw new Exception("La page demandée n'existe pas.");
     }
 } catch (Exception $e) {

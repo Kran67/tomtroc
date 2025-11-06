@@ -7,6 +7,9 @@
 @import url(./bookDetail.css);
 @import url(./sign.css);
 @import url(./account.css);
+@import url(./error.css);
+@import url(./profile.css);
+@import url(./bookForm.css);
 
 @font-face {
     font-family: playfair;
@@ -55,6 +58,69 @@ a {
 a:visited {
     outline: none;
     text-decoration: none;
+}
+
+select,
+::picker(select) {
+    appearance: base-select;
+}
+
+select {
+    flex: 1;
+    transition: 0.4s;
+}
+
+select::picker-icon {
+    color: #999999;
+    transition: 0.4s rotate;
+}
+
+select:open::picker-icon {
+    rotate: 180deg;
+}
+
+::picker(select) {
+    border: none;
+    box-shadow: 6px 6px 18px 0 var(--textGray);
+}
+
+option {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background: var(--backgroundLight);
+    padding: 10px;
+    transition: 0.4s;
+    font-size: 14px;
+    color: var(--darkGray);
+}
+
+option:first-of-type {
+    border-radius: 8px 8px 0 0;
+}
+
+option:last-of-type {
+    border-radius: 0 0 8px 8px;
+}
+
+option:nth-of-type(odd) {
+    background: #fff;
+}
+
+option:hover,
+option:focus,
+option:checked:hover {
+    background-color: #EDF2F6;
+}
+
+::picker(select) {
+    border-radius: 8px;
+}
+
+option:not(option:last-of-type) {
+    border-bottom: none;
 }
 
 main {
