@@ -1,6 +1,12 @@
 .book-form-main {
+    display: flex;
+    justify-content: center;
+}
+
+.book-form-container {
     background-color: var(--backgroundLight);
     padding: 38px 145px 90px;
+    width: 1440px;
 }
 
 .book-form-back {
@@ -68,6 +74,8 @@
 .book-form textarea {
     height: 356px;
     resize: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--textGray) var(--backgroundLight);
 }
 
 .book-submit-btn {

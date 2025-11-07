@@ -1,5 +1,4 @@
 <?php
-    date_default_timezone_set("europe/paris");
 /**
  * Classe utilitaire : cette classe ne contient que des méthodes statiques qui peuvent être appelées
  * directement sans avoir besoin d'instancier un objet Utils.
@@ -11,13 +10,13 @@ class Utils {
      * @param DateTime $date : la date à convertir.
      * @return string : la date convertie.
      */
-    public static function convertDateToFrenchFormat(DateTime $date) : string
+    public static function convertDateToFrenchFormat(DateTime $date, string $pattern = 'EEEE d MMMM Y') : string
     {
         // Attention, s'il y a un soucis lié à IntlDateFormatter c'est qu'il faut
         // activer l'extention intl_date_formater (ou intl) au niveau du serveur apache. 
         // Ca peut se faire depuis php.ini ou parfois directement depuis votre utilitaire (wamp/mamp/xamp)
         $dateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
-        $dateFormatter->setPattern('EEEE d MMMM Y');
+        $dateFormatter->setPattern($pattern);
         return $dateFormatter->format($date);
     }
 

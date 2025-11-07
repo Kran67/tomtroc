@@ -1,8 +1,15 @@
 .account-main {
     display: flex;
     flex-direction: column;
-    padding: 90px 150px;
     background-color: var(--backgroundLight);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-container {
+    padding: 90px 150px;
+    width: 1440px;
 }
 
 .account-title {
@@ -98,13 +105,14 @@
 
 .account-button {
     margin: 45px 0 56px;
+    width: 215px;
 }
 
 .account-update-form input,
 .book-form input,
 .book-form textarea,
 .book-form select {
-    background-color: #EDF2F6;
+    background-color: var(--lightGray2);
 }
 
 .account-update-form button {
@@ -189,7 +197,7 @@
 }
 
 .user-books-row:nth-child(odd) {
-    background-color: #EDF2F6;
+    background-color: var(--lightGray2);
 }
 
 .user-books-image-container {

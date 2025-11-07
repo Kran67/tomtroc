@@ -1,0 +1,37 @@
+.thread-main {
+    display: flex;
+    height: 69px;
+    align-items: center;
+    gap: 12px;
+    background-color: #fff;
+    padding-left: 34px;
+}
+
+.thread-image-container {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.thread-image-container img {
+    width: 48px;
+}
+
+.thread-right {
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+}
+
+.thread-right-header {
+    display: flex;
+    font-size: 14px;
+    color: var(--darkGray);
+    justify-content: space-between;
+}
+
+.thread-last-message {
+    font-size: 12px;
+    color: var(--textGray);
+}

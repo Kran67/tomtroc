@@ -6,6 +6,11 @@ require_once 'config/autoload.php';
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
 $action = Utils::request('action', 'home');
+$userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : -1;
+$MessagingManager = new MessagingManager();
+$unReadMessages = $MessagingManager->getUnReadMessageCountByUserId($userId);
+$_SESSION['unReadMessages'] = $unReadMessages;
+
 
 // Try catch global pour gérer les erreurs
 try {
@@ -79,6 +84,11 @@ try {
         case 'profile':
             $profileController = new ProfileController();
             $profileController->showProfile(Utils::request('id', '-1'));
+            break;
+
+        case 'messaging':
+            $MessagingController = new MessagingController();
+            $MessagingController->showMessaging();
             break;
 
     default:

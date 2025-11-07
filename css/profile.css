@@ -1,10 +1,26 @@
 .profile-main {
     display: flex;
+    flex-direction: column;
+
     background-color: var(--backgroundLight);
-    gap: 28px;
+    align-items: center;
+}
+
+.profile-container {
+    display: flex;
     padding: 103px 130px;
+    width: 1440px;
+    gap: 28px;
 }
 
 .profile-main .account-card {
     min-width: 341px;
+}
+
+.profile-container .user-books-row:nth-child(odd) {
+    background-color: #fff;
+}
+
+.profile-container .user-books-row:nth-child(even) {
+    background-color: var(--lightGray2);
 }

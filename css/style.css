@@ -10,6 +10,8 @@
 @import url(./error.css);
 @import url(./profile.css);
 @import url(./bookForm.css);
+@import url(./message.css);
+@import url(./thread.css);
 
 @font-face {
     font-family: playfair;
@@ -39,6 +41,8 @@
     --backgroundLight: #FAF9F7;
     --availableTag: #6DC5A1;
     --unavailableTag: #C56D6D;
+    --lightGray2: #EDF2F6;
+    --white: #F0F0F0;
 }
 
 /**
@@ -71,7 +75,7 @@ select {
 }
 
 select::picker-icon {
-    color: #999999;
+    color: car(--darkGray);
     transition: 0.4s rotate;
 }
 
@@ -89,7 +93,7 @@ option {
     justify-content: flex-start;
     gap: 20px;
     border-radius: 6px;
-    border: 1px solid #F0F0F0;
+    border: 1px solid var(--white);
     background: var(--backgroundLight);
     padding: 10px;
     transition: 0.4s;
@@ -112,7 +116,7 @@ option:nth-of-type(odd) {
 option:hover,
 option:focus,
 option:checked:hover {
-    background-color: #EDF2F6;
+    background-color: var(--lightGray2);
 }
 
 ::picker(select) {
@@ -124,7 +128,10 @@ option:not(option:last-of-type) {
 }
 
 main {
-    background-color: #fff;
+    background-color: var(--backgroundLight);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 main .title {
@@ -135,9 +142,7 @@ main .title {
 }
 
 .cta {
-    display: inline-block;
     background-color: var(--primary);
-    padding: 22px 38px;
     border-radius: 10px;
     font-weight: 600;
     font-size: 16px;
@@ -145,6 +150,10 @@ main .title {
     text-align: center;
     transition: all 300ms ease-out;
     border: 1px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 63px;
 }
 
 .cta2 {
@@ -183,4 +192,8 @@ main .title {
 .avatar-nickname {
     font-size: 14px;
     color: var(--darkGray);
+}
+
+.hidden {
+    display: none;
 }

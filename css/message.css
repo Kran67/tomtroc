@@ -1,0 +1,131 @@
+.messaging-main {
+    background-color: var(--lightGray);
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 80px - 61px);
+}
+
+.messaging-threads {
+    background-color: var(--backgroundLight);
+    display: flex;
+    width: 308px;
+    flex-direction: column;
+    padding-top: 54px;
+    gap: 26px;
+}
+
+.messaging-threads-title {
+    font-family: playfair;
+    font-size: 26px;
+    padding-left: 34px;
+}
+
+.messaging-threads-container {
+    overflow-y: auto;
+}
+
+.messaging-current-thread {
+    width: 831px;
+    background-color: var(--lightGray);
+    padding: 35px 0 35px 44px;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.messaging-current-thread-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--darkGray);
+}
+
+.thread-messages-container {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    scrollbar-width: thin;
+    scrollbar-color: var(--textGray) var(--backgroundLight);
+}
+
+.thread-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 0;
+}
+
+.messaging-current-thread-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.messaging-current-thread-message-header {
+    display: flex;
+    font-size: 12px;
+    color: var(--textGray);
+    gap: 6px;
+    align-items: center;
+}
+
+.messaging-current-thread-message-header.connected-user,
+.messaging-current-thread-message-content.connected-user {
+    justify-content: flex-end;
+}
+
+.messaging-current-thread-image-container {
+    position: relative;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+
+.messaging-current-thread-image-container img {
+    position: absolute;
+    width: 30px;
+    left: -3px;
+}
+
+.messaging-current-thread-message-content {
+    display: flex;
+}
+
+.messaging-current-thread-message-content span {
+    padding: 10px 19px;
+    font-size: 12px;
+    color: var(--darkGray);
+    border-radius: 3px;
+    background-color: #fff;
+
+}
+
+.messaging-current-thread-message-content.connected-user span {
+    background-color: var(--lightGray2);
+}
+
+.messaging-send-message-form {
+    display: flex;
+    gap: 22px;
+}
+
+.messaging-send-message-form input {
+    background-color: #fff;
+    border: 1px solid var(--white);
+    border-radius: 6px;
+    padding: 0 40px;
+    color: var(--textGray);
+    outline: none;
+    flex: 1;
+}
+
+.messaging-submit-btn {
+    width: 132px;
+    height: 49px;
+}

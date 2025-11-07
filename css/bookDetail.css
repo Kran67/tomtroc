@@ -1,3 +1,14 @@
+.book-detail {
+    background-color: var(--lightGray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-detail-container {
+    width: 1440px;
+}
+
 .book-detail-breadcrumb {
     padding-left: 150px;
     color: var(--textGray);
@@ -82,5 +93,5 @@
 
 .book-detail-button {
     margin-top: 81px;
-    width: 100%;
+    flex: 1;
 }

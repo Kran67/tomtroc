@@ -20,23 +20,25 @@ $action = Utils::request('action', 'home');
 <body>
     <header>
         <nav>
+            <div></div>    
+            <div></div>    
             <a href="./" class="logo">
                 <img src="<?= IMG . 'logo.png' ?>" alt="logo" />
             </a>
             <a href="./" class="home <?php if ($action === 'home') echo 'active'; ?>">Accueil</a>
             <a href="./?action=books" class="exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</a>
+            <div></div>    
             <div class="line"></div>
             <a href="./?action=messaging" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
                 <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie" />
-                <span class="messagingTxt">Messagerie</span><span class="bubble">
-                    <span class="bubbleText">0</span>
-                </span>
+                <span class="messagingTxt">Messagerie</span><span class="bubble"><?= $_SESSION['unReadMessages'] ?></span>
             </a>
             <a href="./?action=account" class="account <?php if ($action === 'account') echo 'active'; ?>">
                 <img src="<?= IMG . 'account.svg' ?>" alt="compte" />
                 <span class="accountTxt">Mon compte</span>
             </a>
-            <a href="./?action=<?= isset($_SESSION['idUser']) ? "logout" : "signin" ?>" class="signin" <?php if ($action === 'signin') echo 'active'; ?>"><?= isset($_SESSION['idUser']) ? "Déconnexion" : "Connexion" ?></a>
+            <a href="./?action=<?= isset($_SESSION['idUser']) ? "logout" : "signin" ?>" class="signin <?php if ($action === 'signin') echo 'active'; ?>"><?= isset($_SESSION['idUser']) ? "Déconnexion" : "Connexion" ?></a>
+            <div></div>    
         </nav>
     </header>
 

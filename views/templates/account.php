@@ -4,10 +4,12 @@
      */
 ?>
 <div class="account-main">
-    <div class="account-title">Mon compte</div>
-    <div class="account-detail">
-        <?= $user->getCard() ?>
-        <?= $user->getUpdateForm() ?>
+    <div class="account-container">
+        <div class="account-title">Mon compte</div>
+        <div class="account-detail">
+            <?= $user->getCard() ?>
+            <?= $user->getUpdateForm() ?>
+        </div>
+        <?= $user->getBooks($books) ?>
     </div>
-    <?= $user->getBooks($books) ?>
 <div>

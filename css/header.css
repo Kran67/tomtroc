@@ -1,9 +1,16 @@
 header nav {
     align-items: center;
     background-color: var(--lightGray);
-    display: flex;
+    display: grid;
     height: 80px;
     min-height: 80px;
+    grid-template-columns: 1fr 150px 212px 95px 193px 158px 56px 170px 156px 130px 121px 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+}
+
+header nav .logo {
+    justify-self: flex-start;
 }
 
 header nav a,
@@ -22,39 +29,29 @@ header nav a.active {
     font-weight: 600;
 }
 
-header nav .logo {
-    margin-left: 150px;
-}
-
-header nav .home {
-    margin-left: 63px;
-    width: 45px;
-}
-
-header nav .exchangeBooks {
-    margin-left: 37px;
-}
 
 header nav .line {
     background-color: var(--textGray);
     height: 19px;
     width: 1px;
-    margin-left: auto;
-    margin-right: 46px;
     opacity: 20%;
 }
 
 header nav .messaging {
-    margin-right: 47px;
-    width: 100px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
 }
 
 header nav .messagingTxt {
-    display: inline-block;
     width: 80px;
 }
 
-header nav .messaging img,
+header nav .messaging img {
+    margin-top: 4px;
+    height: 13px;
+}
+
 header nav .account img {
     vertical-align: text-bottom;
 }
@@ -62,35 +59,12 @@ header nav .account img {
 header nav .messaging .bubble {
     background-color: var(--darkGray);
     border-radius: 6.75px;
-    display: inline-block;
     height: 15px;
-    text-align: center;
-    width: 11px;
-    vertical-align: bottom;
-}
-
-header nav .messaging .bubbleText {
     color: var(--lightGray);
-    display: inline-block;
     font-size: 8.25px;
     font-weight: 700;
-    height: 10px;
-    vertical-align: top;
-    width: 6px;
-    padding-top: 3px;
-}
-
-header nav .account {
-    margin-right: 48px;
-}
-
-header nav .accountTxt {
-    display: inline-block;
-    width: 86px;
-}
-
-header nav .signin {
-    margin-right: 150px;
-    display: inline-block;
-    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
 }
