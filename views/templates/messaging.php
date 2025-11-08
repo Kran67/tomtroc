@@ -2,7 +2,7 @@
     /**
      * Affichage du détail du profile d'un utilisateur.
      */
-$userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : -1;
+$userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : '';
 ?>
 <div class="messaging-main">
     <div class="messaging-threads">
@@ -18,7 +18,7 @@ $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] :
     <div class="messaging-current-thread">
         <div class="messaging-current-thread-header">
             <div class='thread-image-container'>
-                <img src='<?= IMG_AVATARS.Utils::format($current_thread->getAvatar()); ?>' alt='avatar' />
+                <img src='<?= IMG_AVATARS.Utils::format($current_thread->getAvatar()); ?>' alt='avatar'>
             </div>
             <?= $current_thread->getNickname(); ?>
         </div>
@@ -30,7 +30,7 @@ $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] :
                         <div class="messaging-current-thread-container">
                             <div class="messaging-current-thread-message-header <?= $message->getUserId() === $userId ? 'connected-user' : '' ?>">
                                 <div class="messaging-current-thread-image-container <?= $message->getUserId() === $userId ? 'hidden' : '' ?>">
-                                    <img src="<?= IMG_AVATARS.Utils::format($message->getAvatar()); ?>" alt="avatar" />
+                                    <img src="<?= IMG_AVATARS.Utils::format($message->getAvatar()); ?>" alt="avatar">
                                 </div>
                                 <span><?= Utils::convertDateToFrenchFormat($message->getSentAt(), "dd:MM HH:mm"); ?></span>
                             </div>
@@ -43,12 +43,12 @@ $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] :
                 ?>
             </div>
         </div>
-        <form class="messaging-send-message-form" action="index.php" method="post">
-            <input type="hidden" name="action" value="sentMessage" />
+        <form class="messaging-send-message-form" action="./" method="post">
+            <input type="hidden" name="action" value="sentMessage">
             <input type="hidden" name="id" value="<?= $current_thread->getId() ?>" /    >
-            <input type="hidden" name="userId" value="<?= $userId ?>" />
-            <input type="text" name="message" id="message" placeholder="Tapez votre message ici" />
-            <button class="cta messaging-submit-btn" href="/?action=">Envoyer</button>
+            <input type="hidden" name="userId" value="<?= $userId ?>">
+            <input type="text" name="message" id="message" placeholder="Tapez votre message ici">
+            <button class="cta messaging-submit-btn">Envoyer</button>
         </form>
     </div>
 </div>

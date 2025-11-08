@@ -7,7 +7,10 @@
     <div class="left-part">
         <div class="title home-top-part-title">Rejoignez nos lecteurs passionnés</div>
         <div class="home-top-part-desc">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</div>
-        <a href="./?action=books" class="cta home-top-part-button">Découvrir</a>
+        <form class="flex" action="./" method="post">
+            <input type="hidden" name="action" value="books">
+            <button type="submit" class="cta home-top-part-button">Découvrir</button>
+        </form>
     </div>
     <div class="right-part"></div>
 </div>
@@ -20,7 +23,10 @@
             }
         ?>
     </div>
-    <a href="./?action=books" class="cta home-middle-part-button">Voir tous les livres</a>
+    <form class="flex" action="./" method="post">
+        <input type="hidden" name="action" value="books">
+        <button type="submit" class="cta home-middle-part-button">Voir tous les livres</button>
+    </form>
 </div>
 <div class="home-bottom-part">
     <div class="title">Comment ça marche ?</div>
@@ -31,15 +37,18 @@
         <div class="home-bottom-part-step">Parcourez les livres disponibles chez d'autres membres.</div>
         <div class="home-bottom-part-step">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
     </div>
-    <a href="./?action=books" class="cta cta2 home-bottom-part-button">Voir tous les livres</a>
+    <form class="flex" action="./" method="post">
+        <input type="hidden" name="action" value="books">
+        <button type="submit" class="cta cta2 home-middle-part-button">Voir tous les livres</button>
+    </form>
     <div class="home-bottom-part-image"></div>
     <div class="home-bottom-part-our-values">
         <div class="title">Nos valeurs</div>
         <div class="home-bottom-part-desc2">
             Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. Nos valeurs sont ancrées dans notre passion pour les livres et notre désir de créer des liens entre les lecteurs. Nous croyons en la puissance des histoires pour rassembler les gens et inspirer des conversations enrichissantes.
-            <br /><br />
+            <br><br>
             Notre association a été fondée avec une conviction profonde : chaque livre mérite d'être lu et partagé.
-            <br /><br />
+            <br><br>
             Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.
         </div>
         <div class="home-bottom-part-signature">L’équipe Tom Troc</div>

@@ -5,8 +5,8 @@
  */ 
 class Message extends AbstractEntity 
 {
-    private int $thread_id;
-    private int $user_id;
+    private string $thread_id;
+    private string $user_id;
     private string $content;
     private ?DateTime $sent_at;
     private int $is_read;
@@ -14,36 +14,36 @@ class Message extends AbstractEntity
 
     /**
      * Setter pour l'identifiant de la conversation.
-     * @param int $thread_id
+     * @param string $thread_id
      */
-    public function setThreadId(int $thread_id) : void 
+    public function setThreadId(string $thread_id) : void 
     {
         $this->thread_id = $thread_id;
     }
 
     /**
      * Getter pour l'identifiant de la conversation.
-     * @return int
+     * @return string
      */
-    public function getThreadId() : int
+    public function getThreadId() : string
     {
         return $this->thread_id;
     }
 
     /**
      * Setter pour l'identifiant de l'utilisateur qui a écrit le message.
-     * @param int $user_id
+     * @param string $user_id
      */
-    public function setUserId(int $user_id) : void 
+    public function setUserId(string $user_id) : void 
     {
         $this->user_id = $user_id;
     }
 
     /**
      * Getter pour l'identifiant de l'utilisateur qui a écrit le message.
-     * @return int
+     * @return string
      */
-    public function getUserId() : int
+    public function getUserId() : string
     {
         return $this->user_id;
     }

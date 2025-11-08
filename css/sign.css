@@ -17,6 +17,7 @@
 
 .sign-form {
     margin-top: 10px;
+    width: 322px;
 }
 
 .sign-form-row,
@@ -65,7 +66,7 @@
     margin-top: 40px;
 }
 
-.sign-ask a,
+.sign-ask button,
 .book-form-back,
 .book-form-image-upload {
     font-size: 14px;

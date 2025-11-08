@@ -44,10 +44,10 @@ class BookManager extends AbstractEntityManager
     
     /**
      * Récupère un livre par son id.
-     * @param int $id : l'id du livre.
+     * @param string $id : l'id du livre.
      * @return Book|null : un objet Book ou null si le livre n'existe pas.
      */
-    public function getBookById(int $id) : ?Book
+    public function getBookById(string $id) : ?Book
     {
         $sql = BASE_BOOK_QUERY ." WHERE b.id = :id";
         $result = $this->db->query($sql, ['id' => $id]);
@@ -60,18 +60,18 @@ class BookManager extends AbstractEntityManager
 
     /**
      * Ajoute ou modifie un livre.
-     * On sait si le livre est un nouveau livre car son id sera -1.
+     * On sait si le livre est un nouveau livre car son id sera ''.
      * @param Book $book : le livre à ajouter ou modifier.
      * @return void
      */
-    public function addOrUpdateBook(Book $book) : void 
-    {
-        if ($book->getId() == -1) {
-            $this->addBook($book);
-        } else {
-            $this->updateBook($book);
-        }
-    }
+    //public function addOrUpdateBook(Book $book) : void 
+    //{
+    //    if (empty($book->getId())) {
+    //        $this->addBook($book);
+    //    } else {
+    //        $this->updateBook($book);
+    //    }
+    //}
 
     /**
      * Ajoute un livre.
@@ -80,8 +80,9 @@ class BookManager extends AbstractEntityManager
      */
     public function addBook(Book $book) : void
     {
-        $sql = "INSERT INTO book (user_id, title, author, image, description, status, created_at, updated_at) VALUES (:id_user, :title, :author, :image, :description, :status, NOW(), NOW())";
+        $sql = "INSERT INTO book (id, user_id, title, author, image, description, status, created_at, updated_at) VALUES (:id_user, :title, :author, :image, :description, :status, NOW(), NOW())";
         $this->db->query($sql, [
+            'id' => Utils::guidv4(),
             'id_user' => $book->getUserId(),
             'title' => $book->getTitle(),
             'author' => $book->getAuthor(),
@@ -121,9 +122,10 @@ class BookManager extends AbstractEntityManager
 
     /**
      * Récupère le nombre de livre pour un utilisateur.
+     * @param string $userId : l'identifiant de l'utilisateur
      * @return int : le nombre de livres.
      */
-    public function getBookCountByUserId(int $userId) : int
+    public function getBookCountByUserId(string $userId) : int
     {
         $sql = "SELECT count(id) as count FROM book WHERE user_id = :userId";
         $query = $this->db->query($sql, ['userId' => $userId]);
@@ -135,9 +137,10 @@ class BookManager extends AbstractEntityManager
 
     /**
      * Récupère tous les livres d'un utilisateur.
+     * @param string $userId : l'identifiant de l'utilisateur
      * @return array : un tableau d'objets Book.
      */
-    public function getAllBooksFromUserId(int $userId) : array
+    public function getAllBooksFromUserId(string $userId) : array
     {
         $sql = BASE_BOOK_QUERY ." WHERE b.user_id = :userId ORDER BY b.created_at";
         $result = $this->db->query($sql, ['userId' => $userId]);

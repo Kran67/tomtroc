@@ -4,6 +4,10 @@
     flex-direction: column;
 }
 
+.book-card-link {
+    text-align: left;
+}
+
 .book-tag {
     background-color: var(--availableTag);
     color: #fff;
@@ -32,8 +36,8 @@
 
 .book-card .book-content {
     display: flex;
-    width: 200;
-    height: 124;
+    width: 200px;
+    height: 124px;
     gap: 10px;
     flex-direction: column;
     background-color: #fff;

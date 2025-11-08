@@ -2,8 +2,8 @@
 
 abstract class AbstractEntity 
 {
-    // Par défaut l'id vaut -1, ce qui permet de vérifier facilement si l'entité est nouvelle ou pas. 
-    protected int $id = -1;
+    // Par défaut l'id vaut '', ce qui permet de vérifier facilement si l'entité est nouvelle ou pas. 
+    protected string $id = '';
 
     /**
      * Constructeur de la classe.
@@ -37,10 +37,10 @@ abstract class AbstractEntity
 
     /** 
      * Setter pour l'id.
-     * @param int $id
+     * @param string $id
      * @return void
      */
-    public function setId(int $id) : void 
+    public function setId(string $id) : void 
     {
         $this->id = $id;
     }
@@ -48,9 +48,9 @@ abstract class AbstractEntity
     
     /**
      * Getter pour l'id.
-     * @return int
+     * @return string
      */
-    public function getId() : int 
+    public function getId() : string
     {
         return $this->id;
     }

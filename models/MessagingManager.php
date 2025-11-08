@@ -8,9 +8,10 @@ class MessagingManager extends AbstractEntityManager
 {
     /**
      * Récupère les conversations pour un utilisateur.
+     * @param string $userId : identifiant de l'utilisateur.
      * @return array : les conversations avec le dernier message.
      */
-    public function getThreadsByUserId(int $userId) : array
+    public function getThreadsByUserId(string $userId) : array
     {
         $sql = "SELECT mt.id, u.id as user_id, u.nickname, u.avatar, m.content, m.sent_at
                 FROM message_thread mt
@@ -34,9 +35,10 @@ class MessagingManager extends AbstractEntityManager
 
     /**
      * Récupère le nombre de message non lus pour un utilisateur.
+     * @param string $userId : identifiant de l'utilisateur.
      * @return int : le nombre de messages.
      */
-    public function getUnReadMessageCountByUserId(int $userId) : int
+    public function getUnReadMessageCountByUserId(string $userId) : int
     {
         $sql = "SELECT count(m.id) as count FROM message_thread mt LEFT JOIN message m ON m.thread_id = mt.id WHERE m.is_read = 0 and mt.user_id = :userId";
         $query = $this->db->query($sql, ['userId' => $userId]);
@@ -48,9 +50,10 @@ class MessagingManager extends AbstractEntityManager
 
     /**
      * Récupère les messages d'une conversation.
+     * @param string $threadId : identifiant de la conversation
      * @return array : tableau de message.
      */
-    public function getThreadMessagesById(int $threadId) : array
+    public function getThreadMessagesById(string $threadId) : array
     {
         $sql = "SELECT m.content, m.sent_at, m.user_id, u.avatar
             FROM message m
@@ -68,9 +71,10 @@ class MessagingManager extends AbstractEntityManager
 
     /**
      * Récupère tous les messages d'un utilisateur.
+     * @param string $threadId : identifiant de la conversation
      * @return array : un tableau d'objets Message.
      */
-    public function getTreadById(int $threadId) : ?Thread
+    public function getTreadById(string $threadId) : ?Thread
     {
         $sql = "SELECT mt.id, u.id as user_id, u.nickname, u.avatar
                 FROM message_thread mt

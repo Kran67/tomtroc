@@ -24,10 +24,10 @@ class UserManager extends AbstractEntityManager
 
     /**
      * Récupère un user par son identifiant.
-     * @param int $id
+     * @param string $id
      * @return ?User
      */
-    public function getUserById(int $id) : ?User 
+    public function getUserById(string $id) : ?User 
     {
         $sql = "SELECT * FROM user WHERE id = :id";
         $result = $this->db->query($sql, ['id' => $id]);
@@ -48,8 +48,9 @@ class UserManager extends AbstractEntityManager
      */
     public function addUser(User $user) : ?User 
     {
-        $sql = "INSERT INTO user (login, password, nickname, avatar, created_at) VALUES (:login, :password, :nickname, :avatar, NOW())";
+        $sql = "INSERT INTO user (id, login, password, nickname, avatar, created_at) VALUES (:login, :password, :nickname, :avatar, NOW())";
         $this->db->query($sql, [
+            'id' => Utils::guidv4(),
             'login' => $user->getLogin(),
             'password' => $user->getPassword(),
             'nickname' => $user->getNickname(),
@@ -67,12 +68,14 @@ class UserManager extends AbstractEntityManager
      */
     public function updateUser(User $user) : void
     {
-        $sql = "UPDATE user SET password = :password, nickname = :nickname WHERE id = :id";
+        $sql = "UPDATE user SET password = :password, nickname = :nickname, avatar = :avatar WHERE id = :id";
         $this->db->query($sql, [
             'password' => $user->getPassword(),
             'nickname' => $user->getNickname(),
+            'avatar' => $user->getAvatar(),
             'id' => $user->getId()
         ]);
+        echo $sql;
 
         // on met à jour la session
         $_SESSION['user'] = $this->getUserById($user->getId());

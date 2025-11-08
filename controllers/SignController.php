@@ -106,7 +106,7 @@ class SignController
             throw new Exception("L'utilisateur existe déjà.");
         }
 
-        $user = new User(['login' => $login, 'password' => password_hash($password, PASSWORD_DEFAULT), 'nickname' => $nickname]);
+        $user = new User(['id' => Utils::guidv4(),'login' => $login, 'password' => password_hash($password, PASSWORD_DEFAULT), 'nickname' => $nickname]);
 
         // On enregistre le nouvel utilisateur
         $user = $userManager->addUser($user);
@@ -125,9 +125,33 @@ class SignController
      */
     public function updateAccount() : void 
     {
+        $target_dir = "img/avatars/";
+        $avatar = $_FILES["avatarUpload"]["name"];
+        $target_file = $target_dir.basename($avatar);
+
         // On récupère les données du formulaire.
         $password = Utils::request("password");
         $nickname = Utils::request("nickname");
+
+        $uploadOk = true;
+        if (isset($_FILES["avatarUpload"])) {
+            $info = getimagesize($_FILES["avatarUpload"]["tmp_name"]);
+            if (!$info) {
+                $uploadOk = false;
+            } else if ($info[0] > 135 && $info[1] > 135) {
+                $uploadOk = false;
+            }
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if (!$uploadOk) {
+            $avatar = "avatar.png";
+        // if everything is ok, try to upload file
+        } else {
+            if (!move_uploaded_file($_FILES["avatarUpload"]["tmp_name"], $target_file)) {
+                $avatar = "avatar.png";
+            }
+        }        
 
         // On vérifie que les données sont valides.
         if (empty($password) || empty($nickname)) {
@@ -138,7 +162,8 @@ class SignController
         $user = new User([
             'id' => $_SESSION['idUser'],
             'password' => password_hash($password, PASSWORD_DEFAULT),
-            'nickname' => $nickname
+            'nickname' => $nickname,
+            'avatar' => $avatar
         ]);
 
         $userManager = new UserManager();
@@ -176,7 +201,7 @@ class SignController
     {
         $this->checkIfUserIsConnected();
 
-        $id = Utils::request("id", -1);
+        $id = Utils::request("id", '');
 
 
         // On récupère l'article associé.
@@ -191,6 +216,64 @@ class SignController
         }
     }
 
+     /**
+     * Modification d'un livre. 
+     * @return void
+     */
+    public function updateBook() : void 
+    {
+        $target_dir = "img/books/";
+        $booksImgFolder = $_FILES["imageUpload"]["name"];
+        $target_file = $target_dir.basename($booksImgFolder);
+
+        // On récupère les données du formulaire.
+        $id = Utils::request("id");
+        $title = Utils::request("title");
+        $author = Utils::request("author");
+        $description = Utils::request("description");
+        $availability = Utils::request("availability");
+
+        $uploadOk = true;
+        if (isset($_FILES["imageUpload"]) && !empty($_FILES["imageUpload"]["tmp_name"])) {
+            $info = getimagesize($_FILES["imageUpload"]["tmp_name"]);
+            if (!$info) {
+                $uploadOk = false;
+            } else if ($info[0] > 135 && $info[1] > 135) {
+                $uploadOk = false;
+            }
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if (!$uploadOk) {
+            $booksImgFolder = "a_book.jpg";
+        // if everything is ok, try to upload file
+        } else {
+            if (!move_uploaded_file($_FILES["imageUpload"]["tmp_name"], $target_file)) {
+                $booksImgFolder = "a_book.jpg";
+            }
+        }        
+
+        // On vérifie que les données sont valides.
+        if (empty($title) || empty($author) || empty($description)) {
+            throw new Exception("Tous les champs sont obligatoires.");
+        }
+
+        // On crée l'objet Book.
+        $book = new Book([
+            'id' => $id,
+            'title' => $title,
+            'author' => $author,
+            'image' => $booksImgFolder,
+            'status' => $availability
+        ]);
+
+        $bookManager = new BookManager();
+        $bookManager->updateBook($book);
+
+        // On redirige vers la page du compte.
+        Utils::redirect("account");
+    }
+
     /**
      * Suppression d'un livre.
      * @return void
@@ -199,7 +282,7 @@ class SignController
     {
         $this->checkIfUserIsConnected();
 
-        $id = Utils::request("id", -1);
+        $id = Utils::request("id", '');
 
         // On supprime le livre.
         $bookManager = new BookManager();

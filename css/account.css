@@ -228,6 +228,11 @@
     gap: 28px;
 }
 
+.user-books-column-action button {
+    text-decoration: underline;
+}
+
 .user-books-column-action .delete {
     color: #CB2D2D;
+    text-decoration-color: #CB2D2D;
 }

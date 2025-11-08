@@ -18,9 +18,9 @@ class MessagingController
         $threads = $messagingManager->getThreadsByUserId($userId);
 
         $current_thread = null;
-        $current_thread_id = Utils::request("threadId", -1);
+        $current_thread_id = Utils::request("threadId", '');
 
-        if ($current_thread_id === -1) {
+        if (empty($current_thread_id)) {
             $current_thread_id = $threads[0]->getId();
         }
 

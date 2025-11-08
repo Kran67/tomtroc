@@ -6,7 +6,8 @@ require_once 'config/autoload.php';
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
 $action = Utils::request('action', 'home');
-$userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : -1;
+$action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] : $action;
+$userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : '';
 $MessagingManager = new MessagingManager();
 $unReadMessages = $MessagingManager->getUnReadMessageCountByUserId($userId);
 $_SESSION['unReadMessages'] = $unReadMessages;
@@ -29,7 +30,7 @@ try {
             break;
 
         case 'book':
-            $bookId = Utils::request('id', '-1');
+            $bookId = Utils::request('id', '');
             $bookController = new BookController();
             $bookController->showBookDetail($bookId);
             break;
@@ -70,20 +71,26 @@ try {
             break;
 
         case 'editBook':
-            $bookId = Utils::request('id', '-1');
+            $bookId = Utils::request('id', '');
             $signController = new SignController();
             $signController->editBook($bookId);
             break;
 
+        case 'updateBook':
+            $bookId = Utils::request('id', '');
+            $signController = new SignController();
+            $signController->updateBook();
+            break;
+
         case 'deleteBook':
-            $bookId = Utils::request('id', '-1');
+            $bookId = Utils::request('id', '');
             $signController = new SignController();
             $signController->deleteBook($bookId);
             break;
 
         case 'profile':
             $profileController = new ProfileController();
-            $profileController->showProfile(Utils::request('id', '-1'));
+            $profileController->showProfile(Utils::request('id', ''));
             break;
 
         case 'messaging':
@@ -99,3 +106,5 @@ try {
     $errorView = new View('Erreur');
     $errorView->render('errorPage', ['errorMessage' => $e->getMessage()]);
 }
+
+unset($_SESSION['action']);

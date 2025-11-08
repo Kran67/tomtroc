@@ -30,9 +30,10 @@ class BookController
 
     /**
      * Affiche du détail d'un livre.
+     * @param string $bookId : identifiant du livre
      * @return void
      */
-    public function showBookDetail(int $bookId) : void
+    public function showBookDetail(string $bookId) : void
     {
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($bookId);

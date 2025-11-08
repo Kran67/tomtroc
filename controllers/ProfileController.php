@@ -4,16 +4,17 @@ class ProfileController
 {
     /**
      * Affichage de la page de profile d'un l'utilisateur.
+     * @param string $id : l'identifiant de l'utilisateur
      * @return User
      */
-    public function showProfile(int $id): void
+    public function showProfile(string $userId): void
     {
-        if (!isset($id) || $id < 1) {
+        if (!isset($userId) || $userId < 1) {
             throw new Exception("Profile inconnu");
         }
 
         $userManager = new UserManager();
-        $user = $userManager->getUserById($id);
+        $user = $userManager->getUserById($userId);
 
         if (!$user) {
             throw new Exception("Profile inconnu");
@@ -22,7 +23,7 @@ class ProfileController
         $bookManager = new BookManager();
         $userBooks = $bookManager->getAllBooksFromUserId($user->getId());
 
-        if (isset($_SESSION) && isset($_SESSION['idUser']) && $_SESSION['idUser'] === $id) {
+        if (isset($_SESSION) && isset($_SESSION['idUser']) && $_SESSION['idUser'] === $userId) {
             $view = new View("account");
             $view->render("account", ["user" => $user, "books" => $userBooks]);
         } else {

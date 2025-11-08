@@ -5,15 +5,18 @@
 ?>
 <div class="book-form-main">
     <div class="book-form-container">
-        <a class="book-form-back" <?= Utils::back(); ?> href="#">&#8592; retour</a>
-        <h2><?= $book->getId() === -1 ? "Création d'un livre" : "Modifier les informations"?></h2>
-        <form class="book-form" action="index.php" method="post">
+        <form class="flex" action="./" method="post">
+            <input type="hidden" name="action" value="account">
+            <button type="submit" class="book-form-back" <?= Utils::back(); ?>>&#8592; retour</button>
+        </form>
+        <h2><?= empty($book->getId()) ? "Création d'un livre" : "Modifier les informations"?></h2>
+        <form class="book-form" action="./" method="post" enctype="multipart/form-data">
             <div class="book-form-left">
                 <div class="book-form-image-title">Photo</div>
                 <div class="book-form-image-container">
-                    <img class="book-form-image" src="<?= IMG_BOOKS.$book->getImage() ?>" alt="avatar" />
+                    <img class="book-form-image" src="<?= IMG_BOOKS.$book->getImage() ?>" alt="avatar">
                 </div>
-                <a class="book-form-image-upload" href="/?action=">Modifier la photo</a>
+                <label for="imageUpload" class="link book-form-image-upload">Modifier la photo</label>
             </div>
             <div class="book-form-right">
                 <div class='book-form-row'>
@@ -38,6 +41,7 @@
                 </div>
                 <input type="hidden" name="action" value="updateBook">
                 <input type="hidden" name="id" value="<?= $book->getId() ?>">
+                <input type="file" name="imageUpload" id="imageUpload" accept=".jpg, .png, .gif">
                 <button class="cta book-submit-btn">Valider</button>
             </div>
         </form>

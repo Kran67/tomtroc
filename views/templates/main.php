@@ -7,6 +7,7 @@
  *      $content string : le contenu de la page. 
  */
 $action = Utils::request('action', 'home');
+$action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] : $action;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,23 +23,41 @@ $action = Utils::request('action', 'home');
         <nav>
             <div></div>    
             <div></div>    
-            <a href="./" class="logo">
-                <img src="<?= IMG . 'logo.png' ?>" alt="logo" />
-            </a>
-            <a href="./" class="home <?php if ($action === 'home') echo 'active'; ?>">Accueil</a>
-            <a href="./?action=books" class="exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</a>
+            <form class="flex logo" action="./" method="post">
+                <button type="submit">
+                    <img src="<?= IMG . 'logo.png' ?>" alt="logo">
+                </button>
+            </form>
+            <form class="flex" action="./" method="post">
+                <button type="submit" class="home <?php if ($action === 'home') echo 'active'; ?>">Accueil</button>
+            </form>
+            <form class="flex" action="./" method="post">
+                <input type="hidden" name="action" value="books">
+                <button type="submit" class="link exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</button>
+            </form>
             <div></div>    
             <div class="line"></div>
-            <a href="./?action=messaging" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
-                <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie" />
-                <span class="messagingTxt">Messagerie</span><span class="bubble"><?= $_SESSION['unReadMessages'] ?></span>
-            </a>
-            <a href="./?action=account" class="account <?php if ($action === 'account') echo 'active'; ?>">
-                <img src="<?= IMG . 'account.svg' ?>" alt="compte" />
-                <span class="accountTxt">Mon compte</span>
-            </a>
-            <a href="./?action=<?= isset($_SESSION['idUser']) ? "logout" : "signin" ?>" class="signin <?php if ($action === 'signin') echo 'active'; ?>"><?= isset($_SESSION['idUser']) ? "Déconnexion" : "Connexion" ?></a>
-            <div></div>    
+            <form class="flex" action="./" method="post">
+                <input type="hidden" name="action" value="messaging">
+                <button type="submit" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
+                    <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie">
+                    <span class="messagingTxt">Messagerie</span><span class="bubble"><?= $_SESSION['unReadMessages'] ?></span>
+                </button>
+            </form>
+            <form class="flex" action="./" method="post">
+                <input type="hidden" name="action" value="account">
+                <button type="submit" class="account <?php if ($action === 'account') echo 'active'; ?>">
+                    <img src="<?= IMG . 'account.svg' ?>" alt="compte">
+                    <span class="accountTxt">Mon compte</span>
+                </button>
+            </form>
+            <form class="flex" action="./" method="post">
+                <input type="hidden" name="action" value="<?= isset($_SESSION['idUser']) ? "logout" : "signin" ?>">
+                <button type="submit" class="signin <?php if ($action === 'signin') echo 'active'; ?>">
+                    <?= isset($_SESSION['idUser']) ? "Déconnexion" : "Connexion" ?>
+                </button>
+            </form>
+            <div></div>
         </nav>
     </header>
 
@@ -50,7 +69,7 @@ $action = Utils::request('action', 'home');
         <span class="privacy-policy">Politique de confidentialité</span>
         <span class="legal-notice">Mentions légales</span>
         <span class="copyright">Tom Troc©</span>
-        <img src="<?= IMG_MIN . 'logo.png' ?>" alt="logo_min" class="logo-min" />
+        <img src="<?= IMG_MIN . 'logo.png' ?>" alt="logo_min" class="logo-min">
     </footer>
 
 </body>

@@ -125,7 +125,7 @@
     flex: 1;
 }
 
-.messaging-submit-btn {
+.cta.messaging-submit-btn {
     width: 132px;
     height: 49px;
 }

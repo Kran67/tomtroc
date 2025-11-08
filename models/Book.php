@@ -6,7 +6,7 @@
  */
  class Book extends AbstractEntity 
  {
-    private int $user_id;
+    private string $user_id;
     private string $title = "";
     private string $author = "";
     private string $image = "";
@@ -19,18 +19,18 @@
 
     /**
      * Setter pour l'identifiant du propriétaire du livre.
-     * @param int $user_id
+     * @param string $user_id
      */
-    public function setUserId(int $user_id) : void 
+    public function setUserId(string $user_id) : void 
     {
         $this->user_id = $user_id;
     }
 
     /**
      * Getter pour l'identifiant du propriétaire du livre.
-     * @return int
+     * @return string
      */
-    public function getUserId() : int
+    public function getUserId() : string
     {
         return $this->user_id;
     }
@@ -213,16 +213,22 @@
     {
         $status = $this->status === 'indisponible' ? 'non dispo.' : $this->status;
         return 
-        "<a href='./?action=book&id={$this->id}'>
-            <div class='book-card'>
-                <img src='./img/books/min/". Utils::format($this->image). "' alt='' />
-                <span class='book-tag {$this->status}'>{$status}</span>
-                <div class='book-content'>
-                    <div class='book-title'>". Utils::format($this->title). "</div>
-                    <div class='book-author'>". Utils::format($this->author). "</div>
-                    <div class='book-seller'>Vendu par : ". Utils::format($this->user_nickname). "</div>
-                </div>
-            </div>
-        </a>";
+        "<form class='flex' action='./' method='post'>
+            <input type='hidden' name='action' value='book'>
+            <input type='hidden' name='id' value='{$this->id}'>
+            <button type='submit' class='book-card-link'>
+                <span class='book-card'>
+                    <div class='book-card-image-container'>
+                        <img src='".IMG_BOOKS_MIN.Utils::format($this->image)."' alt='".Utils::format($this->image)."'>
+                    </div>
+                    <span class='book-tag {$this->status}'>{$status}</span>
+                    <span class='book-content'>
+                        <span class='book-title'>".Utils::format($this->title)."</span>
+                        <span class='book-author'>".Utils::format($this->author)."</span>
+                        <span class='book-seller'>Vendu par : ".Utils::format($this->user_nickname)."</span>
+                    </span>
+                </span>
+            </button>
+        </form>";
     }
 }

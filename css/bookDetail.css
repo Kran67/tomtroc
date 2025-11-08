@@ -19,8 +19,9 @@
     align-items: center;
 }
 
-.book-detail-breadcrumb a:visited {
+.book-detail-breadcrumb button {
     color: var(--textGray);
+    font-size: 10px;
 }
 
 .book-detail-main {

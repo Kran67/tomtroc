@@ -13,8 +13,7 @@ header nav .logo {
     justify-self: flex-start;
 }
 
-header nav a,
-header nav a:visited {
+header nav button {
     border: none;
     color: var(--darkGray);
     font-size: 14px;
@@ -24,8 +23,8 @@ header nav a:visited {
     font-weight: 400;
 }
 
-header nav a:hover,
-header nav a.active {
+header nav button:hover,
+header nav button.active {
     font-weight: 600;
 }
 

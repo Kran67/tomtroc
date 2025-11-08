@@ -5,7 +5,7 @@
  */ 
 class Thread extends AbstractEntity 
 {
-    private int $user_id;
+    private string $user_id;
     private string $nickname;
     private string $avatar;
     private string $content;
@@ -13,18 +13,18 @@ class Thread extends AbstractEntity
 
     /**
      * Setter pour l'identifiant de l'utilisateur.
-     * @param int $user_id
+     * @param string $user_id
      */
-    public function setUserId(int $user_id) : void 
+    public function setUserId(string $user_id) : void 
     {
         $this->user_id = $user_id;
     }
 
     /**
      * Getter pour l'identifiant de l'utilisateur'.
-     * @return int
+     * @return string
      */
-    public function getUserId() : int
+    public function getUserId() : string
     {
         return $this->user_id;
     }
@@ -116,7 +116,7 @@ class Thread extends AbstractEntity
     {
         return "<div class='thread-main'>
             <div class='thread-image-container'>
-                <img src='".IMG_AVATARS.Utils::format($this->avatar)."' alt='' />
+                <img src='".IMG_AVATARS.Utils::format($this->avatar)."' alt='".Utils::format($this->avatar)."'>
             </div>
             <div class='thread-right'>
                 <div class='thread-right-header'>

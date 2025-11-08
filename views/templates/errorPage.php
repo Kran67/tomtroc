@@ -15,5 +15,7 @@
     <?php } else { ?>
         <p class="error-title"><?= $errorMessage ?></p>
     <?php } ?>
-    <a class="cta error-go-home" href="./?action=home">Retour à la page d'accueil</a>
+    <form class="flex" action="./" method="post">
+        <button type="submit" class="cta error-go-home">Retour à la page d'accueil</button>
+    </form>
 </div>

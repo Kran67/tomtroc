@@ -53,28 +53,33 @@ body {
     font-family: 'inter';
 }
 
-a {
+button {
+    font-family: 'inter';
     border: none;
     outline: none;
     text-decoration: none;
+    background: none;
 }
 
-a:visited {
-    outline: none;
-    text-decoration: none;
+input[type="file"] {
+    display: none;
 }
 
-select,
+label.link {
+    cursor: pointer;
+}
+
+/*select,
 ::picker(select) {
     appearance: base-select;
-}
+}*/
 
 select {
     flex: 1;
     transition: 0.4s;
 }
 
-select::picker-icon {
+/*select::picker-icon {
     color: car(--darkGray);
     transition: 0.4s rotate;
 }
@@ -86,7 +91,9 @@ select:open::picker-icon {
 ::picker(select) {
     border: none;
     box-shadow: 6px 6px 18px 0 var(--textGray);
+    border-radius: 8px;
 }
+*/
 
 option {
     display: flex;
@@ -119,12 +126,16 @@ option:checked:hover {
     background-color: var(--lightGray2);
 }
 
-::picker(select) {
-    border-radius: 8px;
-}
-
 option:not(option:last-of-type) {
     border-bottom: none;
+}
+
+form.flex {
+    display: flex;
+}
+
+button {
+    cursor: pointer;
 }
 
 main {
