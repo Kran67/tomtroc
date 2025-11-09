@@ -25,9 +25,9 @@
                 <div class="book-detail-owner-title">PROPRIÉTAIRE</div>
                 <div class="book-detail-owner"><?= $user ?></div>
                 <form class="flex" action="./" method="post">
-                    <input type="hidden" name="action" value="messaging">
+                    <input type="hidden" name="action" value="createOrViewThread">
                     <input type="hidden" name="id" value="<?= $user->getId() ?>">
-                    <button class="cta book-detail-button">Envoyer un message</button>
+                    <button class="cta book-detail-button" <?= Utils::onSendMessage(); ?>>Envoyer un message</button>
                 </form>
             </div>
         </div>

@@ -8,10 +8,8 @@ require_once 'config/autoload.php';
 $action = Utils::request('action', 'home');
 $action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] : $action;
 $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : '';
-$MessagingManager = new MessagingManager();
-$unReadMessages = $MessagingManager->getUnReadMessageCountByUserId($userId);
-$_SESSION['unReadMessages'] = $unReadMessages;
-
+$messagingManager = new MessagingManager();
+$_SESSION['unReadMessages'] = $messagingManager->getUnReadMessageCountByUserId($userId);
 
 // Try catch global pour gérer les erreurs
 try {
@@ -98,7 +96,27 @@ try {
             $MessagingController->showMessaging();
             break;
 
-    default:
+        case 'createOrViewThread':
+            $toUserId = Utils::request('id', '');
+            $MessagingController = new MessagingController();
+            $MessagingController->createOrViewThread($toUserId);
+            break;
+
+        case 'changeThread':
+            $threadId = Utils::request('id', '');
+            if (isset($_SESSION["currentThreadId"]) && $_SESSION["currentThreadId"] !== $threadId) {
+                $_SESSION["currentThreadId"] = $threadId;
+            }
+            $MessagingController = new MessagingController();
+            $MessagingController->showMessaging();
+            break;
+
+        case 'sendMessage':
+            $MessagingController = new MessagingController();
+            $MessagingController->sendMessage();
+            break;
+
+        default:
             throw new Exception("La page demandée n'existe pas.");
     }
 } catch (Exception $e) {

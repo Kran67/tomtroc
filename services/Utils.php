@@ -10,14 +10,18 @@ class Utils {
      * @param DateTime $date : la date à convertir.
      * @return string : la date convertie.
      */
-    public static function convertDateToFrenchFormat(DateTime $date, string $pattern = 'EEEE d MMMM Y') : string
+    public static function convertDateToFrenchFormat(?DateTime $date, string $pattern = 'EEEE d MMMM Y') : string
     {
         // Attention, s'il y a un soucis lié à IntlDateFormatter c'est qu'il faut
         // activer l'extention intl_date_formater (ou intl) au niveau du serveur apache. 
         // Ca peut se faire depuis php.ini ou parfois directement depuis votre utilitaire (wamp/mamp/xamp)
-        $dateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
-        $dateFormatter->setPattern($pattern);
-        return $dateFormatter->format($date);
+        if (!isset($date)) {
+            return "";
+        } else {
+            $dateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+            $dateFormatter->setPattern($pattern);
+            return $dateFormatter->format($date);
+        }
     }
 
     /**
@@ -52,6 +56,7 @@ class Utils {
     /**
      * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
      * retour en arrière.
+     * @return string : le code js à insérer dans le bouton.
      */
     public static function back() : string
     {
@@ -196,10 +201,24 @@ class Utils {
 
     /**
      * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
-     * retour en arrière.
+     * @param string $imgId : identifiant de l'image dans le DOM.
+     * @return string : le code js à insérer dans le bouton.
      */
     public static function onChangeImage(string $imgId) : string
     {
         return "onchange=\"imageChanged(this, '".$imgId."');\"";
+    }
+
+    /**
+     * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
+     * @param string $imgId : identifiant de l'image dans le DOM.
+     * @return string : le code js à insérer dans le bouton.
+     */
+    public static function onSendMessage() : string
+    {
+        if (isset($_SESSION) && !isset($_SESSION["idUser"])) {
+            return "onclick=\"alert('Vous devez vous connecter pour envoyer un message.'); return false;\"";
+        }
+        return "";
     }
 }

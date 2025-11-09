@@ -152,14 +152,13 @@ class User extends AbstractEntity
             <div class='account-nickname'>". Utils::format($this->nickname) ."</div>
             <div class='account-member-since'>Membre ".$accountMemberSince["texte"]."</div>
             <div class='account-library'>BIBLIOTHEQUE</div>
-            <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>{$this->book_count} livre".($this->book_count > 1 ? "s" : "")."</div>";
-        if (!$this->isConnected()) {
-            $result .= "<form class='flex' action='./' method='post'>";
-            $result .= "    <input type='hidden' name='action' value='action'>";
-            $result .= "    <button type='submit' class='cta cta2 account-button'>Écrire un message</button>";
-            $result .= "</form>";
-        }
-        $result .= "</div>";
+            <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>{$this->book_count} livre".($this->book_count > 1 ? "s" : "")."</div>
+            <form class='flex' action='./' method='post'>
+                <input type='hidden' name='action' value='createOrViewThread'>
+                <input type='hidden' name='id' value='{$this->getId()}'>
+                <button type='submit' class='cta cta2 account-button' ".Utils::onSendMessage().">Écrire un message</button>
+            </form>
+        </div>";
         return $result;
     }
 

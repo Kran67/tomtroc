@@ -3,8 +3,12 @@
     height: 69px;
     align-items: center;
     gap: 12px;
+    padding: 0 34px;
+    background-color: var(--backgroundLight);
+}
+
+.thread-main.active {
     background-color: #fff;
-    padding-left: 34px;
 }
 
 .thread-image-container {
@@ -22,16 +26,26 @@
     display: flex;
     gap: 6px;
     flex-direction: column;
+    flex: 1;
 }
 
 .thread-right-header {
     display: flex;
+    justify-content: space-between;
+}
+
+.thread-nickname,
+.thread-send-at {
     font-size: 14px;
     color: var(--darkGray);
-    justify-content: space-between;
 }
 
 .thread-last-message {
     font-size: 12px;
     color: var(--textGray);
+}
+
+
+.thread-last-message.unread {
+    font-weight: bold;
 }

@@ -8,8 +8,9 @@ class Thread extends AbstractEntity
     private string $user_id;
     private string $nickname;
     private string $avatar;
-    private string $content;
-    private DateTime $sent_at;
+    private ?string $content;
+    private ?DateTime $sent_at;
+    private ?bool $is_read;
 
     /**
      * Setter pour l'identifiant de l'utilisateur.
@@ -69,8 +70,11 @@ class Thread extends AbstractEntity
      * Setter pour le contenu du message.
      * @param string $content
      */
-    public function setContent(string $content) : void 
+    public function setContent(string|null $content) : void 
     {
+        if (!isset($content)) {
+            $content = "";
+        }
         $this->content = $content;
     }
 
@@ -95,7 +99,7 @@ class Thread extends AbstractEntity
      * Setter pour la date du message.
      * @param DateTime $sent_at
      */
-    public function setSentAt(string|DateTime $sent_at, string $format = 'Y-m-d H:i:s') : void 
+    public function setSentAt(string|DateTime|null $sent_at, string $format = 'Y-m-d H:i:s') : void 
     {
         if (is_string($sent_at)) {
             $sent_at = DateTime::createFromFormat($format, $sent_at);
@@ -112,19 +116,49 @@ class Thread extends AbstractEntity
         return $this->sent_at;
     }
 
+    /**
+     * Setter pour la lecture du message.
+     * @param bool $is_read
+     */
+    public function setIsRead(?bool $is_read) : void 
+    {
+        $this->is_read = $is_read;
+    }
+
+    /**
+     * Getter pour la lecture du message.
+     * @return bool
+     */
+    public function getIsRead() : bool
+    {
+        return $this->is_read ?? false;
+    }
+
     public function __toString() : string
     {
-        return "<div class='thread-main'>
+        $current_thread_id = $_SESSION['currentThreadId'] ?? "";
+        $result = "<div class='thread-main ".($current_thread_id === $this->id ? "active" : "")."'>
             <div class='thread-image-container'>
                 <img src='".IMG_AVATARS.Utils::format($this->avatar)."' alt='".Utils::format($this->avatar)."'>
             </div>
             <div class='thread-right'>
                 <div class='thread-right-header'>
-                    <span class='thread-nickname'>".Utils::format($this->nickname)."</span>
+                    <form class='flex' action='./' method='post'>
+                        <input type='hidden' name='action' value='changeThread'>
+                        <input type='hidden' name='id' value='".$this->id."'>";
+        if ($current_thread_id !== $this->id) {
+            $result .= "    <button type='submit' class=''>";
+        }
+        $result .= "        <span class='thread-nickname'>".Utils::format($this->nickname)."</span>";
+        if ($current_thread_id !== $this->id) {
+            $result .= "    </button>";
+        }
+        $result .= "        </form>
                     <span class='thread-send-at'>".Utils::convertDateToFrenchFormat($this->sent_at, "HH:mm")."</span>
                 </div>
-                <div class='thread-last-message'>".Utils::format($this->getContent(27))."</div>
+                <div class='thread-last-message ".(!$this->getIsRead() ? "unread" : "")."'>".Utils::format($this->getContent(27))."</div>
             </div>
         </div>";
+        return $result;
     }
 }

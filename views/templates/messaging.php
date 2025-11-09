@@ -44,10 +44,10 @@ $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] :
             </div>
         </div>
         <form class="messaging-send-message-form" action="./" method="post">
-            <input type="hidden" name="action" value="sentMessage">
+            <input type="hidden" name="action" value="sendMessage">
             <input type="hidden" name="id" value="<?= $current_thread->getId() ?>" /    >
             <input type="hidden" name="userId" value="<?= $userId ?>">
-            <input type="text" name="message" id="message" placeholder="Tapez votre message ici">
+            <input type="text" name="content" id="content" placeholder="Tapez votre message ici">
             <button class="cta messaging-submit-btn">Envoyer</button>
         </form>
     </div>
