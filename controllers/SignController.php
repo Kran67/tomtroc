@@ -225,12 +225,15 @@ class SignController
         $target_dir = "img/books/";
         $booksImgFolder = $_FILES["imageUpload"]["name"];
         $target_file = $target_dir.basename($booksImgFolder);
+        $target_min_dir = "img/books/min/";
+        $target_min_file = $target_min_dir.basename($booksImgFolder);
 
         // On récupère les données du formulaire.
         $id = Utils::request("id");
         $title = Utils::request("title");
         $author = Utils::request("author");
         $description = Utils::request("description");
+        $image = Utils::request("image");
         $availability = Utils::request("availability");
 
         $uploadOk = true;
@@ -238,7 +241,7 @@ class SignController
             $info = getimagesize($_FILES["imageUpload"]["tmp_name"]);
             if (!$info) {
                 $uploadOk = false;
-            } else if ($info[0] > 135 && $info[1] > 135) {
+            } else if ($info[0] > 783 && $info[1] > 1175) {
                 $uploadOk = false;
             }
         }
@@ -248,10 +251,24 @@ class SignController
             $booksImgFolder = "a_book.jpg";
         // if everything is ok, try to upload file
         } else {
-            if (!move_uploaded_file($_FILES["imageUpload"]["tmp_name"], $target_file)) {
-                $booksImgFolder = "a_book.jpg";
+            $fileMoved = false;
+            if (!file_exists($target_file)) {
+                $fileMoved = move_uploaded_file($_FILES["imageUpload"]["tmp_name"], $target_file);
+                if (!$fileMoved) {
+                    $booksImgFolder = "a_book.jpg";
+                } else {
+                    // Resample
+                    list($width, $height) = getimagesize($target_file);
+                    $image_p = imagecreatetruecolor(200, 200);
+                    $image = imagecreatefromjpeg($target_file);
+                    imagecopyresampled($image_p, $image, 0, 0, 0, 0, 200, 200, $width, $height);
+                    imagejpeg($image_p, $target_min_file);
+                }
             }
-        }        
+        }
+        if (empty($booksImgFolder)) {
+            $booksImgFolder = $image;
+        }
 
         // On vérifie que les données sont valides.
         if (empty($title) || empty($author) || empty($description)) {
@@ -263,6 +280,7 @@ class SignController
             'id' => $id,
             'title' => $title,
             'author' => $author,
+            'description' => $description,
             'image' => $booksImgFolder,
             'status' => $availability
         ]);

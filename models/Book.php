@@ -218,9 +218,7 @@
             <input type='hidden' name='id' value='{$this->id}'>
             <button type='submit' class='book-card-link'>
                 <span class='book-card'>
-                    <div class='book-card-image-container'>
-                        <img src='".IMG_BOOKS_MIN.Utils::format($this->image)."' alt='".Utils::format($this->image)."'>
-                    </div>
+                    <img src='".IMG_BOOKS_MIN.Utils::format($this->image)."' alt='".Utils::format($this->image)."'>
                     <span class='book-tag {$this->status}'>{$status}</span>
                     <span class='book-content'>
                         <span class='book-title'>".Utils::format($this->title)."</span>

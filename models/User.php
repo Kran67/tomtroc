@@ -142,7 +142,7 @@ class User extends AbstractEntity
     {
         $accountMemberSince = Utils::differenceDate($this->created_at);
         $result = "<div class='account-card'>
-            <img src='". IMG_AVATARS.$this->getAvatar() ."' alt='{$this->getAvatar()}'>";
+            <img id='avatar' src='". IMG_AVATARS.$this->getAvatar() ."' alt='{$this->getAvatar()}'>";
         if ($this->isConnected()) {
             $result .= "<label for='avatarUpload' class='link account-image-update'>modifier</label>";
         } else {
@@ -169,7 +169,7 @@ class User extends AbstractEntity
             <div class='account-update-form-title'></div>
             <form class='sign-form' action='./' method='post' enctype='multipart/form-data'>
                 <input type='hidden' name='action' value='updateAccount'>
-                <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif'>
+                <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif' ".Utils::onChangeImage('avatar').">
                 <div class='sign-form-row'>
                     <label for='email'>Adresse email</label>
                     <input name='email' id='email' type='text' value='{$this->login}' readonly>

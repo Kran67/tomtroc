@@ -193,4 +193,13 @@ class Utils {
         // Output the 36 character UUID.
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
+
+    /**
+     * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
+     * retour en arrière.
+     */
+    public static function onChangeImage(string $imgId) : string
+    {
+        return "onchange=\"imageChanged(this, '".$imgId."');\"";
+    }
 }

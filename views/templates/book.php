@@ -14,7 +14,7 @@
         </div>
         <div class="book-detail-main">
             <div class="book-detail-img-container">    
-                <img class="book-detail-img" src="<?= Utils::format(IMG_BOOKS.$book->getImage()) ?>">
+                <img id="book-image" class="book-detail-img" src="<?= Utils::format(IMG_BOOKS.$book->getImage()) ?>">
             </div>
             <div class="book-detail-detail">
                 <div class="book-detail-title"><?= Utils::format($book->getTitle()) ?></div>
