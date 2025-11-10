@@ -24,7 +24,7 @@
             }
         ?>
     </div>
-    <form class="flex" action="./" method="post">
+    <form class="flex home-middle-part-form" action="./" method="post">
         <input type="hidden" name="action" value="books">
         <button type="submit" class="cta home-middle-part-button">Voir tous les livres</button>
     </form>
@@ -38,7 +38,7 @@
         <div class="home-bottom-part-step">Parcourez les livres disponibles chez d'autres membres.</div>
         <div class="home-bottom-part-step">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
     </div>
-    <form class="flex" action="./" method="post">
+    <form class="flex home-bottom-part-form" action="./" method="post">
         <input type="hidden" name="action" value="books">
         <button type="submit" class="cta cta2 home-middle-part-button">Voir tous les livres</button>
     </form>

@@ -7,6 +7,7 @@ header nav {
     grid-template-columns: 1fr 150px 212px 95px 193px 158px 56px 170px 156px 130px 121px 1fr;
     grid-template-rows: 1fr;
     justify-items: center;
+    position: relative;
 }
 
 header nav .logo {
@@ -66,4 +67,83 @@ header nav .messaging .bubble {
     align-items: center;
     justify-content: center;
     padding: 0 3px;
+}
+
+header nav::before {
+    content: none;
+}
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+
+    header nav {
+        min-height: 56px;
+        height: 56px;
+        display: flex;
+        padding-left: 20px;
+        cursor: pointer;
+    }
+
+    header nav::before {
+        position: absolute;
+        content: url(../img/burger.svg);
+        right: 38px;
+        cursor: pointer;
+        top: 20px;
+        transition: transform 500ms ease;
+    }
+
+    header nav.open::before {
+        transform: rotate(-90deg);
+    }
+
+    header nav .spacer,
+    header nav .line {
+        display: none;
+    }
+
+    header nav .logo img {
+        width: 78px;
+    }
+
+    header nav form.flex:not(.logo) {
+        position: absolute;
+        right: 0;
+        z-index: 1;
+        background-color: var(--backgroundLight);
+        width: 160px;
+        height: 25px;
+        align-items: center;
+        padding-right: 10px;
+        border-bottom: 1px solid var(--lightGray);
+        display: none;
+    }
+
+    header nav form.flex.home {
+        bottom: -25px;
+    }
+
+    header nav form.flex.books {
+        bottom: -50px;
+    }
+
+    header nav form.flex.messaging {
+        bottom: -75px;
+    }
+
+    header nav form.flex.account {
+        bottom: -100px;
+    }
+
+    header nav form.flex.sign {
+        bottom: -125px;
+    }
+
+    header nav.open form.flex:not(.logo) {
+        display: flex;
+        justify-content: flex-end;
+    }
 }

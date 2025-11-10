@@ -21,44 +21,44 @@ $action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] :
 
 <body>
     <header>
-        <nav>
-            <div></div>    
-            <div></div>    
+        <nav class="header" <?= Utils::openBurger() ?>>
+            <div class="spacer"></div>    
+            <div class="spacer"></div>    
             <form class="flex logo" action="./" method="post">
                 <button type="submit">
                     <img src="<?= IMG . 'logo.png' ?>" alt="logo">
                 </button>
             </form>
-            <form class="flex" action="./" method="post">
+            <form class="flex home" action="./" method="post">
                 <button type="submit" class="home <?php if ($action === 'home') echo 'active'; ?>">Accueil</button>
             </form>
-            <form class="flex" action="./" method="post">
+            <form class="flex books" action="./" method="post">
                 <input type="hidden" name="action" value="books">
                 <button type="submit" class="link exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</button>
             </form>
-            <div></div>    
+            <div class="spacer"></div>    
             <div class="line"></div>
-            <form class="flex" action="./" method="post">
+            <form class="flex messaging" action="./" method="post">
                 <input type="hidden" name="action" value="messaging">
                 <button type="submit" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
                     <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie">
                     <span class="messagingTxt">Messagerie</span><span class="bubble"><?= $_SESSION['unReadMessages'] ?></span>
                 </button>
             </form>
-            <form class="flex" action="./" method="post">
+            <form class="flex account" action="./" method="post">
                 <input type="hidden" name="action" value="account">
                 <button type="submit" class="account <?php if ($action === 'account') echo 'active'; ?>">
                     <img src="<?= IMG . 'account.svg' ?>" alt="compte">
                     <span class="accountTxt">Mon compte</span>
                 </button>
             </form>
-            <form class="flex" action="./" method="post">
+            <form class="flex sign" action="./" method="post">
                 <input type="hidden" name="action" value="<?= isset($_SESSION['idUser']) ? "logout" : "signin" ?>">
                 <button type="submit" class="signin <?php if ($action === 'signin') echo 'active'; ?>">
                     <?= isset($_SESSION['idUser']) ? "Déconnexion" : "Connexion" ?>
                 </button>
             </form>
-            <div></div>
+            <div class="spacer"></div>
         </nav>
     </header>
 

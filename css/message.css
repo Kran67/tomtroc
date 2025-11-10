@@ -5,6 +5,14 @@
     height: calc(100vh - 80px - 61px);
 }
 
+.discussion-main:hover img {
+    filter: sepia(100%) hue-rotate(90deg) saturate(300%);
+}
+
+.discussion-main:hover .discussion-nickname {
+    color: var(--primary);
+}
+
 .messaging-discussions {
     background-color: var(--backgroundLight);
     display: flex;

@@ -194,6 +194,14 @@ main .title {
     justify-self: flex-start;
 }
 
+.avatar:hover .avatar-nickname {
+    color: var(--primary);
+}
+
+.avatar:hover img {
+    filter: sepia(100%) hue-rotate(90deg) saturate(300%);
+}
+
 .avatar-image {
     width: 48px;
     height: 48px;

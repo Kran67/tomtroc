@@ -141,3 +141,158 @@
     font-weight: 400;
     color: var(--textGray);
 }
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .home-top-part {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 15px;
+    }
+
+    .home-top-part .left-part {
+        order: 1;
+        padding: 52px 20px 0;
+        width: auto;
+    }
+
+    .home-top-part-title {
+        font-size: 30px;
+    }
+
+    .home-top-part-desc {
+        padding-right: 40px;
+    }
+
+    .home-top-part .right-part {
+        width: 100%;
+    }
+
+    .home-top-part .right-part::after {
+        right: 26px;
+    }
+
+    .home-top-part-button {
+        flex: 1;
+        margin: 39px 0 33px;
+    }
+
+    .home-middle-part {
+        padding-top: 48px;
+    }
+
+    .home-middle-part-title {
+        font-size: 28px;
+        padding: 0 55px;
+        text-align: center;
+    }
+
+    .home-middle-part-books {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 34px;
+    }
+
+    .home-middle-part-books img {
+        width: 160px;
+    }
+
+    .home-middle-part-books .book-card .book-content {
+        width: auto;
+        font-size: 13px;
+        height: 99px;
+        padding-top: 14px;
+        gap: 3px;
+    }
+
+    .home-middle-part-books .book-card .book-content .book-author {
+        font-size: 11px;
+    }
+
+    .home-middle-part-books .book-card .book-content .book-seller {
+        font-size: 8px;
+        margin-top: 14px;
+    }
+
+    .home-middle-part {
+        padding-bottom: 81px;
+    }
+
+    .home-middle-part-form.flex {
+        display: none;
+    }
+
+    .home-bottom-part {
+        padding: 48px 0 195px;
+    }
+
+    .home-bottom-part .title {
+        font-size: 28px;
+    }
+
+    .home-bottom-part-desc {
+        width: auto;
+        padding: 0 20px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .home-bottom-part-steps {
+        flex-direction: column;
+        gap: 16px;
+        padding: 0 20px;
+        margin-top: 32px;
+    }
+
+    .home-bottom-part-step {
+        height: 139px;
+        width: auto;
+    }
+
+    .home-bottom-part-form {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .home-middle-part-button {
+        width: 100%;
+        margin-top: 32px;
+    }
+
+    .home-bottom-part-image {
+        background-image: url(../img/min/our_values.jpg);
+        height: 425px;
+        margin-top: 48px;
+    }
+
+    .home-bottom-part-our-values {
+        margin-top: 32px;
+        padding: 0 20px;
+    }
+
+    .home-bottom-part-our-values .title {
+        font-size: 28px;
+    }
+
+    .home-bottom-part-desc2 {
+        width: auto;
+        font-size: 14px;
+    }
+
+    .home-bottom-part-signature {
+        margin-top: 26px;
+    }
+
+    .home-bottom-part-our-values::after {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 102px;
+        bottom: -162px;
+    }
+}

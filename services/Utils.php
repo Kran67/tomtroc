@@ -215,4 +215,9 @@ class Utils {
         }
         return "";
     }
+
+    public static function openBurger() : string
+    {
+        return "onclick=\"this.classList.toggle('open');\"";
+    }
 }
