@@ -13,7 +13,7 @@ class UserManager extends AbstractEntityManager
      */
     public function getUserByLogin(string $login) : ?User 
     {
-        $sql = "SELECT * FROM user WHERE login = :login";
+        $sql = "SELECT * FROM `user` WHERE login = :login";
         $result = $this->db->query($sql, ['login' => $login]);
         $user = $result->fetch();
         if ($user) {
@@ -29,7 +29,7 @@ class UserManager extends AbstractEntityManager
      */
     public function getUserById(string $id) : ?User 
     {
-        $sql = "SELECT * FROM user WHERE id = :id";
+        $sql = "SELECT * FROM `user` WHERE id = :id";
         $result = $this->db->query($sql, ['id' => $id]);
         $user = $result->fetch();
         if ($user) {
@@ -48,7 +48,7 @@ class UserManager extends AbstractEntityManager
      */
     public function addUser(User $user) : ?User 
     {
-        $sql = "INSERT INTO user (id, login, password, nickname, avatar, created_at) VALUES (:login, :password, :nickname, :avatar, NOW())";
+        $sql = "INSERT INTO `user` (id, login, password, nickname, avatar, created_at) VALUES (:id, :login, :password, :nickname, :avatar, NOW())";
         $this->db->query($sql, [
             'id' => Utils::guidv4(),
             'login' => $user->getLogin(),
@@ -56,10 +56,7 @@ class UserManager extends AbstractEntityManager
             'nickname' => $user->getNickname(),
             'avatar' => 'avatar.png',
         ]);
-        if ($user) {
-            return $this->getUserByLogin($user->getLogin());
-        }
-        return null;
+        return $this->getUserByLogin($user->getLogin());
     }
 
     /**
@@ -68,7 +65,7 @@ class UserManager extends AbstractEntityManager
      */
     public function updateUser(User $user) : void
     {
-        $sql = "UPDATE user SET password = :password, nickname = :nickname, avatar = :avatar WHERE id = :id";
+        $sql = "UPDATE `user` SET password = :password, nickname = :nickname, avatar = :avatar WHERE id = :id";
         $this->db->query($sql, [
             'password' => $user->getPassword(),
             'nickname' => $user->getNickname(),
@@ -79,20 +76,5 @@ class UserManager extends AbstractEntityManager
 
         // on met à jour la session
         $_SESSION['user'] = $this->getUserById($user->getId());
-    }
-
-    /**
-     * Récupère le nombre de livres de l'utilisateur.
-     * @return string
-     */
-    public function getBookCount() : string
-    {
-        $sql = "SELECT * FROM book WHERE user_id = :id";
-        $result = $this->db->query($sql, ['id' => $this->id]);
-        $count = $result->fetch();
-        if ($count) {
-            return $count;
-        }
-        return "0";
     }
 }

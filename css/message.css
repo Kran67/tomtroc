@@ -5,7 +5,7 @@
     height: calc(100vh - 80px - 61px);
 }
 
-.messaging-threads {
+.messaging-discussions {
     background-color: var(--backgroundLight);
     display: flex;
     width: 308px;
@@ -14,17 +14,17 @@
     gap: 26px;
 }
 
-.messaging-threads-title {
+.messaging-discussions-title {
     font-family: playfair;
     font-size: 26px;
     padding-left: 34px;
 }
 
-.messaging-threads-container {
+.messaging-discussions-container {
     overflow-y: auto;
 }
 
-.messaging-current-thread {
+.messaging-current-discussion {
     width: 831px;
     background-color: var(--lightGray);
     padding: 35px 0 35px 44px;
@@ -34,7 +34,7 @@
     overflow: hidden;
 }
 
-.messaging-current-thread-header {
+.messaging-current-discussion-header {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -43,7 +43,7 @@
     color: var(--darkGray);
 }
 
-.thread-messages-container {
+.discussion-messages-container {
     overflow-y: auto;
     flex: 1;
     display: flex;
@@ -53,20 +53,20 @@
     scrollbar-color: var(--textGray) var(--backgroundLight);
 }
 
-.thread-messages {
+.discussion-messages {
     display: flex;
     flex-direction: column;
     gap: 24px;
     min-height: 0;
 }
 
-.messaging-current-thread-container {
+.messaging-current-discussion-container {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-.messaging-current-thread-message-header {
+.messaging-current-discussion-message-header {
     display: flex;
     font-size: 12px;
     color: var(--textGray);
@@ -74,12 +74,12 @@
     align-items: center;
 }
 
-.messaging-current-thread-message-header.connected-user,
-.messaging-current-thread-message-content.connected-user {
+.messaging-current-discussion-message-header.connected-user,
+.messaging-current-discussion-message-content.connected-user {
     justify-content: flex-end;
 }
 
-.messaging-current-thread-image-container {
+.messaging-current-discussion-image-container {
     position: relative;
     border-radius: 50%;
     width: 24px;
@@ -87,17 +87,17 @@
     overflow: hidden;
 }
 
-.messaging-current-thread-image-container img {
+.messaging-current-discussion-image-container img {
     position: absolute;
     width: 30px;
     left: -3px;
 }
 
-.messaging-current-thread-message-content {
+.messaging-current-discussion-message-content {
     display: flex;
 }
 
-.messaging-current-thread-message-content span {
+.messaging-current-discussion-message-content span {
     padding: 10px 19px;
     font-size: 12px;
     color: var(--darkGray);
@@ -106,7 +106,7 @@
 
 }
 
-.messaging-current-thread-message-content.connected-user span {
+.messaging-current-discussion-message-content.connected-user span {
     background-color: var(--lightGray2);
 }
 

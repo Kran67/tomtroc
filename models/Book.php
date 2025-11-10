@@ -13,7 +13,7 @@
     private string $description = "";
     private string $status = "";
     private DateTime $created_at;
-    private DateTime $update_at;
+    private DateTime $updated_at;
     private string $user_nickname;
 
 
@@ -108,7 +108,7 @@
     }
  
     /**
-     * Setter pour la descritpion du livre.
+     * Setter pour la description du livre.
      * @param string $description
      */
     public function setDescription(string $description) : void 
@@ -116,14 +116,16 @@
         $this->description = $description;
     }
 
-    /**
-     * Getter pour la descritpion du livre.
-     * @return string
-     */
+     /**
+      * Getter pour la description du livre.
+      * @param int $length
+      * @return string
+      */
     public function getDescription(int $length = -1) : string
     {
         if ($length > 0) {
-            // Ici, on utilise mb_substr et pas substr pour éviter de couper un caractère en deux (caractère multibyte comme les accents).
+            // Ici, on utilise mb_substr et pas substr pour éviter de couper un caractère en deux
+            // (caractère multibyte comme les accents).
             $description = mb_substr($this->description, 0, $length);
             if (strlen($this->description) > $length) {
                 $description .= "...";
@@ -134,7 +136,7 @@
     }
  
     /**
-     * Setter pour la descritpion du livre.
+     * Setter pour la description du livre.
      * @param string $status
      */
     public function setStatus(string $status) : void 
@@ -152,9 +154,9 @@
     }
 
     /**
-     * Setter pour la date de création. Si la date est une string, on la convertit en DateTime.
+     * Setter pour la date de création. Si la date est une chaine, on la convertit en DateTime.
      * @param string|DateTime $created_at
-     * @param string $format : le format pour la convertion de la date si elle est une string.
+     * @param string $format : le format pour la conversion de la date si elle est une chaine.
      * Par défaut, c'est le format de date mysql qui est utilisé. 
      */
     public function setCreatedAt(string|DateTime $created_at, string $format = 'Y-m-d H:i:s') : void 
@@ -176,12 +178,12 @@
     }
 
     /**
-     * Setter pour la date de mise à jour. Si la date est une string, on la convertit en DateTime.
+     * Setter pour la date de mise à jour. Si la date est une chaine, on la convertit en DateTime.
      * @param string|DateTime $updated_at
-     * @param string $format : le format pour la convertion de la date si elle est une string.
+     * @param string $format : le format pour la conversion de la date si elle est une chaine.
      * Par défaut, c'est le format de date mysql qui est utilisé.
      */
-    public function setUpdateAt(string|DateTime $updated_at, string $format = 'Y-m-d H:i:s') : void 
+    public function setUpdatedAt(string|DateTime $updated_at, string $format = 'Y-m-d H:i:s') : void
     {
         if (is_string($updated_at)) {
             $updated_at = DateTime::createFromFormat($format, $updated_at);
@@ -195,7 +197,7 @@
      * si la date de mise à jour n'a pas été définie.
      * @return DateTime|null
      */
-    public function getUpdateAt() : ?DateTime 
+    public function getUpdatedAt() : ?DateTime
     {
         return $this->updated_at;
     }
@@ -215,11 +217,11 @@
         return 
         "<form class='flex' action='./' method='post'>
             <input type='hidden' name='action' value='book'>
-            <input type='hidden' name='id' value='{$this->id}'>
+            <input type='hidden' name='id' value='".$this->id."'>
             <button type='submit' class='book-card-link'>
                 <span class='book-card'>
                     <img src='".IMG_BOOKS_MIN.Utils::format($this->image)."' alt='".Utils::format($this->image)."'>
-                    <span class='book-tag {$this->status}'>{$status}</span>
+                    <span class='book-tag ".$this->status."'>".$status."</span>
                     <span class='book-content'>
                         <span class='book-title'>".Utils::format($this->title)."</span>
                         <span class='book-author'>".Utils::format($this->author)."</span>

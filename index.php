@@ -71,7 +71,7 @@ try {
         case 'editBook':
             $bookId = Utils::request('id', '');
             $signController = new SignController();
-            $signController->editBook($bookId);
+            $signController->editBook();
             break;
 
         case 'updateBook':
@@ -83,7 +83,7 @@ try {
         case 'deleteBook':
             $bookId = Utils::request('id', '');
             $signController = new SignController();
-            $signController->deleteBook($bookId);
+            $signController->deleteBook();
             break;
 
         case 'profile':
@@ -96,16 +96,16 @@ try {
             $MessagingController->showMessaging();
             break;
 
-        case 'createOrViewThread':
+        case 'createOrViewDiscussion':
             $toUserId = Utils::request('id', '');
             $MessagingController = new MessagingController();
-            $MessagingController->createOrViewThread($toUserId);
+            $MessagingController->createOrViewDiscussion($toUserId);
             break;
 
-        case 'changeThread':
-            $threadId = Utils::request('id', '');
-            if (isset($_SESSION["currentThreadId"]) && $_SESSION["currentThreadId"] !== $threadId) {
-                $_SESSION["currentThreadId"] = $threadId;
+        case 'changeDiscussion':
+            $discussionId = Utils::request('id', '');
+            if (isset($_SESSION['currentDiscussionId']) && $_SESSION['currentDiscussionId'] !== $discussionId) {
+                $_SESSION['currentDiscussionId'] = $discussionId;
             }
             $MessagingController = new MessagingController();
             $MessagingController->showMessaging();
@@ -117,7 +117,7 @@ try {
             break;
 
         default:
-            throw new Exception("La page demandée n'existe pas.");
+            throw new Exception('La page demandée n\'existe pas.');
     }
 } catch (Exception $e) {
     // En cas d'erreur, on affiche la page d'erreur.

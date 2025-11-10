@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\NoReturn;
+
 /**
  * Classe utilitaire : cette classe ne contient que des méthodes statiques qui peuvent être appelées
  * directement sans avoir besoin d'instancier un objet Utils.
@@ -6,14 +9,15 @@
  */
 class Utils {
     /**
-     * Convertit une date vers le format de type "Samedi 15 juillet 2023" en francais.
-     * @param DateTime $date : la date à convertir.
+     * Convertit une date vers le format de type "samedi 15 juillet 2023" en francais.
+     * @param DateTime|null $date : la date à convertir.
+     * @param string $pattern
      * @return string : la date convertie.
      */
     public static function convertDateToFrenchFormat(?DateTime $date, string $pattern = 'EEEE d MMMM Y') : string
     {
-        // Attention, s'il y a un soucis lié à IntlDateFormatter c'est qu'il faut
-        // activer l'extention intl_date_formater (ou intl) au niveau du serveur apache. 
+        // Attention, s'il y a un souci lié à IntlDateFormatter c'est qu'il faut
+        // activer l'extension intl_date_formater (ou intl) au niveau du serveur apache.
         // Ca peut se faire depuis php.ini ou parfois directement depuis votre utilitaire (wamp/mamp/xamp)
         if (!isset($date)) {
             return "";
@@ -27,23 +31,19 @@ class Utils {
     /**
      * Redirige vers une URL.
      * @param string $action : l'action que l'on veut faire (correspond aux actions dans le routeur).
-     * @param array $params : Facultatif, les paramètres de l'action sous la forme ['param1' => 'valeur1', 'param2' => 'valeur2']
      * @return void
      */
-    public static function redirect(string $action, array $params = []) : void
+    #[NoReturn] public static function redirect(string $action) : void
     {
         $_SESSION['action'] = $action;
         $url = "./";
-        //foreach ($params as $paramName => $paramValue) {
-        //    $url .= "&$paramName=$paramValue";
-        //}
         header("Location: $url");
         exit();
     }
 
     /**
-     * Cette méthode retourne le code js a insérer en attribut d'un bouton.
-     * pour ouvrir une popup "confirm", et n'effectuer l'action que si l'utilisateur
+     * Cette méthode retourne le code js à insérer en attribut d'un bouton.
+     * Pour ouvrir une popup "confirm", et n'effectuer l'action que si l'utilisateur
      * a bien cliqué sur "ok".
      * @param string $message : le message à afficher dans la popup.
      * @return string : le code js à insérer dans le bouton.
@@ -54,8 +54,8 @@ class Utils {
     }
 
     /**
-     * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
-     * retour en arrière.
+     * Cette méthode retourne le code js à insérer en attribut d'un élément HTML.
+     * Retour en arrière.
      * @return string : le code js à insérer dans le bouton.
      */
     public static function back() : string
@@ -70,18 +70,16 @@ class Utils {
      */
     public static function format(string $string) : string
     {
-        // Etape 1, on protège le texte avec htmlspecialchars.
-        $finalString = htmlspecialchars($string, ENT_QUOTES);
-
-        return $finalString;
+        // Étape 1, on protège le texte avec htmlspecialchars.
+        return htmlspecialchars($string, ENT_QUOTES);
     }
 
     public static function formatToParagraph(string $string) : string
     {
-        // Etape 1, on protège le texte avec htmlspecialchars.
+        // Étape 1, on protège le texte avec htmlspecialchars.
         $finalString = htmlspecialchars($string, ENT_QUOTES);
 
-        // Etape 2, le texte va être découpé par rapport aux retours à la ligne, 
+        // Étape 2, le texte va être découpé par rapport aux retours à la ligne,
         $lines = explode("\n", $finalString);
 
         // On reconstruit en mettant chaque ligne dans un paragraphe (et en sautant les lignes vides).
@@ -109,28 +107,23 @@ class Utils {
     }
 
     /**
-     * A noter qu'il vous faudra configurer le timezone pour afficher la bonne différence, à la minute prés
-     * Le timezone pour la France:
+     * À noter qu'il vous faudra configurer le timezone pour afficher la bonne différence, à la minute prés
+     * Le timezone pour la France :
      * date_default_timezone_set("europe/paris");
-     * A utiliser en haut du document
+     * À utiliser en haut du document
      */
-    public static function differenceDate(DateTime $firstDate, ?DateTime $lastDate = null){
-        //on part du principe que $firstDate et $lastDate peut être envoyé sous deux formats: un timestamp ou une date formatée
+    public static function differenceDate(DateTime $firstDate, ?DateTime $lastDate = null): array
+    {
+        //on part du principe que $firstDate et $lastDate peut être envoyé sous deux formats : un timestamp ou une date formatée
         
-        //on vérifie donc le format envoyé, pour le mettre en date formatée si c'est un timestamp:
+        //on vérifie donc le format envoyé, pour le mettre en date formatée si c'est un timestamp :
         //is_numeric vérifie si c'est un nombre entier (un timestamp est un nombre entier)
         //$firstDate = is_numeric($firstDate) ? date("d-m-Y H:i:s", $firstDate) : $firstDate;
         
         //on crée ensuite la date via date_create (Retourne un nouvel objet DateTime (DateTime: Représentation d'une date et heure))
         //$firstDate = date_create($firstDate);
-        $maintenant = !isset($lastDate) ? date_create("now") : $lastDate;
+        $maintenant = !isset($lastDate) ? date_create() : $lastDate;
         
-        //si jamais la date formatée qui à été envoyée est incorrect, on retourne un message d'erreur
-        if (!$firstDate)
-        {
-            echo "La date envoyée à differenceDate() est incorrecte.";
-            return;
-        }
         //date_diff nous donne maintenant des valeurs sur les représentations ci-dessus
         $interval = date_diff($maintenant, $firstDate);
         
@@ -141,25 +134,25 @@ class Utils {
         $h = $interval->h;//heures
         $i = $interval->i;//minutes
         $s = $interval->s;//secondes
-        $invert = $interval->invert;//0 = $firstDate est dans le futur, 1 = $firstDate est dans la passé
+        $invert = $interval->invert;//0 = $firstDate est dans le futur, 1 = $firstDate est dans le passé
         $texte_invert = $invert === (!isset($lastDate) ? 1 : 0) ? "depuis" : "Dans";//il y a une différence lorsqu'on demande un interval ou si on demande "depuis $firstDate seulement":
-        //depuis $firstDate seulement: 1 = $firstDate est dans le futur, 0 = $firstDate est dans la passé
-        //interval entre $firstDate et $lastDate: 0 = $firstDate est dans le futur, 1 = $firstDate est dans la passé
+        //depuis $firstDate seulement: 1 = $firstDate est dans le futur, 0 = $firstDate est dans le passé
+        //interval entre $firstDate et $lastDate: 0 = $firstDate est dans le futur, 1 = $firstDate est dans lea passé
         $days = $interval->days;//nombre de jours écoulés (depuis combien ou dans combien, nombre entier positif)
         
-        //enfin, on retourne les différences pour les afficher:
+        //enfin, on retourne les différences pour les afficher :
         
-        //si il y a plus d'un an, on affiche le nombre d'année plus le nombre de jours ("5 ans et 18 jours" par exemple)
+        //s'il y a plus d'un an, on affiche le nombre d'années plus le nombre de jours ("5 ans et 18 jours" par exemple)
         if ($y > 0) $texte = "$texte_invert $y an".($y > 1 ? "s" : "").($d > 0 ? " et ".$d." jour".($d > 1 ? "s" : "") : "");
-        //si il y a moins d'un an, on affiche les mois et les jours ("5 mois et 24 jours" par exemple)
+        //s'il y a moins d'un an, on affiche les mois et les jours ("5 mois et 24 jours" par exemple)
         elseif ($m > 0) $texte = "$texte_invert $m mois".($d > 0 ? " et $d jour".($d > 1 ? "s" : "") : "");
-        //si il y a moins d'un mois, on affiche les jours, évidemment
+        //s'il y a moins d'un mois, on affiche les jours, évidemment
         elseif ($d > 0) $texte = "$texte_invert $d jour".($d > 1 ? "s" : "");
-        //les heures si il y a moins d'un jour
+        //les heures s'il y a moins d'un jour
         elseif ($h > 0) $texte = "$texte_invert $h heure".($h > 1 ? "s" : "");
-        //les minutes si il y a moins d'une heure
+        //les minutes s'il y a moins d'une heure
         elseif ($i > 0) $texte = "$texte_invert $i minute".($i > 1 ? "s" : "");
-        // et les secondes si il y a moins d'une minute
+        // et les secondes s'il y a moins d'une minute
         elseif ($s > 0) $texte = "$texte_invert $s seconde".($s > 1 ? "s" : "");
         
         //si toutes les précédentes valeurs précédentes sont à 0, c'est forcément que c'est maintenant/aujourd'hui (s'affiche seulement si les heures et minutes ne sont pas précisées)
@@ -178,11 +171,13 @@ class Utils {
                 "texte_invert" => $texte_invert,
                 "days" => $days,
             ];
-    }    
+    }
 
     /**
-     * Fonction qui généère un identifiant unique de type UUID
+     * Fonction qui génère un identifiant unique de type UUID
+     * @param null $data
      * @return string
+     * @throws Exception
      */
     public static function guidv4($data = null): string
     {
@@ -200,7 +195,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
+     * Cette méthode retourne le code js à insérer en attribut d'un élément HTML.
      * @param string $imgId : identifiant de l'image dans le DOM.
      * @return string : le code js à insérer dans le bouton.
      */
@@ -210,8 +205,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode retourne le code js a insérer en attribut d'un élément HTML.
-     * @param string $imgId : identifiant de l'image dans le DOM.
+     * Cette méthode retourne le code js à insérer en attribut d'un élément HTML.
      * @return string : le code js à insérer dans le bouton.
      */
     public static function onSendMessage() : string

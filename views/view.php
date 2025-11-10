@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Cette classe génère les vues en fonction de ce que chaque contrôlleur lui passe en paramètre. 
+ * Cette classe génère les vues en fonction de ce que chaque contrôleur lui passe en paramètre.
  */
 class View 
 {
@@ -18,19 +18,19 @@ class View
     {
         $this->title = $title;
     }
-    
+
     /**
-     * Cette méthode retourne une page complète. 
-     * @param string $viewPath : le chemin de la vue demandée par le controlleur. 
-     * @param array $params : les paramètres que le controlleur a envoyé à la vue.
-     * @return string
+     * Cette méthode retourne une page complète.
+     * @param string $viewName
+     * @param array $params : les paramètres que le contrôleur a envoyés à la vue.
+     * @throws Exception
      */
     public function render(string $viewName, array $params = []) : void 
     {
         // On s'occupe de la vue envoyée
         $viewPath = $this->buildViewPath($viewName);
         
-        // Les deux variables ci-dessous sont utilisées dans le "main.php" qui est le template principal.
+        // Les deux variables ci-dessous sont utilisées dans le "main.php" qui est le modèle principal.
         $content = $this->_renderViewFromTemplate($viewPath, $params);
         $title = $this->title;
         ob_start();
@@ -39,16 +39,16 @@ class View
     }
     
     /**
-     * Coeur de la classe, c'est ici qu'est généré ce que le controlleur a demandé. 
-     * @param $viewPath : le chemin de la vue demandée par le controlleur.
-     * @param array $params : les paramètres que le controlleur a envoyés à la vue.
+     * Cœur de la classe, c'est ici qu'est généré ce que le contrôleur a demandé.
+     * @param $viewPath : le chemin de la vue demandée par le contrôleur.
+     * @param array $params : les paramètres que le contrôleur a envoyés à la vue.
      * @throws Exception : si la vue n'existe pas.
      * @return string : le contenu de la vue.
      */
     private function _renderViewFromTemplate(string $viewPath, array $params = []) : string
     {  
         if (file_exists($viewPath)) {
-            extract($params); // On transforme les diverses variables stockées dans le tableau "params" en véritables variables qui pourront être lues dans le template.
+            extract($params); // On transforme les diverses variables stockées dans le tableau "params" en véritables variables qui pourront être lues dans le modèle.
             ob_start();
             require($viewPath);
             return ob_get_clean();

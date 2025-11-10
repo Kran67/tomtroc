@@ -9,9 +9,9 @@ class DBManager
 {
     // Création d'une classe singleton qui permet de se connecter à la base de données.
     // On crée une instance de la classe DBConnect qui permet de se connecter à la base de données.
-    private static $instance;
+    private static DBManager $instance;
 
-    private $db;
+    private PDO $db;
 
     /**
      * Constructeur de la classe DBManager.
@@ -33,19 +33,10 @@ class DBManager
      */
     public static function getInstance() : DBManager
     {
-        if (!self::$instance) {
+        if (!isset(self::$instance) ){
             self::$instance = new DBManager();
         }
         return self::$instance;
-    }
-
-    /**
-     * Méthode qui permet de récupérer l'objet PDO qui permet de se connecter à la base de données.
-     * @return PDO
-     */
-    public function getPDO() : PDO
-    {
-        return $this->db;
     }
 
     /**

@@ -3,7 +3,7 @@
 /**
  * Entité Message
  */ 
-class Thread extends AbstractEntity 
+class Discussion extends AbstractEntity
 {
     private string $user_id;
     private string $nickname;
@@ -68,7 +68,7 @@ class Thread extends AbstractEntity
 
     /**
      * Setter pour le contenu du message.
-     * @param string $content
+     * @param string|null $content
      */
     public function setContent(string|null $content) : void 
     {
@@ -80,6 +80,7 @@ class Thread extends AbstractEntity
 
     /**
      * Getter pour le contenu du message.
+     * @param int $length
      * @return string
      */
     public function getContent(int $length = -1) : string
@@ -97,7 +98,8 @@ class Thread extends AbstractEntity
 
     /**
      * Setter pour la date du message.
-     * @param DateTime $sent_at
+     * @param string|DateTime|null $sent_at
+     * @param string $format
      */
     public function setSentAt(string|DateTime|null $sent_at, string $format = 'Y-m-d H:i:s') : void 
     {
@@ -136,27 +138,27 @@ class Thread extends AbstractEntity
 
     public function __toString() : string
     {
-        $current_thread_id = $_SESSION['currentThreadId'] ?? "";
-        $result = "<div class='thread-main ".($current_thread_id === $this->id ? "active" : "")."'>
-            <div class='thread-image-container'>
+        $current_discussion_id = $_SESSION['currentDiscussionId'] ?? "";
+        $result = "<div class='discussion-main ".($current_discussion_id === $this->id ? "active" : "")."'>
+            <div class='discussion-image-container'>
                 <img src='".IMG_AVATARS.Utils::format($this->avatar)."' alt='".Utils::format($this->avatar)."'>
             </div>
-            <div class='thread-right'>
-                <div class='thread-right-header'>
+            <div class='discussion-right'>
+                <div class='discussion-right-header'>
                     <form class='flex' action='./' method='post'>
-                        <input type='hidden' name='action' value='changeThread'>
+                        <input type='hidden' name='action' value='changeDiscussion'>
                         <input type='hidden' name='id' value='".$this->id."'>";
-        if ($current_thread_id !== $this->id) {
+        if ($current_discussion_id !== $this->id) {
             $result .= "    <button type='submit' class=''>";
         }
-        $result .= "        <span class='thread-nickname'>".Utils::format($this->nickname)."</span>";
-        if ($current_thread_id !== $this->id) {
+        $result .= "        <span class='discussion-nickname'>".Utils::format($this->nickname)."</span>";
+        if ($current_discussion_id !== $this->id) {
             $result .= "    </button>";
         }
         $result .= "        </form>
-                    <span class='thread-send-at'>".Utils::convertDateToFrenchFormat($this->sent_at, "HH:mm")."</span>
+                    <span class='discussion-send-at'>".Utils::convertDateToFrenchFormat($this->sent_at, "HH:mm")."</span>
                 </div>
-                <div class='thread-last-message ".(!$this->getIsRead() ? "unread" : "")."'>".Utils::format($this->getContent(27))."</div>
+                <div class='discussion-last-message ".(!$this->getIsRead() ? "unread" : "")."'>".Utils::format($this->getContent(27))."</div>
             </div>
         </div>";
         return $result;

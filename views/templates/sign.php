@@ -5,7 +5,8 @@
 ?>
 <div class="sign">
     <div class="sign-form-container">
-        <div class="sign-title"><?= $signup ? "Inscription" : "Connexion" ?></div>
+        <div class="sign-title"><?= /** @var Bool $signup */
+            $signup ? "Inscription" : "Connexion" ?></div>
         <form class="sign-form" method="post">
             <input type="hidden" name="action" value="<?= $signup ? 'addUser' : 'login' ?>">
             <?php if ($signup) {?>
@@ -29,5 +30,5 @@
             <div class="sign-ask"><?= $signup ? "Déjà inscrit" : "Pas de compte" ?> ? <button type="submit"><?= $signup ? "Connectez-vous" : "Inscrivez-vous" ?></button></div>
         </form>
     </div>
-    <image src="<?= IMG ?>connexion.jpg" alt="">
+    <img src="<?= IMG ?>connexion.jpg" alt="connection">
 </div>

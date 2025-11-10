@@ -4,7 +4,9 @@ class SignController
 {
     /**
      * Affiche la page d'enregistrement ou de connexion.
+     * @param bool $signup
      * @return void
+     * @throws Exception
      */
     public function showSignForm(bool $signup = true) : void
     {
@@ -36,6 +38,7 @@ class SignController
     /**
      * Connexion de l'utilisateur.
      * @return void
+     * @throws Exception
      */
     public function connectUser() : void 
     {
@@ -85,9 +88,10 @@ class SignController
 
     /**
      * Connexion de l'utilisateur.
-     * @return User
+     * @return void
+     * @throws Exception
      */
-    public function addUser() : ?User
+    public function addUser() : void
     {
         // On récupère les données du formulaire.
         $login = Utils::request("email");
@@ -120,8 +124,9 @@ class SignController
     }
 
     /**
-     * Modification d'un utilisateur. 
+     * Modification d'un utilisateur.
      * @return void
+     * @throws Exception
      */
     public function updateAccount() : void 
     {
@@ -138,7 +143,7 @@ class SignController
             $info = getimagesize($_FILES["avatarUpload"]["tmp_name"]);
             if (!$info) {
                 $uploadOk = false;
-            } else if ($info[0] > 135 && $info[1] > 135) {
+            } elseif ($info[0] > 135 && $info[1] > 135) {
                 $uploadOk = false;
             }
         }
@@ -147,11 +152,9 @@ class SignController
         if (!$uploadOk) {
             $avatar = "avatar.png";
         // if everything is ok, try to upload file
-        } else {
-            if (!move_uploaded_file($_FILES["avatarUpload"]["tmp_name"], $target_file)) {
+        } elseif (!move_uploaded_file($_FILES["avatarUpload"]["tmp_name"], $target_file)) {
                 $avatar = "avatar.png";
-            }
-        }        
+        }
 
         // On vérifie que les données sont valides.
         if (empty($password) || empty($nickname)) {
@@ -175,7 +178,8 @@ class SignController
 
     /**
      * Affichage de la page du compte de l'utilisateur.
-     * @return User
+     * @return void
+     * @throws Exception
      */
     public function showAccount(): void
     {
@@ -196,6 +200,7 @@ class SignController
     /**
      * Edition d'un livre.
      * @return void
+     * @throws Exception
      */
     public function editBook() : void
     {
@@ -216,9 +221,10 @@ class SignController
         }
     }
 
-     /**
-     * Modification d'un livre. 
+    /**
+     * Modification d'un livre.
      * @return void
+     * @throws Exception
      */
     public function updateBook() : void 
     {
@@ -241,7 +247,7 @@ class SignController
             $info = getimagesize($_FILES["imageUpload"]["tmp_name"]);
             if (!$info) {
                 $uploadOk = false;
-            } else if ($info[0] > 783 && $info[1] > 1175) {
+            } elseif ($info[0] > 783 && $info[1] > 1175) {
                 $uploadOk = false;
             }
         }
@@ -250,20 +256,17 @@ class SignController
         if (!$uploadOk) {
             $booksImgFolder = "a_book.jpg";
         // if everything is ok, try to upload file
-        } else {
-            $fileMoved = false;
-            if (!file_exists($target_file)) {
-                $fileMoved = move_uploaded_file($_FILES["imageUpload"]["tmp_name"], $target_file);
-                if (!$fileMoved) {
-                    $booksImgFolder = "a_book.jpg";
-                } else {
-                    // Resample
-                    list($width, $height) = getimagesize($target_file);
-                    $image_p = imagecreatetruecolor(200, 200);
-                    $image = imagecreatefromjpeg($target_file);
-                    imagecopyresampled($image_p, $image, 0, 0, 0, 0, 200, 200, $width, $height);
-                    imagejpeg($image_p, $target_min_file);
-                }
+        } elseif (!file_exists($target_file)) {
+            $fileMoved = move_uploaded_file($_FILES["imageUpload"]["tmp_name"], $target_file);
+            if (!$fileMoved) {
+                $booksImgFolder = "a_book.jpg";
+            } else {
+                // Resample
+                list($width, $height) = getimagesize($target_file);
+                $image_p = imagecreatetruecolor(200, 200);
+                $image = imagecreatefromjpeg($target_file);
+                imagecopyresampled($image_p, $image, 0, 0, 0, 0, 200, 200, $width, $height);
+                imagejpeg($image_p, $target_min_file);
             }
         }
         if (empty($booksImgFolder)) {

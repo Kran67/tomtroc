@@ -11,7 +11,7 @@ class MessagingManager extends AbstractEntityManager
      * @param string $userId : identifiant de l'utilisateur.
      * @return array : les conversations avec le dernier message.
      */
-    public function getThreadsByUserId(string $userId) : array
+    public function getDiscussionsByUserId(string $userId) : array
     {
         $sql = "SELECT 
                     u.id AS user_id,
@@ -24,10 +24,7 @@ class MessagingManager extends AbstractEntityManager
                     m.is_read
                 FROM message_thread mt
                 JOIN user u 
-                    ON u.id = CASE 
-                                WHEN mt.user_id = :userId THEN mt.from_user_id
-                                ELSE mt.user_id
-                            END
+                    ON u.id = IF(mt.user_id = :userId, mt.from_user_id, mt.user_id)
                 LEFT JOIN message m 
                     ON m.thread_id = mt.id
                     AND m.sent_at = (
@@ -38,16 +35,16 @@ class MessagingManager extends AbstractEntityManager
                 WHERE mt.user_id = :userId OR mt.from_user_id = :userId
                 ORDER BY mt.created_at DESC, m.sent_at DESC";
         $result = $this->db->query($sql, ['userId' => $userId]);
-        $threads = [];
+        $discussions = [];
 
-        while ($thread = $result->fetch()) {
-            $threads[] = new Thread($thread);
+        while ($discussion = $result->fetch()) {
+            $discussions[] = new Discussion($discussion);
         }
-        return $threads;
+        return $discussions;
     }
 
     /**
-     * Récupère le nombre de message non lus pour un utilisateur.
+     * Récupère le nombre de messages non lus pour un utilisateur.
      * @param string $userId : identifiant de l'utilisateur.
      * @return int : le nombre de messages.
      */
@@ -72,17 +69,17 @@ class MessagingManager extends AbstractEntityManager
 
     /**
      * Récupère les messages d'une conversation.
-     * @param string $threadId : identifiant de la conversation
+     * @param string $discussionId : identifiant de la conversation
      * @return array : tableau de message.
      */
-    public function getThreadMessagesById(string $threadId) : array
+    public function getDiscussionMessagesById(string $discussionId) : array
     {
         $sql = "SELECT m.content, m.sent_at, m.user_id, u.avatar
             FROM message m
             JOIN user u ON u.id = m.user_id
-            WHERE thread_id = :threadId
-            ORDER BY sent_at ASC";
-        $result = $this->db->query($sql, ['threadId' => $threadId]);
+            WHERE thread_id = :discussionId
+            ORDER BY sent_at ";
+        $result = $this->db->query($sql, ['discussionId' => $discussionId]);
         $messages = [];
 
         while ($message = $result->fetch()) {
@@ -93,38 +90,38 @@ class MessagingManager extends AbstractEntityManager
 
     /**
      * Récupère tous les messages d'un utilisateur.
-     * @param string $threadId : identifiant de la conversation
-     * @return array : un tableau d'objets Message.
+     * @param string $discussionId : identifiant de la conversation
+     * @return Discussion|null : un tableau d'objets Message.
      */
-    public function getTreadById(string $threadId) : ?Thread
+    public function getDiscussionById(string $discussionId) : ?Discussion
     {
         $sql = "SELECT mt.id, u.id as user_id, u.nickname, u.avatar
                 FROM message_thread mt
                 JOIN user u ON u.id = mt.from_user_id
-                WHERE mt.id = :threadId";
-        $result = $this->db->query($sql, ['threadId' => $threadId]);
-        $thread = $result->fetch();
-        if ($thread) {
-            return new Thread($thread);
+                WHERE mt.id = :discussionId";
+        $result = $this->db->query($sql, ['discussionId' => $discussionId]);
+        $discussion = $result->fetch();
+        if ($discussion) {
+            return new Discussion($discussion);
         }
         return null;
     }
 
     /**
      * Récupère la conversation pour deux utilisateurs.
-     * @param string $userId : identifiant de l'utilisateur connecté.
-     * @param string $userId : identifiant de l'utilisateur avec qui on souhaite échanger.
-     * @return Thread : la conversation.
+     * @param string $fromUserId
+     * @param string $toUserId
+     * @return Discussion|null : la conversation.
      */
-    public function getThreadByUsers(string $fromUserId, string $toUserId) : ?Thread
+    public function getDiscussionByUsers(string $fromUserId, string $toUserId) : ?Discussion
     {
         $sql = "SELECT *
                 FROM message_thread
                 WHERE user_id = :userId AND from_user_id = :fromUserId";
         $result = $this->db->query($sql, ['userId' => $toUserId, 'fromUserId' => $fromUserId]);
-        $thread = $result->fetch();
-        if ($thread) {
-            return new Thread($thread);
+        $discussion = $result->fetch();
+        if ($discussion) {
+            return new Discussion($discussion);
         }
         return null;
     }
@@ -136,7 +133,7 @@ class MessagingManager extends AbstractEntityManager
      * @param string $fromUserId : identifiant.
      * @return void
      */
-    public function createNewThread(string $id, string $toUserId, string $fromUserId) : void {
+    public function createNewDiscussion(string $id, string $toUserId, string $fromUserId) : void {
         $sql = "INSERT INTO message_thread (id, user_id, from_user_id, created_at) VALUES (:id, :userId, :fromUserId, NOW())";
         $this->db->query($sql, [
             "id" => $id,
@@ -148,18 +145,18 @@ class MessagingManager extends AbstractEntityManager
 
     public function sendMessage(Message $message) : void
     {
-        $sql = "INSERT INTO message (id, thread_id, user_id, content, sent_at, is_read) VALUES (:id, :threadId, :userId, :content, NOW(), 0)";
+        $sql = "INSERT INTO message (id, thread_id, user_id, content, sent_at, is_read) VALUES (:id, :discussionId, :userId, :content, NOW(), 0)";
         $this->db->query($sql, [
             "id" => $message->getId(),
-            "threadId" => $message->getThreadId(),
+            "discussionId" => $message->getDiscussionId(),
             "userId" => $message->getUserId(),
             "content" => $message->getContent()
         ]);
     }
 
-    public function readAllThreadMessage(string $threadId) : void
+    public function readAllDiscussionMessage(string $discussionId) : void
     {
-        $sql = "UPDATE message SET is_read = 1 WHERE thread_id = :threadId";
-        $this->db->query($sql, ["threadId" => $threadId]);
+        $sql = "UPDATE message SET is_read = 1 WHERE thread_id = :discussionId";
+        $this->db->query($sql, ["discussionId" => $discussionId]);
     }
 }

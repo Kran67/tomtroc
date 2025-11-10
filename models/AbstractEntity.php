@@ -2,7 +2,7 @@
 
 abstract class AbstractEntity 
 {
-    // Par défaut l'id vaut '', ce qui permet de vérifier facilement si l'entité est nouvelle ou pas. 
+    // Par défaut l'id il vaut '', ce qui permet de vérifier facilement si l'entité est nouvelle ou pas.
     protected string $id = '';
 
     /**
@@ -22,7 +22,8 @@ abstract class AbstractEntity
      * Système d'hydratation de l'entité.
      * Permet de transformer les données d'un tableau associatif.
      * Les noms de champs de la table doivent correspondre aux noms des attributs de l'entité.
-     * Les underscore sont transformés en camelCase (ex: date_creation devient setDateCreation).
+     * Les underscores sont transformés en camelCase (ex : date_creation devient setDateCreation).
+     * @param array $data
      * @return void
      */
     protected function hydrate(array $data) : void 

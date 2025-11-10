@@ -86,7 +86,8 @@ class User extends AbstractEntity
 
     /**
      * Setter pour la date de création.
-     * @param DateTime $created_at
+     * @param string $created_at
+     * @throws Exception
      */
     public function setCreatedAt(string $created_at) : void
     {
@@ -103,7 +104,7 @@ class User extends AbstractEntity
     }
 
     /**
-     * Setter pour le nombre de livre.
+     * Setter pour le nombre de livres.
      * @param int $bookCount
      */
     public function setBookCount(int $bookCount) : void 
@@ -112,7 +113,7 @@ class User extends AbstractEntity
     }
 
     /**
-     * Getter pour le nombre de livre.
+     * Getter pour le nombre de livres.
      * @return int
      */
     public function getBookCount() : int 
@@ -125,7 +126,7 @@ class User extends AbstractEntity
         return 
             "<form class='flex' action='./' method='post'>
                 <input type='hidden' name='action' value='profile'>
-                <input type='hidden' name='id' value='{$this->id}'>
+                <input type='hidden' name='id' value='".$this->id."'>
                 <button type='submit' class='avatar'>
                     <img src='".Utils::format(IMG_AVATARS.$this->avatar)."' class='avatar-image' alt='".Utils::format(IMG_AVATARS.$this->avatar)."'>
                     <span class='avatar-nickname'>".Utils::format($this->nickname)."</span>
@@ -142,20 +143,20 @@ class User extends AbstractEntity
     {
         $accountMemberSince = Utils::differenceDate($this->created_at);
         $result = "<div class='account-card'>
-            <img id='avatar' src='". IMG_AVATARS.$this->getAvatar() ."' alt='{$this->getAvatar()}'>";
+            <img id='avatar' src='".IMG_AVATARS.$this->getAvatar()."' alt='".$this->getAvatar()."'>";
         if ($this->isConnected()) {
             $result .= "<label for='avatarUpload' class='link account-image-update'>modifier</label>";
         } else {
             $result .= "<div class='account-spacer'></div>";
         }
         $result .= "<hr>
-            <div class='account-nickname'>". Utils::format($this->nickname) ."</div>
+            <div class='account-nickname'>".Utils::format($this->nickname)."</div>
             <div class='account-member-since'>Membre ".$accountMemberSince["texte"]."</div>
             <div class='account-library'>BIBLIOTHEQUE</div>
-            <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>{$this->book_count} livre".($this->book_count > 1 ? "s" : "")."</div>
+            <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>".$this->book_count." livre".($this->book_count > 1 ? "s" : "")."</div>
             <form class='flex' action='./' method='post'>
-                <input type='hidden' name='action' value='createOrViewThread'>
-                <input type='hidden' name='id' value='{$this->getId()}'>
+                <input type='hidden' name='action' value='createOrViewDiscussion'>
+                <input type='hidden' name='id' value='".$this->id."'>
                 <button type='submit' class='cta cta2 account-button' ".Utils::onSendMessage().">Écrire un message</button>
             </form>
         </div>";
@@ -171,7 +172,7 @@ class User extends AbstractEntity
                 <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif' ".Utils::onChangeImage('avatar').">
                 <div class='sign-form-row'>
                     <label for='email'>Adresse email</label>
-                    <input name='email' id='email' type='text' value='{$this->login}' readonly>
+                    <input name='email' id='email' type='text' value='".$this->login."' readonly>
                 </div>
                 <div class='sign-form-row'>
                     <label for='password'>Mot de passe</label>
@@ -179,7 +180,7 @@ class User extends AbstractEntity
                 </div>
                 <div class='sign-form-row'>
                     <label for='nickname'>Pseudo</label>
-                    <input name='nickname' id='nickname' type='text' value='{$this->nickname}'>
+                    <input name='nickname' id='nickname' type='text' value='".$this->nickname."'>
                 </div>
                 <button class='cta cta2 sign-submit-btn'>Enregistrer</button>
             </form>
@@ -195,7 +196,7 @@ class User extends AbstractEntity
                 <div class='user-books-column-author'>AUTEUR</div>
                 <div class='user-books-column-desc'>DESCRIPTION</div>";
                 if ($this->isConnected()) {
-                    $result .= "<div class='user-books-column-availability'>DISPONIBILITE</div>
+                    $result .= "<div class='user-books-column-availability'>DISPONIBILITÉ</div>
                         <div class='user-books-column-action'>ACTION</div>";
                 }
             $result .= "</div>";
@@ -216,17 +217,17 @@ class User extends AbstractEntity
                     $result .= "<div class='user-books-column-desc'>".Utils::format($book->getDescription(82))."</div>";
                     $status = $book->getStatus() === 'indisponible' ? 'non dispo.' : $book->getStatus();
                     if ($this->isConnected()) {
-                        $result .= "<div class='user-books-column-availability'><span class='book-tag {$book->getStatus()}'>".$status."</span></div>";
+                        $result .= "<div class='user-books-column-availability'><span class='book-tag ".$book->getStatus()."'>".$status."</span></div>";
                         $result .= "<div class='user-books-column-action'>";
                         $result .= "    <form class='flex' action='./' method='post'>";
                         $result .= "        <input type='hidden' name='action' value='editBook'>";
-                        $result .= "        <input type='hidden' name='id' value='{$book->getId()}'>";
+                        $result .= "        <input type='hidden' name='id' value='".$book->getId()."'>";
                         $result .= "        <button type='submit'>Éditer</button>";
                         $result .= "    </form>";
                         $result .= "    <form class='flex' action='./' method='post'>";
                         $result .= "        <input type='hidden' name='action' value='deleteBook'>";
-                        $result .= "        <input type='hidden' name='id' value='{$book->getId()}'>";
-                        $result .= "        <button type='submit' class='delete' {Utils::askConfirmation('Êtes-vous sûr de vouloir supprimer ce livre ?')}>Supprimer</button>";
+                        $result .= "        <input type='hidden' name='id' value='".$book->getId()."'>";
+                        $result .= "        <button type='submit' class='delete' ".Utils::askConfirmation('Êtes-vous sûr de vouloir supprimer ce livre ?').">Supprimer</button>";
                         $result .= "    </form>";
                         $result .= "</div>";
                     }

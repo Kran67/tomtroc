@@ -5,7 +5,7 @@
  */ 
 class Message extends AbstractEntity 
 {
-    private string $thread_id;
+    private string $discussion_id;
     private string $user_id;
     private string $content;
     private ?DateTime $sent_at;
@@ -14,20 +14,20 @@ class Message extends AbstractEntity
 
     /**
      * Setter pour l'identifiant de la conversation.
-     * @param string $thread_id
+     * @param string $discussion_id
      */
-    public function setThreadId(string $thread_id) : void 
+    public function setDiscussionId(string $discussion_id) : void 
     {
-        $this->thread_id = $thread_id;
+        $this->discussion_id = $discussion_id;
     }
 
     /**
      * Getter pour l'identifiant de la conversation.
      * @return string
      */
-    public function getThreadId() : string
+    public function getDiscussionId() : string
     {
-        return $this->thread_id;
+        return $this->discussion_id;
     }
 
     /**
@@ -68,7 +68,8 @@ class Message extends AbstractEntity
 
     /**
      * Setter pour la date du message.
-     * @param DateTime $sent_at
+     * @param string|DateTime $sent_at
+     * @param string $format
      */
     public function setSentAt(string|DateTime $sent_at, string $format = 'Y-m-d H:i:s') : void 
     {

@@ -3,9 +3,10 @@
 class ProfileController 
 {
     /**
-     * Affichage de la page de profile d'un l'utilisateur.
-     * @param string $id : l'identifiant de l'utilisateur
-     * @return User
+     * Affichage de la page de profil d'un utilisateur.
+     * @param string $userId
+     * @return void
+     * @throws Exception
      */
     public function showProfile(string $userId): void
     {

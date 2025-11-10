@@ -5,6 +5,7 @@ class BookController
     /**
      * Affiche la page d'accueil.
      * @return void
+     * @throws Exception
      */
     public function showHome() : void
     {
@@ -17,7 +18,9 @@ class BookController
 
     /**
      * Affiche la page des livres à échanger.
+     * @param string $bookTitle
      * @return void
+     * @throws Exception
      */
     public function showBooks(string $bookTitle) : void
     {
@@ -32,6 +35,7 @@ class BookController
      * Affiche du détail d'un livre.
      * @param string $bookId : identifiant du livre
      * @return void
+     * @throws Exception
      */
     public function showBookDetail(string $bookId) : void
     {

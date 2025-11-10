@@ -59,28 +59,14 @@ class BookManager extends AbstractEntityManager
     }
 
     /**
-     * Ajoute ou modifie un livre.
-     * On sait si le livre est un nouveau livre car son id sera ''.
-     * @param Book $book : le livre à ajouter ou modifier.
-     * @return void
-     */
-    //public function addOrUpdateBook(Book $book) : void 
-    //{
-    //    if (empty($book->getId())) {
-    //        $this->addBook($book);
-    //    } else {
-    //        $this->updateBook($book);
-    //    }
-    //}
-
-    /**
      * Ajoute un livre.
-     * @param Book $livre : le livre à ajouter.
+     * @param Book $book
      * @return void
      */
     public function addBook(Book $book) : void
     {
-        $sql = "INSERT INTO book (id, user_id, title, author, image, description, status, created_at, updated_at) VALUES (:id_user, :title, :author, :image, :description, :status, NOW(), NOW())";
+        $sql = "INSERT INTO book (id, user_id, title, author, image, description, status, created_at, updated_at) 
+                    VALUES (:id, :id_user, :title, :author, :image, :description, :status, NOW(), NOW())";
         $this->db->query($sql, [
             'id' => Utils::guidv4(),
             'id_user' => $book->getUserId(),
@@ -99,7 +85,14 @@ class BookManager extends AbstractEntityManager
      */
     public function updateBook(Book $book) : void
     {
-        $sql = "UPDATE book SET title = :title, author = :author, image = :image, description = :description, status = :status, updated_at = NOW() WHERE id = :id";
+        $sql = "UPDATE book 
+                    SET title = :title,
+                        author = :author,
+                        image = :image,
+                        description = :description,
+                        status = :status,
+                        updated_at = NOW()
+                    WHERE id = :id";
         $this->db->query($sql, [
             'id' => $book->getId(),
             'title' => $book->getTitle(),
@@ -122,7 +115,7 @@ class BookManager extends AbstractEntityManager
     }
 
     /**
-     * Récupère le nombre de livre pour un utilisateur.
+     * Récupère le nombre de livres pour un utilisateur.
      * @param string $userId : l'identifiant de l'utilisateur
      * @return int : le nombre de livres.
      */

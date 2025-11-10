@@ -18,7 +18,8 @@
     <div class="home-middle-part-title">Les derniers livres ajoutés</div>
     <div class="home-middle-part-books">
         <?php
-            foreach($books as $book) {
+        /** @var array $books */
+        foreach($books as $book) {
                 echo $book;
             }
         ?>

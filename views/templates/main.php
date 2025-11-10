@@ -1,6 +1,6 @@
 <?php 
 /**
- * Ce fichier est le template principal qui "contient" ce qui aura été généré par les autres vues.  
+ * Ce fichier est le modèle principal qui "contient" ce qui aura été généré par les autres vues.
  * 
  * Les variables qui doivent impérativement être définie sont : 
  *      $title string : le titre de la page.
@@ -63,7 +63,8 @@ $action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] :
     </header>
 
     <main>    
-        <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
+        <?= /** @var string $content */
+        $content /* Ici est affiché le contenu réel de la page. */ ?>
     </main>
     
     <footer>

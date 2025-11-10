@@ -1,6 +1,6 @@
 <?php 
     /** 
-     * Template du formulaire d'update/creation d'un livre. 
+     * Modèle du formulaire de mise à jour / création d'un livre.
      */
 ?>
 <div class="book-form-main">
@@ -9,7 +9,8 @@
             <input type="hidden" name="action" value="account">
             <button type="submit" class="book-form-back" <?= Utils::back(); ?>>&#8592; retour</button>
         </form>
-        <h2><?= empty($book->getId()) ? "Création d'un livre" : "Modifier les informations"?></h2>
+        <h2><?= /** @var Book $book */
+            empty($book->getId()) ? "Création d'un livre" : "Modifier les informations"?></h2>
         <form class="book-form" action="./" method="post" enctype="multipart/form-data">
             <div class="book-form-left">
                 <div class="book-form-image-title">Photo</div>
