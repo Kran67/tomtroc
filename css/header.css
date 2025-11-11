@@ -114,8 +114,8 @@ header nav::before {
         right: 0;
         z-index: 1;
         background-color: var(--backgroundLight);
-        width: 160px;
-        height: 25px;
+        width: 100%;
+        height: 60px;
         align-items: center;
         padding-right: 10px;
         border-bottom: 1px solid var(--lightGray);
@@ -123,27 +123,46 @@ header nav::before {
     }
 
     header nav form.flex.home {
-        bottom: -25px;
+        bottom: -60px;
     }
 
     header nav form.flex.books {
-        bottom: -50px;
+        bottom: -120px;
     }
 
     header nav form.flex.messaging {
-        bottom: -75px;
+        bottom: -180px;
     }
 
     header nav form.flex.account {
-        bottom: -100px;
+        bottom: -240px;
     }
 
     header nav form.flex.sign {
-        bottom: -125px;
+        bottom: -300px;
     }
 
     header nav.open form.flex:not(.logo) {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
     }
+
+    header nav button {
+        font-size: 20px;
+    }
+
+    header nav .messagingTxt {
+        width: auto;
+    }
+
+    header nav .messaging img,
+    header nav .messaging .bubble,
+    header nav .account img {
+        height: 20px;
+    }
+
+    header nav .messaging .bubble {
+        font-size: 12px;
+    }
+
 }

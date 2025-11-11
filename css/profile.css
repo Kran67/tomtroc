@@ -29,3 +29,81 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .profile-main {
+        align-items: unset;
+    }
+
+    .profile-container {
+        padding: 73px 22px 10px;
+        width: 100%;
+        gap: 33px;
+        flex-direction: column;
+    }
+
+    .user-books-header {
+        display: none;
+    }
+
+    .user-books-row {
+        border: 1px solid var(--lightGray);
+        border-radius: 20px;
+        height: 251px;
+        padding: 51px 55px;
+        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        grid-template-rows: 40px 40px 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+            "area1 area2"
+            "area1 area3"
+            "area4 area4";
+    }
+
+    .user-books-row-container {
+        gap: 16px;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .area1 {
+        grid-area: area1;
+    }
+
+    .area2 {
+        grid-area: area2;
+    }
+
+    .area3 {
+        grid-area: area3;
+    }
+
+    .area4 {
+        grid-area: area4;
+        margin-top: 20px;
+    }
+
+    .user-books-image-container {
+        min-width: 78px;
+    }
+
+    .user-books-column-title {
+        min-width: 158px;
+    }
+
+    .user-books-column-author {
+        align-self: flex-end;
+        margin-bottom: 10px;
+    }
+
+    .profile-container .user-books-row:nth-child(even) {
+        background-color: #fff;
+    }
+}

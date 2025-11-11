@@ -11,6 +11,7 @@
 
 .book-form-back {
     text-decoration: none;
+    color: var(--textGray);
 }
 
 .book-form-main h2 {
@@ -80,4 +81,63 @@
 
 .book-submit-btn {
     width: 322px;
+}
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .book-form-main {
+        flex-direction: column;
+    }
+
+    .book-form-container {
+        background-color: var(--backgroundLight);
+        padding: 0;
+        width: 100%;
+        padding: 53px 0 80px;
+    }
+
+    .book-form-container .book-form-back,
+    .book-form-container h2 {
+        padding: 0 20px;
+    }
+
+    .book-form-container h2 {
+        font-size: 30px;
+    }
+
+    .book-form {
+        padding: 0;
+        flex-direction: column;
+        margin-top: 34px;
+    }
+
+    .book-form-image-container {
+        width: 335px;
+        height: 335px;
+    }
+
+    .book-form-image {
+        width: 452px;
+        height: 679px;
+        left: -59px;
+        top: -273px;
+    }
+
+    .book-form-left {
+        padding: 42px 20px 0;
+    }
+
+    .book-form-right {
+        width: 100%;
+        padding: 30px 20px 47px;
+    }
+
+
+    .book-submit-btn {
+        width: 100%;
+        margin-top: 44px;
+    }
 }

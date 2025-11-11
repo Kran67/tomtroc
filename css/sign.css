@@ -1,6 +1,5 @@
 .sign {
     display: flex;
-    background-color: var(--backgroundLight);
     justify-content: center;
 }
 
@@ -28,7 +27,7 @@
 }
 
 .sign-form-row:first-of-type {
-    margin-top: 55px;
+    margin-top: 25px;
 }
 
 .sign-form-row label,
@@ -62,7 +61,7 @@
 
 .sign-ask {
     font-size: 14px;
-    color: var(--textGray);
+    color: var(--darkGray);
     margin-top: 40px;
 }
 
@@ -70,7 +69,51 @@
 .book-form-back,
 .book-form-image-upload {
     font-size: 14px;
-    color: var(--textGray);
+    color: var(--darkGray);
     text-decoration: underline;
     text-decoration-style: solid;
+}
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .sign {
+        flex-direction: column;
+    }
+
+    .sign-form-container {
+        padding: 78px 20px 99px;
+    }
+
+    .sign-title {
+        font-size: 30px;
+    }
+
+    .sign-form {
+        margin: 0;
+    }
+
+    .sign-form-row:first-of-type {
+        margin-top: 31px;
+    }
+
+    .sign-submit-btn {
+        width: 100%;
+        margin-top: 32px;
+    }
+
+    .sign-ask,
+    .sign-ask button {
+        font-size: 16px;
+    }
+
+    .sign-ask {
+        margin-top: 32px;
+    }
+
+    .sign-form-container img {
+        margin-bottom: 8px;
+    }
 }

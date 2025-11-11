@@ -24,7 +24,7 @@ class MessagingController
             $current_discussion_id = Utils::request("discussionId", '');
         }
 
-        if (empty($current_discussion_id)) {
+        if (empty($current_discussion_id) && isset($discussions[0])) {
             $current_discussion_id = $discussions[0]->getId();
         }
 
@@ -32,6 +32,8 @@ class MessagingController
         $current_discussion = $messagingManager->getDiscussionById($current_discussion_id);
         if (isset($current_discussion)) {
             $current_discussion_messages = $messagingManager->getDiscussionMessagesById($current_discussion_id);
+        } elseif (empty($current_discussion_id)) {
+            throw new Exception("Vous n'avez pas de messages");
         } else {
             throw new Exception("La conversation n'existe pas");
         }

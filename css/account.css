@@ -2,8 +2,6 @@
     display: flex;
     flex-direction: column;
     background-color: var(--backgroundLight);
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -34,6 +32,14 @@
     min-height: 508px;
     background-color: #fff;
     border-radius: 20px;
+}
+
+.account-update-form {
+    padding-top: 35px;
+}
+
+.account-update-form-title {
+    font-size: 16px;
 }
 
 .account-card>img {
@@ -235,4 +241,70 @@
 .user-books-column-action .delete {
     color: #CB2D2D;
     text-decoration-color: #CB2D2D;
+}
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .account-container {
+        padding: 0;
+        width: 100%;
+        padding: 73px 22px 62px;
+        gap: 33px;
+    }
+
+    .account-update-form-title {
+        align-self: flex-start;
+    }
+
+    .account-detail {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .account-detail-books {
+        gap: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .account-card,
+    .account-update-form {
+        min-width: auto;
+        min-height: auto;
+        padding: 40px 32px;
+    }
+
+    .user-books-column-availability {
+        align-self: center;
+    }
+
+    .sign-form,
+    .account-update-form button {
+        width: 100%;
+    }
+
+    .user-books-row:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    .user-books-row {
+        min-height: 327px;
+    }
+
+    .user-books-column-action {
+        margin-top: -34px;
+    }
+
+    .user-books-column-desc {
+        padding-right: 114px;
+    }
+
+    .account-detail-books .user-books-row {
+        padding: 51px 55px 18px;
+        height: 298px;
+        min-height: auto;
+    }
 }

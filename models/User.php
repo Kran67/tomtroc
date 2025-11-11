@@ -153,20 +153,24 @@ class User extends AbstractEntity
             <div class='account-nickname'>".Utils::format($this->nickname)."</div>
             <div class='account-member-since'>Membre ".$accountMemberSince["texte"]."</div>
             <div class='account-library'>BIBLIOTHEQUE</div>
-            <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>".$this->book_count." livre".($this->book_count > 1 ? "s" : "")."</div>
+            <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>".$this->book_count." livre".($this->book_count > 1 ? "s" : "")."</div>";
+
+        if ($this->id !== $_SESSION["idUser"]) {
+            $result .= "            
             <form class='flex' action='./' method='post'>
                 <input type='hidden' name='action' value='createOrViewDiscussion'>
                 <input type='hidden' name='id' value='".$this->id."'>
                 <button type='submit' class='cta cta2 account-button' ".Utils::onSendMessage().">Écrire un message</button>
-            </form>
-        </div>";
+            </form>";
+        }
+        $result .= "</div>";
         return $result;
     }
 
     public function getUpdateForm() : string
     {
         return "<div class='account-update-form'>
-            <div class='account-update-form-title'></div>
+            <div class='account-update-form-title'>Vos informations personnelles</div>
             <form class='sign-form' action='./' method='post' enctype='multipart/form-data'>
                 <input type='hidden' name='action' value='updateAccount'>
                 <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif' ".Utils::onChangeImage('avatar').">
@@ -209,15 +213,15 @@ class User extends AbstractEntity
                 }
                 foreach($books as $book) {
                     $result .= "<div class='user-books-row'>";
-                    $result .= "<div class='user-books-column-image user-books-image-container'>";
+                    $result .= "<div class='user-books-column-image user-books-image-container area1'>";
                     $result .= "    <img src='".Utils::format(IMG_BOOKS.$book->getImage())."' class='user-books-image' alt='".Utils::format($book->getImage())."'>";
                     $result .= "</div>";
-                    $result .= "<div class='user-books-column-title'>".Utils::format($book->getTitle())."</div>";
-                    $result .= "<div class='user-books-column-author'>".Utils::format($book->getAuthor())."</div>";
-                    $result .= "<div class='user-books-column-desc'>".Utils::format($book->getDescription(82))."</div>";
+                    $result .= "<div class='user-books-column-title area2'>".Utils::format($book->getTitle())."</div>";
+                    $result .= "<div class='user-books-column-author area2'>".Utils::format($book->getAuthor())."</div>";
+                    $result .= "<div class='user-books-column-desc area4'>".Utils::format($book->getDescription(82))."</div>";
                     $status = $book->getStatus() === 'indisponible' ? 'non dispo.' : $book->getStatus();
                     if ($this->isConnected()) {
-                        $result .= "<div class='user-books-column-availability'><span class='book-tag ".$book->getStatus()."'>".$status."</span></div>";
+                        $result .= "<div class='user-books-column-availability area3'><span class='book-tag ".$book->getStatus()."'>".$status."</span></div>";
                         $result .= "<div class='user-books-column-action'>";
                         $result .= "    <form class='flex' action='./' method='post'>";
                         $result .= "        <input type='hidden' name='action' value='editBook'>";

@@ -61,3 +61,35 @@
     color: var(--textGray);
     margin-top: 14px;
 }
+
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+
+    .book-card .book-content {
+        padding: 16px 15px 18px;
+        gap: 5px;
+        height: auto;
+    }
+
+    .book-card .book-content,
+    .book-card img {
+        width: 160px;
+    }
+
+    .book-card .book-content .book-title {
+        font-size: 13px;
+    }
+
+    .book-card .book-content .book-author {
+        font-size: 11px;
+    }
+
+    .book-card .book-content .book-seller {
+        font-size: 8px;
+        margin-top: 16px;
+    }
+}
