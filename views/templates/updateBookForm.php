@@ -5,15 +5,12 @@
 ?>
 <div class="book-form-main">
     <div class="book-form-container">
-        <form class="flex" action="./" method="post">
-            <input type="hidden" name="action" value="account">
-            <button type="submit" class="book-form-back" <?= Utils::back(); ?>>&#8592; retour</button>
-        </form>
+        <button type="submit" class="book-form-back" <?= Utils::changeAction("account") ?> >&#8592; retour</button>
         <h2><?= /** @var Book $book */
             empty($book->getId()) ? "Création d'un livre" : "Modifier les informations"?></h2>
-        <form class="book-form" action="./" method="post" enctype="multipart/form-data">
+        <div class="book-form">
             <div class="book-form-left">
-                <div class="book-form-image-title">Photo</div>
+            <div class="book-form-image-title">Photo</div>
                 <div class="book-form-image-container">
                     <img id="book-image" class="book-form-image" src="<?= IMG_BOOKS.$book->getImage() ?>" alt="image du livre">
                 </div>
@@ -39,12 +36,10 @@
                         <option value="indisponible" <?= $book->getStatus() === "indisponible" ? "selected" : "" ?>>non disponible</option>
                     </select>
                 </div>
-                <input type="hidden" name="action" value="updateBook">
-                <input type="hidden" name="id" value="<?= $book->getId() ?>">
                 <input type="file" name="imageUpload" id="imageUpload" accept=".jpg, .png, .gif" <?= Utils::onChangeImage('book-image') ?>>
                 <input type="hidden" name="image" value="<?= $book->getImage() ?>">
-                <button class="cta book-submit-btn">Valider</button>
+                <button class="cta book-submit-btn" <?= Utils::changeAction("updateBook", "{'id': '".$book->getId()."'}") ?>>Valider</button>
             </div>
-        </form>
+        </div>
     </div>
 </div>

@@ -7,10 +7,13 @@ require_once 'config/autoload.php';
 // Si aucune action n'est demandée, on affiche la page d'accueil.
 $action = Utils::request('action', 'home');
 $action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] : $action;
+if (!isset($_SESSION['action'])) {
+    $_SESSION['action'] = $action;
+}
 $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : '';
 $messagingManager = new MessagingManager();
 $_SESSION['unReadMessages'] = $messagingManager->getUnReadMessageCountByUserId($userId);
-
+$_SESSION["screenWidth"] = Utils::request('screenWidth', 0);
 // Try catch global pour gérer les erreurs
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.

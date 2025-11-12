@@ -7,10 +7,7 @@
     <div class="left-part">
         <div class="title home-top-part-title">Rejoignez nos lecteurs passionnés</div>
         <div class="home-top-part-desc">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.</div>
-        <form class="flex" action="./" method="post">
-            <input type="hidden" name="action" value="books">
-            <button type="submit" class="cta home-top-part-button">Découvrir</button>
-        </form>
+        <button type="submit" class="cta home-top-part-button" <?= Utils::changeAction("books"); ?> >Découvrir</button>
     </div>
     <div class="right-part"></div>
 </div>
@@ -24,10 +21,7 @@
             }
         ?>
     </div>
-    <form class="flex home-middle-part-form" action="./" method="post">
-        <input type="hidden" name="action" value="books">
-        <button type="submit" class="cta home-middle-part-button">Voir tous les livres</button>
-    </form>
+    <button type="submit" class="cta home-middle-part-button" <?= Utils::changeAction("books"); ?> >Voir tous les livres</button>
 </div>
 <div class="home-bottom-part">
     <div class="title">Comment ça marche ?</div>
@@ -38,10 +32,7 @@
         <div class="home-bottom-part-step">Parcourez les livres disponibles chez d'autres membres.</div>
         <div class="home-bottom-part-step">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
     </div>
-    <form class="flex home-bottom-part-form" action="./" method="post">
-        <input type="hidden" name="action" value="books">
-        <button type="submit" class="cta cta2 home-middle-part-button">Voir tous les livres</button>
-    </form>
+    <button type="submit" class="cta cta2 home-bottom-part-button" <?= Utils::changeAction("books"); ?> >Voir tous les livres</button>
     <div class="home-bottom-part-image"></div>
     <div class="home-bottom-part-our-values">
         <div class="title">Nos valeurs</div>

@@ -60,8 +60,8 @@
 }
 
 .book-detail-sep {
+    border-bottom: none;
     border-top: 1px solid var(--textGray);
-    border: none;
     height: 0px;
     margin: 32px 0;
     width: 27px;
@@ -93,8 +93,8 @@
 }
 
 .book-detail-button {
-    flex: 1;
     margin-top: 81px;
+    width: 100%;
 }
 
 /* ==========================================================

@@ -139,24 +139,21 @@ class Discussion extends AbstractEntity
     public function __toString() : string
     {
         $current_discussion_id = $_SESSION['currentDiscussionId'] ?? "";
+        $screenWidth = intval($_SESSION["screenWidth"], 10);
         $result = "<div class='discussion-main ".($current_discussion_id === $this->id ? "active" : "")."'>
             <div class='discussion-image-container'>
                 <img src='".IMG_AVATARS.Utils::format($this->avatar)."' alt='".Utils::format($this->avatar)."'>
             </div>
             <div class='discussion-right'>
-                <div class='discussion-right-header'>
-                    <form class='flex' action='./' method='post'>
-                        <input type='hidden' name='action' value='changeDiscussion'>
-                        <input type='hidden' name='id' value='".$this->id."'>";
-        if ($current_discussion_id !== $this->id) {
-            $result .= "    <button type='submit' class=''>";
+                <div class='discussion-right-header'>";
+        if ($current_discussion_id !== $this->id || $screenWidth <= 377) {
+            $result .= "    <button type='submit' ".Utils::changeAction("changeDiscussion", "{'id': '".$this->id."'}").">";
         }
         $result .= "        <span class='discussion-nickname'>".Utils::format($this->nickname)."</span>";
-        if ($current_discussion_id !== $this->id) {
+        if ($current_discussion_id !== $this->id || $screenWidth <= 377) {
             $result .= "    </button>";
         }
-        $result .= "        </form>
-                    <span class='discussion-send-at'>".Utils::convertDateToFrenchFormat($this->sent_at, "HH:mm")."</span>
+        $result .= "<span class='discussion-send-at'>".Utils::convertDateToFrenchFormat($this->sent_at, "HH:mm")."</span>
                 </div>
                 <div class='discussion-last-message ".(!$this->getIsRead() ? "unread" : "")."'>".Utils::format($this->getContent(27))."</div>
             </div>

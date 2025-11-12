@@ -6,8 +6,7 @@
  *      $title string : le titre de la page.
  *      $content string : le contenu de la page. 
  */
-$action = Utils::request('action', 'home');
-$action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] : $action;
+$action = $_SESSION['action'];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,59 +19,48 @@ $action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] :
 </head>
 
 <body>
-    <header>
-        <nav class="header" <?= Utils::openBurger() ?>>
-            <div class="spacer"></div>    
-            <div class="spacer"></div>    
-            <form class="flex logo" action="./" method="post">
-                <button type="submit">
-                    <img src="<?= IMG . 'logo.png' ?>" alt="logo">
+    <form action="./" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="action" name="action" value="<?= $action ?>">
+        <input type="hidden" id="screenWidth" name="screenWidth">
+        <input type="hidden" id="id" name="id">
+        <input type="hidden" id="userId" name="userId">
+        <header>
+            <nav class="header" <?= Utils::openBurger() ?>>
+                <div class="spacer"></div>    
+                <div class="spacer"></div>
+                <button type="submit" class="logo" <?= Utils::changeAction("home"); ?>>
+                    <img src="<?= IMG."logo.png" ?>" alt="logo">
                 </button>
-            </form>
-            <form class="flex home" action="./" method="post">
-                <button type="submit" class="home <?php if ($action === 'home') echo 'active'; ?>">Accueil</button>
-            </form>
-            <form class="flex books" action="./" method="post">
-                <input type="hidden" name="action" value="books">
-                <button type="submit" class="link exchangeBooks <?php if ($action === 'books') echo 'active'; ?>">Nos livres à l’échange</button>
-            </form>
-            <div class="spacer"></div>    
-            <div class="line"></div>
-            <form class="flex messaging" action="./" method="post">
-                <input type="hidden" name="action" value="messaging">
-                <button type="submit" class="messaging <?php if ($action === 'messaging') echo 'active'; ?>">
+                <button type="submit" class="home <?php if ($action === 'home') echo 'active'; ?>" <?= Utils::changeAction("home"); ?>>Accueil</button>
+                <button type="submit" class="books link exchangeBooks <?php if ($action === 'books') echo 'active'; ?>" <?= Utils::changeAction("books"); ?>>Nos livres à l’échange</button>
+                <div class="spacer"></div>    
+                <div class="line"></div>
+                <button type="submit" class="messaging <?php if ($action === 'messaging' || $action === 'sendMessage' || $action === 'changeDiscussion') echo 'active'; ?>" <?= Utils::changeAction("messaging"); ?>>
                     <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie">
                     <span class="messagingTxt">Messagerie</span><span class="bubble"><?= $_SESSION['unReadMessages'] ?></span>
                 </button>
-            </form>
-            <form class="flex account" action="./" method="post">
-                <input type="hidden" name="action" value="account">
-                <button type="submit" class="account <?php if ($action === 'account') echo 'active'; ?>">
+                <button type="submit" class="account <?php if ($action === 'account') echo 'active'; ?>" <?= Utils::changeAction("account"); ?>>
                     <img src="<?= IMG . 'account.svg' ?>" alt="compte">
                     <span class="accountTxt">Mon compte</span>
                 </button>
-            </form>
-            <form class="flex sign" action="./" method="post">
-                <input type="hidden" name="action" value="<?= isset($_SESSION['idUser']) ? "logout" : "signin" ?>">
-                <button type="submit" class="signin <?php if ($action === 'signin') echo 'active'; ?>">
+                <button type="submit" class="sign signin <?php if ($action === 'signin') echo 'active'; ?>" <?= Utils::changeAction(isset($_SESSION['idUser']) ? "logout" : "signin"); ?>>
                     <?= isset($_SESSION['idUser']) ? "Déconnexion" : "Connexion" ?>
                 </button>
-            </form>
-            <div class="spacer"></div>
-        </nav>
-    </header>
+                <div class="spacer"></div>
+            </nav>
+        </header>
 
-    <main>    
-        <?= /** @var string $content */
-        $content /* Ici est affiché le contenu réel de la page. */ ?>
-    </main>
-    
-    <footer>
-        <span class="privacy-policy">Politique de confidentialité</span>
-        <span class="legal-notice">Mentions légales</span>
-        <span class="copyright">Tom Troc©</span>
-        <img src="<?= IMG_MIN . 'logo.png' ?>" alt="logo_min" class="logo-min">
-    </footer>
-
+        <main>    
+            <?= /** @var string $content */
+            $content /* Ici est affiché le contenu réel de la page. */ ?>
+        </main>
+        
+        <footer>
+            <span class="privacy-policy">Politique de confidentialité</span>
+            <span class="legal-notice">Mentions légales</span>
+            <span class="copyright">Tom Troc©</span>
+            <img src="<?= IMG_MIN.'logo.png' ?>" alt="logo_min" class="logo-min">
+        </footer>
+    </form>
 </body>
 </html>

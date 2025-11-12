@@ -216,6 +216,11 @@ class Utils {
         return "";
     }
 
+    public static function changeAction(string $newAction, string $params = "{}") : string
+    {
+        return "onclick=\"changeAction('".$newAction."', ".$params.");\"";
+    }
+
     public static function openBurger() : string
     {
         return "onclick=\"this.classList.toggle('open');\"";

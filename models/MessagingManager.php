@@ -95,13 +95,19 @@ class MessagingManager extends AbstractEntityManager
      */
     public function getDiscussionById(string $discussionId) : ?Discussion
     {
-        $sql = "SELECT mt.id, u.id as user_id, u.nickname, u.avatar
+        $sql = "SELECT mt.id, u.id as from_user_id, u.nickname, u.avatar, u2.id as to_user_id, u2.nickname as to_nickname, u2.avatar as to_avatar
                 FROM message_thread mt
                 JOIN user u ON u.id = mt.from_user_id
+                JOIN user u2 ON u2.id = mt.user_id
                 WHERE mt.id = :discussionId";
         $result = $this->db->query($sql, ['discussionId' => $discussionId]);
         $discussion = $result->fetch();
         if ($discussion) {
+            if ($discussion["from_user_id"] === $_SESSION["idUser"]) {
+                $discussion["from_user_id"] = $discussion["to_user_id"];
+                $discussion["nickname"] = $discussion["to_nickname"];
+                $discussion["avatar"] = $discussion["to_avatar"];
+            }
             return new Discussion($discussion);
         }
         return null;
@@ -156,7 +162,10 @@ class MessagingManager extends AbstractEntityManager
 
     public function readAllDiscussionMessage(string $discussionId) : void
     {
-        $sql = "UPDATE message SET is_read = 1 WHERE thread_id = :discussionId";
-        $this->db->query($sql, ["discussionId" => $discussionId]);
+        $sql = "UPDATE message SET is_read = 1 WHERE thread_id = :discussionId AND user_id <> :user_id";
+        $this->db->query($sql, [
+            "discussionId" => $discussionId,
+            "user_id" => $_SESSION["idUser"]
+        ]);
     }
 }

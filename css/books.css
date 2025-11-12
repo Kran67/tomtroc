@@ -34,6 +34,7 @@
     padding-left: 38px;
     position: relative;
     width: 322px;
+    outline: none;
 }
 
 .exchange-books_grid {

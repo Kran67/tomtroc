@@ -11,6 +11,7 @@ class MessagingController
     {
         $userId = $_SESSION['idUser'] ?? '';
         $current_discussion_id = $_SESSION['currentDiscussionId'] ?? '';
+        $screenWidth = intval($_SESSION["screenWidth"], 10);
 
         if (empty($userId)) {
             Utils::redirect("signin");
@@ -24,7 +25,7 @@ class MessagingController
             $current_discussion_id = Utils::request("discussionId", '');
         }
 
-        if (empty($current_discussion_id) && isset($discussions[0])) {
+        if (empty($current_discussion_id) && isset($discussions[0]) && $screenWidth > 377) {
             $current_discussion_id = $discussions[0]->getId();
         }
 
@@ -34,14 +35,16 @@ class MessagingController
             $current_discussion_messages = $messagingManager->getDiscussionMessagesById($current_discussion_id);
         } elseif (empty($current_discussion_id)) {
             throw new Exception("Vous n'avez pas de messages");
-        } else {
+        } elseif ($screenWidth > 377) {
             throw new Exception("La conversation n'existe pas");
         }
         // on sauvegarde la conversation courante
         $_SESSION['currentDiscussionId'] = $current_discussion_id;
 
-        // on lit tous les messages de la conversation courante
-        $messagingManager->readAllDiscussionMessage($current_discussion_id);
+        if ($current_discussion_id) {
+            // on lit tous les messages de la conversation courante
+            $messagingManager->readAllDiscussionMessage($current_discussion_id);
+        }
 
         // on met à jour la variable de session qui donne le nombre de messages non lus
         $_SESSION['unReadMessages'] = $messagingManager->getUnReadMessageCountByUserId($userId);
@@ -50,7 +53,7 @@ class MessagingController
         $view->render("messaging", [
             "discussions" => $discussions,
             "current_discussion" => $current_discussion,
-            "current_discussion_messages" => $current_discussion_messages
+            "current_discussion_messages" => $current_discussion_messages ??[]
         ]);
     }
 

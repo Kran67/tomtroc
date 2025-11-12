@@ -60,9 +60,10 @@ class BookManager extends AbstractEntityManager
 
     /**
      * Ajoute ou modifie un livre.
-     * On sait si le livre est un nouveau livre car son id sera -1.
+     * On sait si le livre est un nouveau livre, car son id sera -1.
      * @param Book $book : le livre à ajouter ou modifier.
      * @return void
+     * @throws Exception
      */
     public function addOrUpdateBook(Book $book) : void 
     {
@@ -72,11 +73,12 @@ class BookManager extends AbstractEntityManager
             $this->updateBook($book);
         }
     }
-    
+
     /**
      * Ajoute un livre.
      * @param Book $book
      * @return void
+     * @throws Exception
      */
     public function addBook(Book $book) : void
     {

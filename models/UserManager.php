@@ -65,14 +65,19 @@ class UserManager extends AbstractEntityManager
      */
     public function updateUser(User $user) : void
     {
-        $sql = "UPDATE `user` SET password = :password, nickname = :nickname, avatar = :avatar WHERE id = :id";
-        $this->db->query($sql, [
-            'password' => $user->getPassword(),
+        $sqlParams = [
             'nickname' => $user->getNickname(),
             'avatar' => $user->getAvatar(),
             'id' => $user->getId()
-        ]);
-        echo $sql;
+        ];
+        $sql = "UPDATE `user` SET nickname = :nickname, avatar = :avatar ";
+        if (!empty($user->getPassword())) {
+            $sql .= ", password = :password";
+            $sqlParams['password'] = $user->getPassword();
+        }
+        $sql .= " WHERE id = :id";
+
+        $this->db->query($sql, $sqlParams);
 
         // on met à jour la session
         $_SESSION['user'] = $this->getUserById($user->getId());

@@ -136,3 +136,50 @@
     height: 49px;
     width: 132px;
 }
+
+.messaging-current-discussion-back {
+    display: none;
+}
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .messaging-main {
+        height: calc(100vh - 61px);
+    }
+
+    .messaging-discussions {
+        width: 100%;
+    }
+
+    .messaging-current-discussion {
+        padding: 22px 0 44px 20px;
+    }
+
+    .messaging-current-discussion-header,
+    .discussion-messages,
+    .messaging-send-message-form {
+        margin-right: 20px;
+    }
+
+    .messaging-send-message-form {
+        flex-direction: column;
+    }
+
+    .messaging-send-message-form .content {
+        min-height: 49px;
+    }
+
+    .cta.messaging-submit-btn {
+        width: 100%;
+    }
+
+    .messaging-current-discussion-back {
+        color: var(--textGray);
+        display: block;
+        margin-bottom: -22px;
+        text-align: left;
+    }
+}

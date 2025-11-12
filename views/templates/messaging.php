@@ -2,10 +2,15 @@
     /**
      * Affichage du détail du profil d'un utilisateur.
      */
-$userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : '';
+    $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : '';
+    $screenWidth = intval($_SESSION["screenWidth"], 10);
+    $action = $_SESSION["action"];
+    $isMobileView = $screenWidth <= 377 && $screenWidth > 0;
+    $viewDiscussions = $action === "messaging";
+    $viewDiscussion = $action === "sendMessage" || $action === "changeDiscussion";
 ?>
 <div class="messaging-main">
-    <div class="messaging-discussions">
+    <div class="messaging-discussions <?php echo !$viewDiscussions && $isMobileView ? "hidden" : "" ?> ">
         <div class="messaging-discussions-title">Messagerie</div>
         <div class="messaging-discussions-container">
         <?php
@@ -16,13 +21,14 @@ $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] :
         ?>
         </div>
     </div>
-    <div class="messaging-current-discussion">
+    <div class="messaging-current-discussion <?php echo $isMobileView && !$viewDiscussion ? "hidden" : "" ?>">
+        <button type="submit" class="messaging-current-discussion-back" <?= Utils::changeAction("messaging") ?> >&#8592; retour</button>
         <div class="messaging-current-discussion-header">
             <div class='discussion-image-container'>
                 <img src='<?= /** @var Discussion $current_discussion */
-                IMG_AVATARS.Utils::format($current_discussion->getAvatar()); ?>' alt='avatar'>
+                IMG_AVATARS.Utils::format($current_discussion ? $current_discussion->getAvatar() : ""); ?>' alt='avatar'>
             </div>
-            <?= $current_discussion->getNickname(); ?>
+            <?= $current_discussion ? $current_discussion->getNickname() : ""; ?>
         </div>
         <div class="discussion-messages-container">
             <div class="discussion-messages">
@@ -46,12 +52,11 @@ $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] :
                 ?>
             </div>
         </div>
-        <form class="messaging-send-message-form" action="./" method="post">
-            <input type="hidden" name="action" value="sendMessage">
-            <input type="hidden" name="id" value="<?= $current_discussion->getId() ?>" />
-            <input type="hidden" name="userId" value="<?= $userId ?>">
-            <input type="text" name="content" placeholder="Tapez votre message ici">
-            <button class="cta messaging-submit-btn">Envoyer</button>
-        </form>
+        <div class="messaging-send-message-form">
+            <input type="text" name="content" class="content" placeholder="Tapez votre message ici">
+            <button class="cta messaging-submit-btn" 
+                <?= Utils::changeAction("sendMessage", "{'id':'".($current_discussion ? $current_discussion->getId() : "")."', 'userId': '".$userId."'}") ?>
+            >Envoyer</button>
+        </div>
     </div>
 </div>

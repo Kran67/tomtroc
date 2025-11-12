@@ -6,10 +6,7 @@
 <div class="book-detail">
     <div class="book-detail-container">
         <div class="book-detail-breadcrumb">
-            <form class="flex" action="./" method="post">
-                <input type="hidden" name="action" value="books">
-                <button type="submit">Nos livres</button>
-            </form>
+            <button type="submit" <?= Utils::changeAction("books"); ?>>Nos livres</button>
             &nbsp; > <?= Utils::format($book->getTitle()) ?>
         </div>
         <div class="book-detail-main">
@@ -24,11 +21,8 @@
                 <div class="book-detail-desc"><?= Utils::formatToParagraph($book->getDescription()) ?></div>
                 <div class="book-detail-owner-title">PROPRIÉTAIRE</div>
                 <div class="book-detail-owner"><?= $user ?></div>
-                <form class="flex" action="./" method="post">
-                    <input type="hidden" name="action" value="createOrViewDiscussion">
-                    <input type="hidden" name="id" value="<?= $user->getId() ?>">
-                    <button class="cta book-detail-button" <?= Utils::onSendMessage(); ?>>Envoyer un message</button>
-                </form>
+                <button class="cta book-detail-button" <?= Utils::onSendMessage(); ?>
+                    <?= Utils::changeAction("createOrViewDiscussion", "{ 'id': '".$user->getId()."'}"); ?>>Envoyer un message</button>
             </div>
         </div>
     </div>

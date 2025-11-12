@@ -139,7 +139,8 @@ class SignController
         $nickname = Utils::request("nickname");
 
         $uploadOk = true;
-        if (isset($_FILES["avatarUpload"])) {
+        var_dump($_FILES["avatarUpload"]);
+        if (isset($_FILES["avatarUpload"]) && !empty($_FILES["avatarUpload"]["tmp_name"])) {
             $info = getimagesize($_FILES["avatarUpload"]["tmp_name"]);
             if (!$info) {
                 $uploadOk = false;
@@ -157,14 +158,14 @@ class SignController
         }
 
         // On vérifie que les données sont valides.
-        if (empty($password) || empty($nickname)) {
+        if (empty($nickname)) {
             throw new Exception("Tous les champs sont obligatoires.");
         }
 
         // On crée l'objet User.
         $user = new User([
             'id' => $_SESSION['idUser'],
-            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'password' => !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : "",
             'nickname' => $nickname,
             'avatar' => $avatar
         ]);

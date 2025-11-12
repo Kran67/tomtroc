@@ -35,7 +35,8 @@
 }
 
 .account-update-form {
-    padding-top: 35px;
+    align-items: normal;
+    padding: 35px 117px 37px;
 }
 
 .account-update-form-title {
@@ -64,8 +65,8 @@
 }
 
 .account-card hr {
-    border-bottom: 1px solid var(--lightGray);
-    border: none;
+    border-bottom: none;
+    border-top: 1px solid var(--lightGray);
     height: 0;
     margin-top: 47px;
     width: 242px;

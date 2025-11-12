@@ -214,12 +214,10 @@
     public function __toString() : string
     {
         $status = $this->status === 'indisponible' ? 'non dispo.' : $this->status;
-        return 
-        "<form class='flex' action='./' method='post'>
-            <input type='hidden' name='action' value='book'>
-            <input type='hidden' name='id' value='".$this->id."'>
-            <button type='submit' class='book-card-link'>
-                <span class='book-card'>
+        $result = "<button type='submit' class='book-card-link'";
+        $result .= Utils::changeAction("book", "{'id': '".$this->id."'}");
+        $result .= ">";
+        $result .= "<span class='book-card'>
                     <img src='".IMG_BOOKS_MIN.Utils::format($this->image)."' alt='".Utils::format($this->image)."'>
                     <span class='book-tag ".$this->status."'>".$status."</span>
                     <span class='book-content'>
@@ -228,7 +226,7 @@
                         <span class='book-seller'>Vendu par : ".Utils::format($this->user_nickname)."</span>
                     </span>
                 </span>
-            </button>
-        </form>";
+            </button>";
+        return $result;
     }
 }

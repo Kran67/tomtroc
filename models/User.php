@@ -124,14 +124,11 @@ class User extends AbstractEntity
     public function __toString() : string
     {
         return 
-            "<form class='flex' action='./' method='post'>
-                <input type='hidden' name='action' value='profile'>
-                <input type='hidden' name='id' value='".$this->id."'>
-                <button type='submit' class='avatar'>
+            "<button type='submit' class='avatar' ".
+                    Utils::changeAction("profile", "{ 'id': '".$this->id."'}").">
                     <img src='".Utils::format(IMG_AVATARS.$this->avatar)."' class='avatar-image' alt='".Utils::format(IMG_AVATARS.$this->avatar)."'>
                     <span class='avatar-nickname'>".Utils::format($this->nickname)."</span>
-                </button>
-            </form>";
+                </button>";
     }
 
     private function isConnected() : bool
@@ -155,13 +152,10 @@ class User extends AbstractEntity
             <div class='account-library'>BIBLIOTHEQUE</div>
             <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>".$this->book_count." livre".($this->book_count > 1 ? "s" : "")."</div>";
 
-        if (isset($_SESSION["idUser"]) && $this->id !== $_SESSION["idUser"]) {
-            $result .= "            
-            <form class='flex' action='./' method='post'>
-                <input type='hidden' name='action' value='createOrViewDiscussion'>
-                <input type='hidden' name='id' value='".$this->id."'>
-                <button type='submit' class='cta cta2 account-button' ".Utils::onSendMessage().">Écrire un message</button>
-            </form>";
+        if (!isset($_SESSION["idUser"]) || $this->id !== $_SESSION["idUser"]) {
+            $result .= "<button type='submit' class='cta cta2 account-button' ".Utils::onSendMessage()." ".
+                Utils::changeAction("createOrViewDiscussion", "{ 'id': '".$this->id."'}")
+                .">Écrire un message</button>";
         }
         $result .= "</div>";
         return $result;
@@ -171,23 +165,22 @@ class User extends AbstractEntity
     {
         return "<div class='account-update-form'>
             <div class='account-update-form-title'>Vos informations personnelles</div>
-            <form class='sign-form' action='./' method='post' enctype='multipart/form-data'>
-                <input type='hidden' name='action' value='updateAccount'>
-                <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif' ".Utils::onChangeImage('avatar').">
-                <div class='sign-form-row'>
-                    <label for='email'>Adresse email</label>
-                    <input name='email' id='email' type='text' value='".$this->login."' readonly>
-                </div>
-                <div class='sign-form-row'>
-                    <label for='password'>Mot de passe</label>
-                    <input name='password' id='password' type='password' required>
-                </div>
-                <div class='sign-form-row'>
-                    <label for='nickname'>Pseudo</label>
-                    <input name='nickname' id='nickname' type='text' value='".$this->nickname."'>
-                </div>
-                <button class='cta cta2 sign-submit-btn'>Enregistrer</button>
-            </form>
+            <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif' ".Utils::onChangeImage('avatar').">
+            <div class='sign-form-row'>
+                <label for='email'>Adresse email</label>
+                <input name='email' id='email' type='text' value='".$this->login."' readonly>
+            </div>
+            <div class='sign-form-row'>
+                <label for='password'>Mot de passe</label>
+                <input name='password' id='password' type='password'>
+            </div>
+            <div class='sign-form-row'>
+                <label for='nickname'>Pseudo</label>
+                <input name='nickname' id='nickname' type='text' value='".$this->nickname."'>
+            </div>
+            <button class='cta cta2 sign-submit-btn'".
+                Utils::changeAction("updateAccount")
+            .">Enregistrer</button>
         </div>";
     }
 
@@ -206,10 +199,9 @@ class User extends AbstractEntity
             $result .= "</div>";
             if (count($books) === 0) {
                 $result .= "<div class='user-books-no-book'>Aucun livre à afficher<br>";
-                $result .= "<form class='flex' action='./' method='post'>";
-                $result .= "    <input type='hidden' name='action' value='editBook'>";
-                $result .= "    <button type='submit' class='user-books-add-book'>Ajouter un livre</button>";
-                $result .= "</form>";
+                $result .= "<button type='submit' class='user-books-add-book'";
+                $result .= Utils::changeAction("editBook");
+                $result .= ">Ajouter un livre</button>";
             } else {
                 if (!$this->isConnected()) {
                     $result .= "<div class='user-books-row-container'>";
@@ -226,16 +218,12 @@ class User extends AbstractEntity
                     if ($this->isConnected()) {
                         $result .= "<div class='user-books-column-availability area3'><span class='book-tag ".$book->getStatus()."'>".$status."</span></div>";
                         $result .= "<div class='user-books-column-action'>";
-                        $result .= "    <form class='flex' action='./' method='post'>";
-                        $result .= "        <input type='hidden' name='action' value='editBook'>";
-                        $result .= "        <input type='hidden' name='id' value='".$book->getId()."'>";
-                        $result .= "        <button type='submit'>Éditer</button>";
-                        $result .= "    </form>";
-                        $result .= "    <form class='flex' action='./' method='post'>";
-                        $result .= "        <input type='hidden' name='action' value='deleteBook'>";
-                        $result .= "        <input type='hidden' name='id' value='".$book->getId()."'>";
-                        $result .= "        <button type='submit' class='delete' ".Utils::askConfirmation('Êtes-vous sûr de vouloir supprimer ce livre ?').">Supprimer</button>";
-                        $result .= "    </form>";
+                        $result .= "    <button type='submit'";
+                        $result .= Utils::changeAction("editBook", "{ 'id': '".$book->getId()."'}");
+                        $result .= ">Éditer</button>";
+                        $result .= "    <button type='submit' class='delete' ".Utils::askConfirmation('Êtes-vous sûr de vouloir supprimer ce livre ?');
+                        $result .= Utils::changeAction("deleteBook", "{ 'id': '".$book->getId()."'}");
+                        $result .= ">Supprimer</button>";
                         $result .= "</div>";
                     }
                     $result .= "</div>";
