@@ -206,16 +206,20 @@ class SignController
     {
         $this->checkIfUserIsConnected();
 
-        $id = Utils::request("id", '');
-
+        $id = Utils::request("id", "");
 
         // On récupère l'article associé.
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
        
-        if (!$book) {
+        if (!$book && !empty($id)) {
             throw new Exception("Le livre demandé n'existe pas.");
         } else {
+            if (empty($id)) {
+                $book = new Book();
+                $book->setImage("a_book.jpg");
+            }
+
             $view = new View("updateBookForm");
             $view->render("updateBookForm", ["book" => $book]);
         }
@@ -289,7 +293,7 @@ class SignController
         ]);
 
         $bookManager = new BookManager();
-        $bookManager->updateBook($book);
+        $bookManager->addOrUpdateBook($book);
 
         // On redirige vers la page du compte.
         Utils::redirect("account");

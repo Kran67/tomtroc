@@ -155,7 +155,7 @@ class User extends AbstractEntity
             <div class='account-library'>BIBLIOTHEQUE</div>
             <div class='account-book-count'><img src='".IMG."livres.svg' alt='livres'>".$this->book_count." livre".($this->book_count > 1 ? "s" : "")."</div>";
 
-        if ($this->id !== $_SESSION["idUser"]) {
+        if (isset($_SESSION["idUser"]) && $this->id !== $_SESSION["idUser"]) {
             $result .= "            
             <form class='flex' action='./' method='post'>
                 <input type='hidden' name='action' value='createOrViewDiscussion'>
@@ -206,7 +206,10 @@ class User extends AbstractEntity
             $result .= "</div>";
             if (count($books) === 0) {
                 $result .= "<div class='user-books-no-book'>Aucun livre à afficher<br>";
-                //$result .= "<a href='./action=addBook' class='user-books-add-book'>Ajouter un livre</a>";
+                $result .= "<form class='flex' action='./' method='post'>";
+                $result .= "    <input type='hidden' name='action' value='editBook'>";
+                $result .= "    <button type='submit' class='user-books-add-book'>Ajouter un livre</button>";
+                $result .= "</form>";
             } else {
                 if (!$this->isConnected()) {
                     $result .= "<div class='user-books-row-container'>";

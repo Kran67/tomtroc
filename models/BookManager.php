@@ -59,6 +59,21 @@ class BookManager extends AbstractEntityManager
     }
 
     /**
+     * Ajoute ou modifie un livre.
+     * On sait si le livre est un nouveau livre car son id sera -1.
+     * @param Book $book : le livre à ajouter ou modifier.
+     * @return void
+     */
+    public function addOrUpdateBook(Book $book) : void 
+    {
+        if (empty($book->getId())) {
+            $this->addBook($book);
+        } else {
+            $this->updateBook($book);
+        }
+    }
+    
+    /**
      * Ajoute un livre.
      * @param Book $book
      * @return void
@@ -67,9 +82,10 @@ class BookManager extends AbstractEntityManager
     {
         $sql = "INSERT INTO book (id, user_id, title, author, image, description, status, created_at, updated_at) 
                     VALUES (:id, :id_user, :title, :author, :image, :description, :status, NOW(), NOW())";
+
         $this->db->query($sql, [
             'id' => Utils::guidv4(),
-            'id_user' => $book->getUserId(),
+            'id_user' => $_SESSION["idUser"],
             'title' => $book->getTitle(),
             'author' => $book->getAuthor(),
             'image' => $book->getImage(),
@@ -105,10 +121,10 @@ class BookManager extends AbstractEntityManager
 
     /**
      * Supprime un livre.
-     * @param int $id : l'id du livre à supprimer.
+     * @param string $id : l'id du livre à supprimer.
      * @return void
      */
-    public function deleteBook(int $id) : void
+    public function deleteBook(string $id) : void
     {
         $sql = "DELETE FROM book WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
