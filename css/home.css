@@ -1,17 +1,17 @@
 .home-top-part {
-    display: flex;
-    padding: 80px 0 128px;
-    flex-direction: row;
     background-color: var(--lightGray);
+    display: flex;
+    flex-direction: row;
     justify-content: center;
+    padding: 80px 0 128px;
 }
 
 .home-top-part .left-part {
-    width: 404px;
     display: flex;
-    padding-right: 75px;
     flex-direction: column;
     justify-content: flex-end;
+    padding-right: 75px;
+    width: 404px;
 }
 
 .home-top-part-title {
@@ -19,40 +19,40 @@
 }
 
 .home-top-part-desc {
-    margin-top: 14px;
     font-size: 16px;
     font-weight: 300;
+    margin-top: 14px;
 }
 
 .home-top-part-button {
-    width: 152px;
     margin: 39px 0 71px;
+    width: 152px;
 }
 
 .home-top-part .right-part {
-    width: 404px;
-    height: 539px;
     background-image: url("../img/hamza-nouasria.jpg");
+    height: 539px;
     position: relative;
+    width: 404px;
 }
 
 .home-top-part .right-part::after {
+    bottom: -28px;
+    color: var(--textGray);
     content: 'Hamza';
+    font-size: 12px;
     position: absolute;
     right: 0;
-    bottom: -28px;
-    font-size: 12px;
-    color: var(--textGray);
     transform: skewX(-15deg);
 }
 
 .home-middle-part {
+    align-items: center;
+    background-color: var(--backgroundLight);
     display: flex;
     flex-direction: column;
-    background-color: var(--backgroundLight);
-    padding-top: 79px;
     padding-bottom: 64px;
-    align-items: center;
+    padding-top: 79px;
 }
 
 .home-middle-part-books {
@@ -67,38 +67,38 @@
 }
 
 .home-bottom-part {
-    display: flex;
-    padding: 79px 0 163px;
-    flex-direction: row;
-    background-color: var(--lightGray);
-    justify-content: center;
-    flex-direction: column;
     align-items: center;
+    background-color: var(--lightGray);
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    padding: 79px 0 163px;
 }
 
 .home-bottom-part-desc {
-    margin-top: 22px;
+    color: var(--darkGray);
     font-size: 16px;
     font-weight: 300;
-    color: var(--darkGray);
+    margin-top: 22px;
     width: 397px;
 }
 
 .home-bottom-part-steps {
     display: flex;
-    margin-top: 38px;
     gap: 36px;
+    margin-top: 38px;
 }
 
 .home-bottom-part-step {
+    align-items: center;
     background-color: #fff;
     border-radius: 10px;
+    display: flex;
     font-size: 14px;
     padding: 30px;
     text-align: center;
     width: 215px;
-    display: flex;
-    align-items: center;
 }
 
 .home-bottom-part-button {
@@ -107,10 +107,10 @@
 }
 
 .home-bottom-part-image {
-    margin-top: 80px;
+    align-self: normal;
     background-image: url(../img/our_values.jpg);
     height: 230px;
-    align-self: normal;
+    margin-top: 80px;
 }
 
 .home-bottom-part-our-values {
@@ -119,27 +119,27 @@
 }
 
 .home-bottom-part-our-values::after {
-    position: absolute;
-    content: url(../img/heart.svg);
-    right: -70px;
     bottom: -79px;
+    content: url(../img/heart.svg);
+    position: absolute;
+    right: -70px;
 }
 
 .home-bottom-part-desc2 {
-    margin-top: 27px;
-    width: 392px;
     align-self: flex-start;
+    color: var(--darkGray);
     font-size: 16px;
     font-weight: 300;
-    color: var(--darkGray);
+    margin-top: 27px;
+    width: 392px;
 }
 
 .home-bottom-part-signature {
-    margin-top: 37px;
-    font-style: italic;
-    font-size: 12px;
-    font-weight: 400;
     color: var(--textGray);
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 37px;
 }
 
 /* ==========================================================
@@ -148,8 +148,8 @@
 
 @media (max-width: 767px) {
     .home-top-part {
-        flex-direction: column;
         align-items: center;
+        flex-direction: column;
         padding: 0 0 15px;
     }
 
@@ -191,8 +191,8 @@
     }
 
     .home-middle-part-books {
-        gap: 15px;
         flex-wrap: wrap;
+        gap: 15px;
         justify-content: center;
         margin-top: 34px;
     }
@@ -202,11 +202,11 @@
     }
 
     .home-middle-part-books .book-card .book-content {
-        width: auto;
         font-size: 13px;
+        gap: 3px;
         height: 99px;
         padding-top: 14px;
-        gap: 3px;
+        width: auto;
     }
 
     .home-middle-part-books .book-card .book-content .book-author {
@@ -235,17 +235,17 @@
     }
 
     .home-bottom-part-desc {
-        width: auto;
+        font-size: 14px;
         padding: 0 20px;
         text-align: center;
-        font-size: 14px;
+        width: auto;
     }
 
     .home-bottom-part-steps {
         flex-direction: column;
         gap: 16px;
-        padding: 0 20px;
         margin-top: 32px;
+        padding: 0 20px;
     }
 
     .home-bottom-part-step {
@@ -254,13 +254,13 @@
     }
 
     .home-bottom-part-form {
-        width: 100%;
         padding: 0 20px;
+        width: 100%;
     }
 
     .home-middle-part-button {
-        width: 100%;
         margin-top: 32px;
+        width: 100%;
     }
 
     .home-bottom-part-image {
@@ -279,8 +279,8 @@
     }
 
     .home-bottom-part-desc2 {
-        width: auto;
         font-size: 14px;
+        width: auto;
     }
 
     .home-bottom-part-signature {
@@ -288,11 +288,11 @@
     }
 
     .home-bottom-part-our-values::after {
-        right: auto;
+        bottom: -162px;
+        height: 102px;
         left: 50%;
+        right: auto;
         transform: translateX(-50%);
         width: 120px;
-        height: 102px;
-        bottom: -162px;
     }
 }

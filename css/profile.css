@@ -1,16 +1,15 @@
 .profile-main {
+    align-items: center;
+    background-color: var(--backgroundLight);
     display: flex;
     flex-direction: column;
-
-    background-color: var(--backgroundLight);
-    align-items: center;
 }
 
 .profile-container {
     display: flex;
+    gap: 28px;
     padding: 103px 130px;
     width: 1440px;
-    gap: 28px;
 }
 
 .profile-main .account-card {
@@ -40,10 +39,10 @@
     }
 
     .profile-container {
+        flex-direction: column;
+        gap: 33px;
         padding: 73px 22px 10px;
         width: 100%;
-        gap: 33px;
-        flex-direction: column;
     }
 
     .user-books-header {
@@ -51,25 +50,25 @@
     }
 
     .user-books-row {
-        border: 1px solid var(--lightGray);
-        border-radius: 20px;
-        height: 251px;
-        padding: 51px 55px;
         align-items: flex-start;
+        border-radius: 20px;
+        border: 1px solid var(--lightGray);
         display: grid;
-        grid-template-columns: 96px 1fr;
-        grid-template-rows: 40px 40px 1fr;
         gap: 0px 0px;
         grid-template-areas:
             "area1 area2"
             "area1 area3"
             "area4 area4";
+        grid-template-columns: 96px 1fr;
+        grid-template-rows: 40px 40px 1fr;
+        height: 251px;
+        padding: 51px 55px;
     }
 
     .user-books-row-container {
-        gap: 16px;
         display: flex;
         flex-direction: column;
+        gap: 16px;
         height: auto;
     }
 

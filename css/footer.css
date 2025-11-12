@@ -4,8 +4,8 @@ footer {
     color: var(--darkGray);
     display: flex;
     font-size: 12px;
-    justify-content: flex-end;
     height: 61px;
+    justify-content: flex-end;
     min-height: 61px;
 }
 
@@ -32,13 +32,13 @@ footer .logo-min {
 
 @media (max-width: 767px) {
     footer {
-        flex-direction: column;
         align-items: center;
-        text-align: center;
-        padding: 24px 16px;
+        flex-direction: column;
         gap: 16px;
         height: auto;
         min-height: auto;
+        padding: 24px 16px;
+        text-align: center;
     }
 
     footer .footer-links {

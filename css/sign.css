@@ -32,46 +32,46 @@
 
 .sign-form-row label,
 .book-form-row label {
-    font-size: 14px;
     color: var(--textGray);
+    font-size: 14px;
 }
 
 .sign-form-row input,
 .book-form-row input,
 .book-form-row textarea,
 .book-form select {
-    margin-top: 10px;
-    height: 50px;
+    background-color: #fff;
     border-radius: 6px;
     border: 1px solid var(--white);
-    background-color: #fff;
+    color: var(--darkGray);
+    font-size: 14px;
+    height: 50px;
+    margin-top: 10px;
     outline: none;
     padding: 16px 14px;
-    font-size: 14px;
-    color: var(--darkGray);
 }
 
 .sign-submit-btn,
 .book-submit-btn {
-    margin-top: 30px;
     cursor: pointer;
+    margin-top: 30px;
     outline: none;
     width: 322px;
 }
 
 .sign-ask {
-    font-size: 14px;
     color: var(--darkGray);
+    font-size: 14px;
     margin-top: 40px;
 }
 
 .sign-ask button,
 .book-form-back,
 .book-form-image-upload {
-    font-size: 14px;
     color: var(--darkGray);
-    text-decoration: underline;
+    font-size: 14px;
     text-decoration-style: solid;
+    text-decoration: underline;
 }
 
 /* ==========================================================
@@ -100,8 +100,8 @@
     }
 
     .sign-submit-btn {
-        width: 100%;
         margin-top: 32px;
+        width: 100%;
     }
 
     .sign-ask,

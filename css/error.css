@@ -1,8 +1,8 @@
 .error {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     background-color: var(--backgroundLight);
+    display: flex;
+    flex-direction: column;
     height: calc(100vh - 80px - 61px);
     justify-content: center;
 }
@@ -13,20 +13,20 @@
 }
 
 .error-title {
-    margin-top: 20px;
+    color: var(--darkGray);
     font-size: 20px;
     font-weight: 600;
-    color: var(--darkGray);
+    margin-top: 20px;
 }
 
 .error-link {
-    margin-top: 5px;
     color: var(--textGray);
+    margin-top: 5px;
 }
 
 .error-page-removed {
-    margin-top: 5px;
     font-size: 12px;
+    margin-top: 5px;
 }
 
 .error-go-home {

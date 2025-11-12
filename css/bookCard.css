@@ -1,7 +1,7 @@
 .book-card {
-    position: relative;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .book-card-link {
@@ -10,12 +10,12 @@
 
 .book-tag {
     background-color: var(--availableTag);
-    color: #fff;
-    font-weight: 500;
-    font-size: 8.88px;
-    text-align: center;
-    padding: 3.7px 13.31px;
     border-radius: 29.58px;
+    color: #fff;
+    font-size: 8.88px;
+    font-weight: 500;
+    padding: 3.7px 13.31px;
+    text-align: center;
 }
 
 .book-tag.indisponible {
@@ -27,41 +27,40 @@
 }
 
 .book-card .book-tag {
-    position: absolute;
-    z-index: 1;
-    top: 16px;
-    right: 12px;
     display: none;
+    position: absolute;
+    right: 12px;
+    top: 16px;
+    z-index: 1;
 }
 
 .book-card .book-content {
-    display: flex;
-    width: 200px;
-    height: 124px;
-    gap: 10px;
-    flex-direction: column;
     background-color: #fff;
-    padding: 21px 15px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 124px;
+    padding: 21px 15px;
+    width: 200px;
 }
 
 .book-card .book-content .book-title {
-    font-size: 16px;
     color: #000;
+    font-size: 16px;
 }
 
 .book-card .book-content .book-author {
-    font-size: 14px;
     color: var(--textGray);
+    font-size: 14px;
 }
 
 .book-card .book-content .book-seller {
-    font-style: Italic;
-    font-size: 10px;
     color: var(--textGray);
+    font-size: 10px;
+    font-style: Italic;
     margin-top: 14px;
 }
-
 
 /* ==========================================================
    responsive
@@ -70,9 +69,9 @@
 @media (max-width: 767px) {
 
     .book-card .book-content {
-        padding: 16px 15px 18px;
         gap: 5px;
         height: auto;
+        padding: 16px 15px 18px;
     }
 
     .book-card .book-content,

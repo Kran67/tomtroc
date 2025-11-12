@@ -1,9 +1,9 @@
 .exchange-books-main {
-    display: flex;
-    background-color: var(--backgroundLight);
     align-items: center;
-    padding: 130px 0 80px;
+    background-color: var(--backgroundLight);
+    display: flex;
     flex-direction: column;
+    padding: 130px 0 80px;
 }
 
 .exchange-books-bar {
@@ -17,31 +17,31 @@
 }
 
 .exchange-books-title {
+    color: #000;
     font-family: playfair;
     font-size: 36px;
-    color: #000;
 }
 
 .exchange-books-searchbar {
     background-color: #fff;
-    border: 1px solid var(--white);
-    font-size: 14px;
-    color: var(--textGray);
-    padding-left: 38px;
-    width: 322px;
-    position: relative;
     background-image: url('../img/union.png');
-    background-repeat: no-repeat;
     background-position: 11px center;
+    background-repeat: no-repeat;
     border-radius: 6px;
+    border: 1px solid var(--white);
+    color: var(--textGray);
+    font-size: 14px;
+    padding-left: 38px;
+    position: relative;
+    width: 322px;
 }
 
 .exchange-books_grid {
-    margin-top: 70px;
     display: flex;
-    gap: 48px 38px;
-    width: 914px;
     flex-wrap: wrap;
+    gap: 48px 38px;
+    margin-top: 70px;
+    width: 914px;
 }
 
 /* ==========================================================
@@ -54,8 +54,8 @@
     }
 
     .exchange-books-bar {
-        width: 100%;
         flex-direction: column;
+        width: 100%;
     }
 
     .exchange-books-title {
@@ -63,13 +63,13 @@
     }
 
     .exchange-books-searchbar {
-        margin-top: 27px;
         height: 50px;
+        margin-top: 27px;
     }
 
     .exchange-books_grid {
-        width: 100%;
-        margin-top: 40px;
         gap: 15px;
+        margin-top: 40px;
+        width: 100%;
     }
 }

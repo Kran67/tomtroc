@@ -10,24 +10,24 @@
 }
 
 .book-form-back {
-    text-decoration: none;
     color: var(--textGray);
+    text-decoration: none;
 }
 
 .book-form-main h2 {
-    margin-top: 20px;
     font-family: playfair;
     font-size: 26px;
     font-weight: 400;
+    margin-top: 20px;
 }
 
 .book-form {
-    margin-top: 22px;
     background-color: #fff;
     border-radius: 20px;
-    padding: 54px 49px 67px;
     display: flex;
     justify-content: space-between;
+    margin-top: 22px;
+    padding: 54px 49px 67px;
 }
 
 .book-form-left {
@@ -36,29 +36,29 @@
 }
 
 .book-form-image-title {
-    font-size: 14px;
     color: var(--textGray);
+    font-size: 14px;
 }
 
 .book-form-image-container {
-    margin: 8px 0 21px;
-    width: 488px;
     height: 488px;
+    margin: 8px 0 21px;
     overflow: hidden;
     position: relative;
+    width: 488px;
 }
 
 .book-form-image {
-    position: absolute;
-    width: 658.56px;
     height: 990.21px;
-    top: -395px;
     left: -84.72px;
+    position: absolute;
+    top: -395px;
+    width: 658.56px;
 }
 
 .book-form-image-upload {
-    color: var(--darkGray);
     align-self: flex-end;
+    color: var(--darkGray);
 }
 
 
@@ -75,8 +75,8 @@
 .book-form textarea {
     height: 356px;
     resize: none;
-    scrollbar-width: thin;
     scrollbar-color: var(--textGray) var(--backgroundLight);
+    scrollbar-width: thin;
 }
 
 .book-submit-btn {
@@ -95,8 +95,8 @@
     .book-form-container {
         background-color: var(--backgroundLight);
         padding: 0;
-        width: 100%;
         padding: 53px 0 80px;
+        width: 100%;
     }
 
     .book-form-container .book-form-back,
@@ -109,21 +109,21 @@
     }
 
     .book-form {
-        padding: 0;
         flex-direction: column;
         margin-top: 34px;
+        padding: 0;
     }
 
     .book-form-image-container {
-        width: 335px;
         height: 335px;
+        width: 335px;
     }
 
     .book-form-image {
-        width: 452px;
         height: 679px;
         left: -59px;
         top: -273px;
+        width: 452px;
     }
 
     .book-form-left {
@@ -131,13 +131,12 @@
     }
 
     .book-form-right {
-        width: 100%;
         padding: 30px 20px 47px;
+        width: 100%;
     }
 
-
     .book-submit-btn {
-        width: 100%;
         margin-top: 44px;
+        width: 100%;
     }
 }
