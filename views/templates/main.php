@@ -19,6 +19,7 @@ $action = $_SESSION['action'];
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
     <form action="./" method="post" enctype="multipart/form-data">
         <input type="hidden" id="action" name="action" value="<?= $action ?>">
         <input type="hidden" id="screenWidth" name="screenWidth">
@@ -29,18 +30,18 @@ $action = $_SESSION['action'];
                 <div class="spacer"></div>    
                 <div class="spacer"></div>
                 <button type="submit" class="logo" <?= Utils::changeAction("home"); ?>>
-                    <img src="<?= IMG."logo.png" ?>" alt="logo">
+                    <img src="<?= IMG."logo.png" ?>" alt="Logo du site">
                 </button>
                 <button type="submit" class="home <?php if ($action === 'home') echo 'active'; ?>" <?= Utils::changeAction("home"); ?>>Accueil</button>
                 <button type="submit" class="books link exchangeBooks <?php if ($action === 'books') echo 'active'; ?>" <?= Utils::changeAction("books"); ?>>Nos livres à l’échange</button>
                 <div class="spacer"></div>    
                 <div class="line"></div>
                 <button type="submit" class="messaging <?php if ($action === 'messaging' || $action === 'sendMessage' || $action === 'changeDiscussion') echo 'active'; ?>" <?= Utils::changeAction("messaging"); ?>>
-                    <img src="<?= IMG . 'messaging.svg' ?>" alt="messagerie">
+                    <img src="<?= IMG . 'messaging.svg' ?>" alt="" role="presentation" aria-hidden="true">
                     <span class="messagingTxt">Messagerie</span><span class="bubble"><?= $_SESSION['unReadMessages'] ?></span>
                 </button>
                 <button type="submit" class="account <?php if ($action === 'account') echo 'active'; ?>" <?= Utils::changeAction("account"); ?>>
-                    <img src="<?= IMG . 'account.svg' ?>" alt="compte">
+                    <img src="<?= IMG . 'account.svg' ?>" alt="" role="presentation" aria-hidden="true">
                     <span class="accountTxt">Mon compte</span>
                 </button>
                 <button type="submit" class="sign signin <?php if ($action === 'signin') echo 'active'; ?>" <?= Utils::changeAction(isset($_SESSION['idUser']) ? "logout" : "signin"); ?>>
@@ -50,7 +51,7 @@ $action = $_SESSION['action'];
             </nav>
         </header>
 
-        <main>    
+        <main id="main">    
             <?= /** @var string $content */
             $content /* Ici est affiché le contenu réel de la page. */ ?>
         </main>
@@ -59,7 +60,7 @@ $action = $_SESSION['action'];
             <span class="privacy-policy">Politique de confidentialité</span>
             <span class="legal-notice">Mentions légales</span>
             <span class="copyright">Tom Troc©</span>
-            <img src="<?= IMG_MIN.'logo.png' ?>" alt="logo_min" class="logo-min">
+            <img src="<?= IMG_MIN.'logo.png' ?>" alt="" class="logo-min" role="presentation" aria-hidden="true">
         </footer>
     </form>
 </body>

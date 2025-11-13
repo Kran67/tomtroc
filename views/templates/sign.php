@@ -24,5 +24,5 @@
         <button class="cta sign-submit-btn" <?= Utils::changeAction($signup ? "addUser" : "login") ?>><?= $signup ? "S'inscrire" : "Se connecter" ?></button>
         <div class="sign-ask"><?= $signup ? "Déjà inscrit" : "Pas de compte" ?> ? <button type="submit" <?= Utils::changeAction($signup ? "signin" : "signup")?>><?= $signup ? "Connectez-vous" : "Inscrivez-vous" ?></button></div>
     </div>
-    <img src="<?= IMG ?>connexion.jpg" alt="connection">
+    <img src="<?= IMG ?>connexion.jpg" alt="" role="presentation" aria-hidden="true">
 </div>

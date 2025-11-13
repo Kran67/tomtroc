@@ -218,7 +218,7 @@
         $result .= Utils::changeAction("book", "{'id': '".$this->id."'}");
         $result .= ">";
         $result .= "<span class='book-card'>
-                    <img src='".IMG_BOOKS_MIN.Utils::format($this->image)."' alt='".Utils::format($this->image)."'>
+                    <img src='".IMG_BOOKS_MIN.Utils::format($this->image)."' alt='Couverture du livre : \'".Utils::format($this->title)."\''>
                     <span class='book-tag ".$this->status."'>".$status."</span>
                     <span class='book-content'>
                         <span class='book-title'>".Utils::format($this->title)."</span>

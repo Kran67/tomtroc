@@ -216,3 +216,19 @@ main .title {
 .hidden {
     display: none;
 }
+
+.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+}
+
+.skip-link:focus {
+    position: static;
+    left: 0;
+}
+
+:focus {
+    outline: 3px solid var(--secondary);
+    outline-offset: 2px;
+}

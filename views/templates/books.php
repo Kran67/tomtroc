@@ -8,7 +8,7 @@
         <div class="exchange-books-title">Nos livres à l’échange</div>
             <input name="title" id="title" class="exchange-books-searchbar" type="text"
                    placeholder="Rechercher un livre" value="<?= /** @var string $filter */
-            $filter ?>">
+            $filter ?>" aria-label="Rechercher un livre">
     </div>
     <div class="exchange-books_grid">
         <?php

@@ -26,7 +26,7 @@
         <div class="messaging-current-discussion-header">
             <div class='discussion-image-container'>
                 <img src='<?= /** @var Discussion $current_discussion */
-                IMG_AVATARS.Utils::format($current_discussion ? $current_discussion->getAvatar() : ""); ?>' alt='avatar'>
+                IMG_AVATARS.Utils::format($current_discussion ? $current_discussion->getAvatar() : ""); ?>' alt="Personne : '<?= $current_discussion->getNickname() ?>'">
             </div>
             <?= $current_discussion ? $current_discussion->getNickname() : ""; ?>
         </div>
@@ -39,7 +39,7 @@
                         <div class="messaging-current-discussion-container">
                             <div class="messaging-current-discussion-message-header <?= $message->getUserId() === $userId ? 'connected-user' : '' ?>">
                                 <div class="messaging-current-discussion-image-container <?= $message->getUserId() === $userId ? 'hidden' : '' ?>">
-                                    <img src="<?= IMG_AVATARS.Utils::format($message->getAvatar()); ?>" alt="avatar">
+                                    <img src="<?= IMG_AVATARS.Utils::format($message->getAvatar()); ?>" alt="Personne : '<?= $current_discussion->getNickname() ?>'">
                                 </div>
                                 <span><?= Utils::convertDateToFrenchFormat($message->getSentAt(), "dd:MM HH:mm"); ?></span>
                             </div>
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="messaging-send-message-form">
-            <input type="text" name="content" class="content" placeholder="Tapez votre message ici">
+            <input type="text" name="content" class="content" placeholder="Tapez votre message ici" aria-label="Tapez votre message ici">
             <button class="cta messaging-submit-btn" 
                 <?= Utils::changeAction("sendMessage", "{'id':'".($current_discussion ? $current_discussion->getId() : "")."', 'userId': '".$userId."'}") ?>
             >Envoyer</button>
