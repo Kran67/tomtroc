@@ -44,3 +44,17 @@ function changeAction(action, params) {
         document.getElementById(key).value = value;
     }
 }
+
+/**
+ * Fonction qui permet d'empécher l'utilisateur d'utiliser la touche ENTER dans les champs de saisie sauf pour le filtrage des livres
+ * @param event : l'événement lié à la touche ENTER
+ * @returns true or false
+ */
+function preventEnter(event) {
+    if (event.srcElement.id === 'searchTitle' && event.key === 'Enter') {
+        changeAction('books', {});
+        document.forms[0].submit();
+        return false;
+    }
+    return event.key !== 'Enter';
+}

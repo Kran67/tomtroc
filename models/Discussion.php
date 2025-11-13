@@ -142,7 +142,7 @@ class Discussion extends AbstractEntity
         $screenWidth = intval($_SESSION["screenWidth"], 10);
         $result = "<div class='discussion-main ".($current_discussion_id === $this->id ? "active" : "")."'>
             <div class='discussion-image-container'>
-                <img src='".IMG_AVATARS.Utils::format($this->avatar)."' alt='Personne : \'".Utils::format($this->nickname)."\''>
+                <img src='".IMG_AVATARS.Utils::format($this->avatar)."' alt=\"Personne : '".Utils::format($this->nickname)."'\">
             </div>
             <div class='discussion-right'>
                 <div class='discussion-right-header'>";

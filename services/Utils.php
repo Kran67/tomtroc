@@ -3,7 +3,7 @@
 use JetBrains\PhpStorm\NoReturn;
 
 /**
- * Classe utilitaire : cette classe ne contient que des méthodes statiques qui peuvent être appelées
+ * Classe utilitaire : cette classe ne contient que des fonctions statiques qui peuvent être appelées
  * directement sans avoir besoin d'instancier un objet Utils.
  * Exemple : Utils::redirect('home'); 
  */
@@ -42,7 +42,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode retourne le code js à insérer en attribut d'un bouton.
+     * Cette fonction retourne le code js à insérer en attribut d'un bouton.
      * Pour ouvrir une popup "confirm", et n'effectuer l'action que si l'utilisateur
      * a bien cliqué sur "ok".
      * @param string $message : le message à afficher dans la popup.
@@ -54,7 +54,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode retourne le code js à insérer en attribut d'un élément HTML.
+     * Cette fonction retourne le code js à insérer en attribut d'un élément HTML.
      * Retour en arrière.
      * @return string : le code js à insérer dans le bouton.
      */
@@ -64,7 +64,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode protège une chaine de caractères contre les attaques XSS.
+     * Cette fonction protège une chaine de caractères contre les attaques XSS.
      * @param string $string : la chaine à protéger.
      * @return string : la chaine protégée.
      */
@@ -94,7 +94,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode permet de récupérer une variable de la superglobale $_REQUEST.
+     * Cette fonction permet de récupérer une variable de la superglobale $_REQUEST.
      * Si cette variable n'est pas définie, on retourne la valeur null (par défaut)
      * ou celle qui est passée en paramètre si elle existe.
      * @param string $variableName : le nom de la variable à récupérer.
@@ -195,7 +195,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode retourne le code js à insérer en attribut d'un élément HTML.
+     * Cette fonction retourne le code js à insérer en attribut d'un élément HTML.
      * @param string $imgId : identifiant de l'image dans le DOM.
      * @return string : le code js à insérer dans le bouton.
      */
@@ -205,7 +205,7 @@ class Utils {
     }
 
     /**
-     * Cette méthode retourne le code js à insérer en attribut d'un élément HTML.
+     * Cette fonction retourne le code js à insérer en attribut d'un élément HTML.
      * @return string : le code js à insérer dans le bouton.
      */
     public static function onSendMessage() : string
@@ -216,13 +216,31 @@ class Utils {
         return "";
     }
 
+    /**
+     * Cette fonction permet de changer de page lorsque l'utilisateur clique sur un bouton
+     * @param $newAction : nouvelle action
+     * @param $params : les valeurs à mettre dans les champs cachés
+     * @return string : le code à mettre deans le HTML du bouton
+     */
     public static function changeAction(string $newAction, string $params = "{}") : string
     {
         return "onclick=\"changeAction('".$newAction."', ".$params.");\"";
     }
 
+    /**
+     * Cette fonction ajoute un événement onclick sur un bouton pour ouvrir le menu burger
+     * @return string : le code à mettre deans le HTML du bouton
+     */
     public static function openBurger() : string
     {
         return "onclick=\"this.classList.toggle('open');\"";
+    }
+
+    /**
+     * Cette fonction ajoute un événemen onkeydown sur le formulaire principal
+     * @return string : le code à mettre deans le HTML du bouton
+     */
+    public static function preventEnter() {
+        return "onkeydown=\"return preventEnter(event);\"";
     }
 }

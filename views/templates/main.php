@@ -20,7 +20,7 @@ $action = $_SESSION['action'];
 
 <body>
     <a class="skip-link" href="#main">Aller au contenu</a>
-    <form action="./" method="post" enctype="multipart/form-data">
+    <form action="./" method="post" enctype="multipart/form-data" <?= Utils::preventEnter(); ?>>
         <input type="hidden" id="action" name="action" value="<?= $action ?>">
         <input type="hidden" id="screenWidth" name="screenWidth">
         <input type="hidden" id="id" name="id">

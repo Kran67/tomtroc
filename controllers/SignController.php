@@ -139,7 +139,6 @@ class SignController
         $nickname = Utils::request("nickname");
 
         $uploadOk = true;
-        var_dump($_FILES["avatarUpload"]);
         if (isset($_FILES["avatarUpload"]) && !empty($_FILES["avatarUpload"]["tmp_name"])) {
             $info = getimagesize($_FILES["avatarUpload"]["tmp_name"]);
             if (!$info) {

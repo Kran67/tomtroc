@@ -14,8 +14,26 @@ $userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] :
 $messagingManager = new MessagingManager();
 $_SESSION['unReadMessages'] = $messagingManager->getUnReadMessageCountByUserId($userId);
 $_SESSION["screenWidth"] = Utils::request('screenWidth', 0);
+
+//Liste des actions possibles nécessitant d'être connecté.
+$actions = [
+    'account',
+    'addUser',
+    'changeDiscussion',
+    'createOrViewDiscussion',
+    'deleteBook',
+    'editBook',
+    'editBookForm',
+    'messaging',
+    'sendMessage',
+    'updateAccount',
+    'updateBook',
+];
 // Try catch global pour gérer les erreurs
 try {
+    if (in_array($action, $actions) && !isset($_SESSION['user'])) {
+        throw new Exception("Vous devez être connecté pour accéder à cette page.");
+    }
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
     switch ($action) {
         // Pages accessibles à tous.
@@ -25,7 +43,7 @@ try {
             break;
 
         case 'books':
-            $title = Utils::request('title', '');
+            $title = Utils::request('searchTitle', '');
             $bookController = new BookController();
             $bookController->showBooks($title);
             break;

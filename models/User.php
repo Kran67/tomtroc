@@ -126,7 +126,7 @@ class User extends AbstractEntity
         return 
             "<button type='submit' class='avatar' ".
                     Utils::changeAction("profile", "{ 'id': '".$this->id."'}").">
-                    <img src='".Utils::format(IMG_AVATARS.$this->avatar)."' class='avatar-image' alt='Personne : \'".Utils::format(IMG_AVATARS.$this->nickname)."\''>
+                    <img src='".Utils::format(IMG_AVATARS.$this->avatar)."' class='avatar-image' alt=\"Personne : '".Utils::format($this->nickname)."'\">
                     <span class='avatar-nickname'>".Utils::format($this->nickname)."</span>
                 </button>";
     }
@@ -140,7 +140,7 @@ class User extends AbstractEntity
     {
         $accountMemberSince = Utils::differenceDate($this->created_at);
         $result = "<div class='account-card'>
-            <img id='avatar' src='".IMG_AVATARS.$this->avatar."' alt='Personne : \'".$this->nickname."\''>";
+            <img id='avatar' src='".IMG_AVATARS.$this->avatar."' alt=\"Personne : '".$this->nickname."'\">";
         if ($this->isConnected()) {
             $result .= "<label for='avatarUpload' class='link account-image-update'>modifier</label>";
         } else {
@@ -209,7 +209,7 @@ class User extends AbstractEntity
                 foreach($books as $book) {
                     $result .= "<div class='user-books-row'>";
                     $result .= "<div class='user-books-column-image user-books-image-container area1'>";
-                    $result .= "    <img src='".Utils::format(IMG_BOOKS.$book->getImage())."' class='user-books-image' alt='Couverture du livre : \'".Utils::format($book->getTitle())."\''>";
+                    $result .= "    <img src='".Utils::format(IMG_BOOKS.$book->getImage())."' class='user-books-image' alt=\"Couverture du livre : '".Utils::format($book->getTitle())."'\">";
                     $result .= "</div>";
                     $result .= "<div class='user-books-column-title area2'>".Utils::format($book->getTitle())."</div>";
                     $result .= "<div class='user-books-column-author area2'>".Utils::format($book->getAuthor())."</div>";

@@ -20,6 +20,9 @@ Il est possible que la librairie intl ne soit pas activée sur votre serveur par
 
 Ce projet a été réalisé avec PHP 8.3.1. Bien que d'autres versions de PHP puissent fonctionner, il n'est pas garanti que le projet fonctionne avec des versions antérieures.
 
+## Fonctionnalité JS :
+Le site propose un peu de dynamisme pour l'upload de photos (avatar ou couverture de livre), le responsive.
+
 ## Copyright : 
 
 Projet utilisé dans le cadre d'une formation Openclassrooms. 
