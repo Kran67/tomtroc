@@ -1,0 +1,313 @@
+.account-main {
+    align-items: center;
+    background-color: var(--backgroundLight);
+    display: flex;
+    flex-direction: column;
+}
+
+.account-container {
+    padding: 90px 150px;
+    width: 1440px;
+}
+
+.account-title {
+    font-family: playfair;
+    font-size: 26px;
+    margin-bottom: 48px;
+}
+
+.account-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+.account-card,
+.account-update-form {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 508px;
+    min-width: 547px;
+}
+
+.account-update-form {
+    align-items: normal;
+    padding: 35px 117px 37px;
+}
+
+.account-update-form-title {
+    font-size: 16px;
+}
+
+.account-card>img {
+    border-radius: 50%;
+    height: 135px;
+    margin-top: 48px;
+    width: 135px;
+}
+
+.account-card .account-image-update,
+.account-card .account-image-update:visited {
+    color: var(--textGray);
+    font-size: 14px;
+    margin-top: 5px;
+    outline: none;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.account-spacer {
+    height: 22px;
+}
+
+.account-card hr {
+    border-bottom: none;
+    border-top: 1px solid var(--lightGray);
+    height: 0;
+    margin-top: 47px;
+    width: 242px;
+}
+
+.account-nickname {
+    color: var(--darkGray);
+    font-family: playfair;
+    font-size: 24px;
+    margin-top: 48px;
+    text-align: center;
+}
+
+.account-member-since {
+    color: var(--textGray);
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.account-library {
+    color: var(--darkGray);
+    font-size: 8px;
+    font-weight: 600;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.account-book-count {
+    align-items: center;
+    color: var(--darkGray);
+    display: flex;
+    font-size: 14px;
+    gap: 4px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.account-book-count img {
+    height: 13.71px;
+    width: 10.41px;
+}
+
+.account-button {
+    margin: 45px 0 56px;
+    width: 215px;
+}
+
+.account-update-form input,
+.book-form input,
+.book-form textarea,
+.book-form select {
+    background-color: var(--lightGray2);
+}
+
+.account-update-form button {
+    width: 150px;
+}
+
+.account-detail-books {
+    background-color: var(--backgroundLight);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-books-header {
+    background-color: #fff;
+    color: var(--darkGray);
+    display: flex;
+    font-size: 8px;
+    font-weight: 600;
+    margin-bottom: 1px;
+    padding: 33px 66px 7px;
+}
+
+.user-books-column-image {
+    min-width: 158px;
+}
+
+.user-books-column-title {
+    min-width: 158px;
+}
+
+.user-books-column-author {
+    min-width: 181px;
+}
+
+.user-books-column-desc {
+    min-width: 175px;
+    width: 100%;
+}
+
+.user-books-column-availability {
+    min-width: 213px;
+}
+
+.user-books-column-action {
+    min-width: 202px;
+}
+
+.user-books-no-book {
+    align-items: center;
+    background-color: #fff;
+    color: var(--darkGray);
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    height: 50px;
+    justify-content: center;
+    width: 100%;
+}
+
+.account-detail-books a {
+    color: var(--darkGray);
+    font-size: 12px;
+    outline: none;
+    text-decoration: underline;
+}
+
+.user-books-row-container {
+    height: 530px;
+    overflow-y: auto;
+    scrollbar-color: var(--textGray) var(--backgroundLight);
+    scrollbar-width: thin;
+}
+
+.user-books-row {
+    align-items: center;
+    background-color: #fff;
+    color: var(--darkGray);
+    display: flex;
+    font-size: 12px;
+    height: 130px;
+    padding: 0 66px;
+}
+
+.user-books-row:nth-child(odd) {
+    background-color: var(--lightGray2);
+}
+
+.user-books-image-container {
+    height: 78px;
+    overflow: hidden;
+    position: relative;
+    width: 78px;
+}
+
+.user-books-image {
+    height: 158px;
+    left: -12px;
+    position: absolute;
+    top: -62px;
+    width: 105px;
+}
+
+.user-books-column-desc {
+    padding-right: 45px;
+}
+
+.user-books-row .user-books-column-desc {
+    font-style: italic;
+}
+
+.user-books-column-action {
+    display: flex;
+    gap: 28px;
+}
+
+.user-books-column-action button {
+    text-decoration: underline;
+}
+
+.user-books-column-action .delete {
+    color: #CB2D2D;
+    text-decoration-color: #CB2D2D;
+}
+
+/* ==========================================================
+   responsive
+   ========================================================== */
+
+@media (max-width: 767px) {
+    .account-container {
+        gap: 33px;
+        padding: 0;
+        padding: 73px 22px 62px;
+        width: 100%;
+    }
+
+    .account-update-form-title {
+        align-self: flex-start;
+    }
+
+    .account-detail {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .account-detail-books {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .account-card,
+    .account-update-form {
+        min-height: auto;
+        min-width: auto;
+        padding: 40px 32px;
+    }
+
+    .user-books-column-availability {
+        align-self: center;
+    }
+
+    .sign-form,
+    .account-update-form button {
+        width: 100%;
+    }
+
+    .user-books-row:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    .user-books-row {
+        min-height: 327px;
+    }
+
+    .user-books-column-action {
+        margin-top: -34px;
+    }
+
+    .user-books-column-desc {
+        padding-right: 114px;
+    }
+
+    .account-detail-books .user-books-row {
+        height: 298px;
+        min-height: auto;
+        padding: 51px 55px 18px;
+    }
+}
