@@ -5,6 +5,7 @@ namespace App\src\controllers;
 use App\src\dao\BookDAO;
 use App\src\dao\UserDAO;
 use App\src\models\View;
+use App\src\services\Utils;
 use Exception;
 
 class BookController 
@@ -25,12 +26,12 @@ class BookController
 
     /**
      * Affiche la page des livres à échanger.
-     * @param string $bookTitle
      * @return void
      * @throws Exception
      */
-    public function showBooks(string $bookTitle) : void
+    public function showBooks() : void
     {
+        $bookTitle = Utils::request("searchTitle", "");
         $bookDao = new BookDAO();
         $books = $bookDao->getAllBooks($bookTitle);
 
@@ -40,12 +41,12 @@ class BookController
 
     /**
      * Affiche du détail d'un livre.
-     * @param string $bookId : identifiant du livre
      * @return void
      * @throws Exception
      */
-    public function showBookDetail(string $bookId) : void
+    public function showBookDetail() : void
     {
+        $bookId = Utils::request('id', '');
         $bookDao = new BookDAO();
         $book = $bookDao->getBookById($bookId);
 

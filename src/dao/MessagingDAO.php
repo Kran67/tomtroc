@@ -5,6 +5,7 @@ namespace App\src\dao;
 use App\src\dao\AbstractEntityDAO;
 use App\src\models\Discussion;
 use App\src\models\Message;
+use App\src\services\Utils;
 
 /** 
  * Classe MessagingDAO pour gérer les requêtes liées aux messages.
@@ -14,10 +15,9 @@ class MessagingDAO extends AbstractEntityDAO
 {
     /**
      * Récupère les conversations pour un utilisateur.
-     * @param string $userId : identifiant de l'utilisateur.
      * @return array : les conversations avec le dernier message.
      */
-    public function getDiscussionsByUserId(string $userId) : array
+    public function getDiscussionsByUserId() : array
     {
         $sql = "SELECT 
                     u.id AS user_id,
@@ -40,7 +40,7 @@ class MessagingDAO extends AbstractEntityDAO
                     )
                 WHERE mt.user_id = :userId OR mt.from_user_id = :userId
                 ORDER BY mt.created_at DESC, m.sent_at DESC";
-        $result = $this->db->query($sql, ['userId' => $userId]);
+        $result = $this->db->query($sql, ['userId' => Utils::getUserId()]);
         $discussions = [];
 
         while ($discussion = $result->fetch()) {
@@ -51,10 +51,9 @@ class MessagingDAO extends AbstractEntityDAO
 
     /**
      * Récupère le nombre de messages non lus pour un utilisateur.
-     * @param string $userId : identifiant de l'utilisateur.
      * @return int : le nombre de messages.
      */
-    public function getUnReadMessageCountByUserId(string $userId) : int
+    public function getUnReadMessageCountByUserId() : int
     {
         $sql = "SELECT count(m.id) as count
                 FROM message m
@@ -66,7 +65,7 @@ class MessagingDAO extends AbstractEntityDAO
                             (mt.from_user_id = :userId AND m.user_id != :userId)
                         )";
 
-        $query = $this->db->query($sql, ['userId' => $userId]);
+        $query = $this->db->query($sql, ['userId' => Utils::getUserId()]);
         $result = $query->fetch();
 
         if (!$result) $result = 0;
@@ -109,7 +108,7 @@ class MessagingDAO extends AbstractEntityDAO
         $result = $this->db->query($sql, ['discussionId' => $discussionId]);
         $discussion = $result->fetch();
         if ($discussion) {
-            if ($discussion["from_user_id"] === $_SESSION["idUser"]) {
+            if ($discussion["from_user_id"] === Utils::getUserId()) {
                 $discussion["from_user_id"] = $discussion["to_user_id"];
                 $discussion["nickname"] = $discussion["to_nickname"];
                 $discussion["avatar"] = $discussion["to_avatar"];
@@ -129,7 +128,7 @@ class MessagingDAO extends AbstractEntityDAO
     {
         $sql = "SELECT *
                 FROM message_thread
-                WHERE user_id = :userId AND from_user_id = :fromUserId";
+                WHERE user_id = :userId AND from_user_id = :fromUserId OR user_id = :fromUserId AND from_user_id = :userId";
         $result = $this->db->query($sql, ['userId' => $toUserId, 'fromUserId' => $fromUserId]);
         $discussion = $result->fetch();
         if ($discussion) {
@@ -154,7 +153,11 @@ class MessagingDAO extends AbstractEntityDAO
         ]);
     }
 
-
+    /**
+     * Ajoute un message dans une conversation.
+     * @param Message $message : le message à ajouter.
+     * @return void
+     */
     public function sendMessage(Message $message) : void
     {
         $sql = "INSERT INTO message (id, thread_id, user_id, content, sent_at, is_read) VALUES (:id, :discussionId, :userId, :content, NOW(), 0)";
@@ -166,12 +169,17 @@ class MessagingDAO extends AbstractEntityDAO
         ]);
     }
 
+    /**
+     * Met le flag is_read à vrai pour tous les messages d'une conversation.
+     * @param string $discussionId : identifiant de la conversation.
+     * @return void
+     */
     public function readAllDiscussionMessage(string $discussionId) : void
     {
         $sql = "UPDATE message SET is_read = 1 WHERE thread_id = :discussionId AND user_id <> :user_id";
         $this->db->query($sql, [
             "discussionId" => $discussionId,
-            "user_id" => $_SESSION["idUser"]
+            "user_id" => Utils::getUserId()
         ]);
     }
 }

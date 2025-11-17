@@ -5,18 +5,19 @@ namespace App\src\controllers;
 use App\src\models\View;
 use App\src\dao\BookDao;
 use App\src\dao\UserDao;
+use App\src\services\Utils;
 use Exception;
 
 class ProfileController 
 {
     /**
      * Affichage de la page de profil d'un utilisateur.
-     * @param string $userId
      * @return void
      * @throws Exception
      */
-    public function showProfile(string $userId): void
+    public function showProfile(): void
     {
+        $userId = Utils::request('id', '');
         if (!isset($userId) || $userId < 1) {
             throw new Exception("Profile inconnu");
         }
@@ -31,7 +32,7 @@ class ProfileController
         $bookDao = new BookDao();
         $userBooks = $bookDao->getAllBooksFromUserId($user->getId());
 
-        if (isset($_SESSION) && isset($_SESSION['idUser']) && $_SESSION['idUser'] === $userId) {
+        if (Utils::getUserId() === $userId) {
             $view = new View("account");
             $view->render("account", ["user" => $user, "books" => $userBooks]);
         } else {

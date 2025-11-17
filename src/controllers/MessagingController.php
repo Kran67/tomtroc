@@ -12,13 +12,14 @@ class MessagingController
 {
     /**
      * Affichage de la page des messages.
-     * @return void of Message
+     * @return void
      * @throws Exception
      */
     public function showMessaging(): void
     {
-        $userId = $_SESSION['idUser'] ?? '';
+        $userId = Utils::getUserId();
         $current_discussion_id = $_SESSION['currentDiscussionId'] ?? '';
+
         $screenWidth = intval($_SESSION["screenWidth"], 10);
 
         if (empty($userId)) {
@@ -67,13 +68,14 @@ class MessagingController
 
     /**
      * Création si la conversation n'existe pas et affichage de la conversation.
-     * @param string $toUserId
+     * @return void
      * @throws Exception
      */
-    public function createOrViewDiscussion(string $toUserId): void
+    public function createOrViewDiscussion(): void
     {
+        $toUserId = Utils::request("id", "");
+        $fromUserId = Utils::getUSerId();
         // on va voir s'il y a déjà une discussion entre l'utilisateur actuel et l'utilisateur qui met le livre à disposition
-        $fromUserId = $_SESSION['idUser'];
         $messagingDao = new MessagingDAO();
         $discussion = $messagingDao->getDiscussionByUsers($fromUserId, $toUserId);
 
@@ -91,6 +93,7 @@ class MessagingController
 
     /**
      * Ajoute un message à la conversation courante.
+     * @return void
      * @throws Exception
      */
     public function sendMessage(): void
@@ -102,7 +105,7 @@ class MessagingController
             "id" => Utils::guidv4(),
             "discussion_id" => $discussionId,
             "user_id" => $_SESSION['idUser'],
-            "content" =>  $content,
+            "content" =>  htmlspecialchars($content),
         ]);
 
         $messagingDao = new MessagingDAO();

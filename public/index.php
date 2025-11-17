@@ -3,29 +3,22 @@
 require_once '../config/config.php';
 require_once '../config/autoload.php';
 
-use App\src\services\Utils;
-use App\src\dao\MessagingDAO;
-use App\src\controllers\BookController;
-use App\src\controllers\SignController;
-use App\src\controllers\ProfileController;
-use App\src\controllers\MessagingController;
-use App\src\models\View;
+//use App\src\services\Utils;
+//use App\src\dao\MessagingDAO;
+//use App\src\controllers\BookController;
+//use App\src\controllers\SignController;
+//use App\src\controllers\ProfileController;
+//use App\src\controllers\MessagingController;
+//use App\src\models\View;
+//use App\config\Autoloader;
 use App\config\Autoloader;
+use App\src\router\Router;
 
 Autoloader::register();
 
-// On récupère l'action demandée par l'utilisateur.
-// Si aucune action n'est demandée, on affiche la page d'accueil.
-$action = Utils::request('action', 'home');
-$action = isset($_SESSION) && isset($_SESSION['action']) ? $_SESSION['action'] : $action;
-if (!isset($_SESSION['action'])) {
-    $_SESSION['action'] = $action;
-}
-$userId = isset($_SESSION) && isset($_SESSION['idUser']) ? $_SESSION['idUser'] : '';
-$messagingDao = new MessagingDAO();
-$_SESSION['unReadMessages'] = $messagingDao->getUnReadMessageCountByUserId($userId);
-$_SESSION["screenWidth"] = Utils::request('screenWidth', 0);
-
+$router = new Router();
+$router->handleRequest();
+/*
 //Liste des actions possibles nécessitant d'être connecté.
 $actions = [
     'account',
@@ -155,6 +148,4 @@ try {
     // En cas d'erreur, on affiche la page d'erreur.
     $errorView = new View('Erreur');
     $errorView->render('errorPage', ['errorMessage' => $e->getMessage()]);
-}
-
-unset($_SESSION['action']);
+}*/

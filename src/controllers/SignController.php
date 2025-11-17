@@ -13,12 +13,32 @@ use Exception;
 class SignController 
 {
     /**
+     * Affiche la page de connexion.
+     * @return void
+     * @throws Exception
+     */
+    public function showSignUpForm() : void
+    {
+        $this->showSignForm();
+    }
+
+    /**
+     * Affiche la page d'enregistrement.
+     * @return void
+     * @throws Exception
+     */
+    public function showSignInForm() : void
+    {
+        $this->showSignForm(false);
+    }
+
+    /**
      * Affiche la page d'enregistrement ou de connexion.
      * @param bool $signup
      * @return void
      * @throws Exception
      */
-    public function showSignForm(bool $signup = true) : void
+    private function showSignForm(bool $signup = true) : void
     {
         $user = new User();
         if (isset($_SESSION['idUser'])) {
@@ -120,7 +140,12 @@ class SignController
             throw new Exception("L'utilisateur existe déjà.");
         }
 
-        $user = new User(['id' => Utils::guidv4(),'login' => $login, 'password' => password_hash($password, PASSWORD_DEFAULT), 'nickname' => $nickname]);
+        $user = new User([
+            'id' => Utils::guidv4(),
+            'login' => htmlspecialchars($login),
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'nickname' => htmlspecialchars($nickname)
+        ]);
 
         // On enregistre le nouvel utilisateur
         $user = $userDao->addUser($user);
@@ -175,8 +200,8 @@ class SignController
         $user = new User([
             'id' => $_SESSION['idUser'],
             'password' => !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : "",
-            'nickname' => $nickname,
-            'avatar' => $avatar
+            'nickname' => htmlspecialchars($nickname),
+            'avatar' => htmlspecialchars($avatar)
         ]);
 
         $userDao = new UserDAO();
@@ -295,9 +320,9 @@ class SignController
         // On crée l'objet Book.
         $book = new Book([
             'id' => $id,
-            'title' => $title,
-            'author' => $author,
-            'description' => $description,
+            'title' => htmlspecialchars($title),
+            'author' => htmlspecialchars($author),
+            'description' => htmlspecialchars($description),
             'image' => $booksImgFolder,
             'status' => $availability
         ]);
@@ -317,7 +342,7 @@ class SignController
     {
         $this->checkIfUserIsConnected();
 
-        $id = Utils::request("id", '');
+        $id = Utils::request("id", "");
 
         // On supprime le livre.
         $bookDao = new BookDAO();

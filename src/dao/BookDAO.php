@@ -13,6 +13,7 @@ class BookDAO extends AbstractEntityDAO
 {
     /**
      * Récupère tous les livres.
+     * @param string $bookTitle : le filtre à appliquer sur le titre des livres
      * @return array : un tableau d'objets Book.
      */
     public function getAllBooks(string $bookTitle) : array
@@ -93,7 +94,7 @@ class BookDAO extends AbstractEntityDAO
 
         $this->db->query($sql, [
             'id' => Utils::guidv4(),
-            'id_user' => $_SESSION["idUser"],
+            'id_user' => Utils::getUserId(),
             'title' => $book->getTitle(),
             'author' => $book->getAuthor(),
             'image' => $book->getImage(),

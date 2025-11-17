@@ -3,6 +3,7 @@ namespace App\src\services;
 
 use DateTime;
 use IntlDateFormatter;
+use App\src\models\View;
 
 use JetBrains\PhpStorm\NoReturn;
 
@@ -43,18 +44,6 @@ class Utils {
         $url = "./";
         header("Location: $url");
         exit();
-    }
-
-    /**
-     * Cette fonction retourne le code js à insérer en attribut d'un bouton.
-     * Pour ouvrir une popup "confirm", et n'effectuer l'action que si l'utilisateur
-     * a bien cliqué sur "ok".
-     * @param string $message : le message à afficher dans la popup.
-     * @return string : le code js à insérer dans le bouton.
-     */
-    public static function askConfirmation(string $message) : string
-    {
-        return "onclick=\"return confirm('$message');\"";
     }
 
     /**
@@ -214,7 +203,7 @@ class Utils {
      */
     public static function onSendMessage() : string
     {
-        if (isset($_SESSION) && !isset($_SESSION["idUser"])) {
+        if (isset($_SESSION) && empty(Utils::getUserId())) {
             return "onclick=\"alert('Vous devez vous connecter pour envoyer un message.'); return false;\"";
         }
         return "";
@@ -226,9 +215,18 @@ class Utils {
      * @param $params : les valeurs à mettre dans les champs cachés
      * @return string : le code à mettre deans le HTML du bouton
      */
-    public static function changeAction(string $newAction, string $params = "{}") : string
+    public static function changeAction(string $newAction, string $params = "{}", string $confirm = "") : string
     {
-        return "onclick=\"changeAction('".$newAction."', ".$params.");\"";
+        $result = "onclick=\"";
+        if (!empty($confirm)) {
+            $result .= "if (confirm('".$confirm."')) {";
+        }
+        $result .= " changeAction('".$newAction."', ".$params.");";
+        if (!empty($confirm)) {
+            $result .= "} else return false;";
+        }
+        $result .= "\"";
+        return $result;
     }
 
     /**
@@ -244,7 +242,28 @@ class Utils {
      * Cette fonction ajoute un événemen onkeydown sur le formulaire principal
      * @return string : le code à mettre deans le HTML du bouton
      */
-    public static function preventEnter() {
+    public static function preventEnter(): string
+    {
         return "onkeydown=\"return preventEnter(event);\"";
+    }
+
+    /**
+     * Cette fonction récupère l'identifiant de l'utilisateur connecté sinon renvoi chaine vide
+     * @return string : l'identifiant de l'utilisateur connecté
+     */
+    public static function getUserId(): string
+    {
+        return isset($_SESSION) && isset($_SESSION["idUser"]) ? $_SESSION["idUser"] : "";
+    }
+
+    /**
+     * Cette fonction permet de rediriger les messages d'erreurs
+     * @param string $message : le message à afficher
+     * @return void
+     */
+    public static function showErrorPage(string $message) : void
+    {
+        $errorView = new View("Erreur");
+        $errorView->render("errorPage", ["errorMessage" => $message]);
     }
 }

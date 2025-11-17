@@ -134,6 +134,10 @@
     overflow: hidden;
 }
 
+.user-books-add-book {
+    text-decoration: underline;
+}
+
 .user-books-header {
     background-color: #fff;
     color: var(--darkGray);

@@ -158,7 +158,7 @@ class User extends AbstractEntity
             <div class='account-library'>BIBLIOTHEQUE</div>
             <div class='account-book-count'><img src='".IMG."livres.svg' alt='Nombre de livres possédés'>".$this->book_count." livre".($this->book_count > 1 ? "s" : "")."</div>";
 
-        if (!isset($_SESSION["idUser"]) || $this->id !== $_SESSION["idUser"]) {
+        if (!empty(Utils::getUserId())) {
             $result .= "<button type='submit' class='cta cta2 account-button' ".Utils::onSendMessage()." ".
                 Utils::changeAction("createOrViewDiscussion", "{ 'id': '".$this->id."'}")
                 .">Écrire un message</button>";
@@ -193,10 +193,12 @@ class User extends AbstractEntity
     public function getBooks(array $books) : string
     {
         $result = "<div class='account-detail-books'>";
-        $result .= "<button type='submit' class='user-books-add-book'";
-        $result .= Utils::changeAction("editBook");
-        $result .= ">Ajouter un livre</button>
-            <div class='user-books-header'>
+        if ($this->isConnected() && $this->id === Utils::getUserId()) {
+            $result .= "<button type='submit' class='user-books-add-book'";
+            $result .= Utils::changeAction("editBook");
+            $result .= ">Ajouter un livre</button>";
+        }
+        $result .= "<div class='user-books-header'>
                 <div class='user-books-column-image'>PHOTO</div>
                 <div class='user-books-column-title'>TITRE</div>
                 <div class='user-books-column-author'>AUTEUR</div>
@@ -227,8 +229,8 @@ class User extends AbstractEntity
                         $result .= "    <button type='submit'";
                         $result .= Utils::changeAction("editBook", "{ 'id': '".$book->getId()."'}");
                         $result .= ">Éditer</button>";
-                        $result .= "    <button type='submit' class='delete' ".Utils::askConfirmation('Êtes-vous sûr de vouloir supprimer ce livre ?');
-                        $result .= Utils::changeAction("deleteBook", "{ 'id': '".$book->getId()."'}");
+                        $result .= "    <button type='submit' class='delete' ";
+                        $result .= Utils::changeAction("deleteBook", "{ 'id': '".$book->getId()."'}", "Êtes-vous sûr de vouloir supprimer ce livre ?");
                         $result .= ">Supprimer</button>";
                         $result .= "</div>";
                     }

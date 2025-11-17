@@ -5,15 +5,15 @@ namespace App\src\dao;
 use App\src\models\User;
 
 /** 
- * Classe UserDAO pour gérer les requêtes liées aux users et à l'authentification.
+ * Classe UserDAO pour gérer les requêtes liées aux utilisateurs et à l'authentification.
  */
 
 class UserDAO extends AbstractEntityDAO
 {
     /**
-     * Récupère un user par son login.
+     * Récupère un utilisateur par son login.
      * @param string $login
-     * @return ?User
+     * @return User|null
      */
     public function getUserByLogin(string $login) : ?User 
     {
@@ -27,9 +27,9 @@ class UserDAO extends AbstractEntityDAO
     }
 
     /**
-     * Récupère un user par son identifiant.
+     * Récupère un utilisateur par son identifiant.
      * @param string $id
-     * @return ?User
+     * @return User|null
      */
     public function getUserById(string $id) : ?User 
     {
@@ -48,7 +48,7 @@ class UserDAO extends AbstractEntityDAO
     /**
      * Ajoute un utilisateur.
      * @param User $user
-     * @return ?User
+     * @return User|null
      */
     public function addUser(User $user) : ?User 
     {
@@ -67,6 +67,7 @@ class UserDAO extends AbstractEntityDAO
     /**
      * Modifie un utilisateur.
      * @params User $user
+     * @return void
      */
     public function updateUser(User $user) : void
     {

@@ -9,7 +9,6 @@
             <input name="searchTitle" id="searchTitle" class="exchange-books-searchbar" type="text"
                    placeholder="Rechercher un livre" value="<?= /** @var string $filter */
             $filter ?>" aria-label="Rechercher un livre">
-            <button type="submit" onclick="alert('ok');"></button>
     </div>
     <div class="exchange-books_grid">
         <?php
