@@ -171,18 +171,18 @@ class User extends AbstractEntity
     {
         return "<div class='account-update-form'>
             <div class='account-update-form-title'>Vos informations personnelles</div>
-            <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif' ".Utils::onChangeImage('avatar').">
+            <input type='file' name='avatarUpload' id='avatarUpload' accept='.jpg, .png, .gif' ".Utils::onChangeImage('avatar')." maxlength='255'>
             <div class='sign-form-row'>
                 <label for='email'>Adresse email</label>
-                <input name='email' id='email' type='text' value='".$this->login."' readonly>
+                <input name='email' id='email' type='email' value='".$this->login."' readonly autocomplete='off'>
             </div>
             <div class='sign-form-row'>
                 <label for='password'>Mot de passe</label>
-                <input name='password' id='password' type='password'>
+                <input name='password' id='password' type='password' maxlength='50'>
             </div>
             <div class='sign-form-row'>
                 <label for='nickname'>Pseudo</label>
-                <input name='nickname' id='nickname' type='text' value='".$this->nickname."'>
+                <input name='nickname' id='nickname' type='text' value='".$this->nickname."' maxlength='30'>
             </div>
             <button class='cta cta2 sign-submit-btn'".
                 Utils::changeAction("updateAccount")

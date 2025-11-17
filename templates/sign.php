@@ -12,16 +12,16 @@
         <?php if ($signup) {?>
             <div class="sign-form-row">
                 <label for="nickname">Pseudo</label>
-                <input name="nickname" id="nickname" type="text">
+                <input name="nickname" id="nickname" type="text" maxlength="30">
             </div>
         <?php }?>
         <div class="sign-form-row">
             <label for="email">Adresse email</label>
-            <input name="email" id="email" type="text">
+            <input name="email" id="email" type="email" maxlength="50">
         </div>
         <div class="sign-form-row">
             <label for="password">Mot de passe</label>
-            <input name="password" id="password" type="password">
+            <input name="password" id="password" type="password" maxlength="100">
         </div>
         <button class="cta sign-submit-btn" <?= Utils::changeAction($signup ? "addUser" : "login") ?>><?= $signup ? "S'inscrire" : "Se connecter" ?></button>
         <div class="sign-ask"><?= $signup ? "Déjà inscrit" : "Pas de compte" ?> ? <button type="submit" <?= Utils::changeAction($signup ? "signin" : "signup")?>><?= $signup ? "Connectez-vous" : "Inscrivez-vous" ?></button></div>

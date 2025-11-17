@@ -21,11 +21,11 @@
             <div class="book-form-right">
                 <div class='book-form-row'>
                     <label for="title">Titre</label>
-                    <input type="text" name="title" id="title" value="<?= Utils::format($book->getTitle()) ?>" required>
+                    <input type="text" name="title" id="title" value="<?= Utils::format($book->getTitle()) ?>" required maxlength="100">
                 </div>
                 <div class='book-form-row'>
                     <label for="author">Auteur</label>
-                    <input type="text" name="author" id="author" value="<?= Utils::format($book->getAuthor()) ?>" required>
+                    <input type="text" name="author" id="author" value="<?= Utils::format($book->getAuthor()) ?>" required maxlength="30">
                 </div>
                 <div class='book-form-row'>
                     <label for="description">Description</label>
