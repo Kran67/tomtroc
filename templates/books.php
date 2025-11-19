@@ -6,6 +6,7 @@
 <div class="exchange-books-main">
     <div class="exchange-books-bar">    
         <div class="exchange-books-title">Nos livres à l’échange</div>
+            <label for="searchTitle" class="hidden">Rechercher un livre</label>
             <input name="searchTitle" id="searchTitle" class="exchange-books-searchbar" type="text"
                    placeholder="Rechercher un livre" value="<?= /** @var string $filter */
             $filter ?>" aria-label="Rechercher un livre">

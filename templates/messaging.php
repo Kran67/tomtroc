@@ -56,7 +56,8 @@
             </div>
         </div>
         <div class="messaging-send-message-form">
-            <input type="text" name="content" class="content" placeholder="Tapez votre message ici" aria-label="Tapez votre message ici">
+            <label for="content" class="hidden">Tapez votre message ici</label>
+            <input type="text" id="content" name="content" class="content" placeholder="Tapez votre message ici">
             <button class="cta messaging-submit-btn" 
                 <?= Utils::changeAction("sendMessage", "{'id':'".($current_discussion ? $current_discussion->getId() : "")."', 'userId': '".$userId."'}") ?>
             >Envoyer</button>
