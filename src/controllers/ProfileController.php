@@ -40,5 +40,4 @@ class ProfileController
             $view->render("profile", ["user" => $user, "books" => $userBooks]);
         }
     }
-
 }

@@ -7,7 +7,8 @@ use App\src\dao\DBDAO;
 /**
  * Classe abstraite qui représente un data access object. Elle récupère automatiquement le gestionnaire de base de données. 
  */
-abstract class AbstractEntityDAO {
+abstract class AbstractEntityDAO
+{
     
     protected DBDAO $db;
 

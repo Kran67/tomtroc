@@ -16,7 +16,8 @@ class View
      * @return void
      * @throws Exception
      */
-    public function render($viewName, $params = []) {
+    public function render($viewName, $params = [])
+    {
         $this->file = '../templates/'.$viewName.'.php';
         $content = $this->renderfile($this->file, $params);
         $view = $this->renderfile('../templates/main.php', [
@@ -32,7 +33,8 @@ class View
      * @throws Exception : si la vue n'existe pas.
      * @return string : le contenu de la vue.
      */
-    private function renderfile($file, $params) {
+    private function renderfile($file, $params)
+    {
         if (file_exists($file)) {
             extract($params);
             ob_start();

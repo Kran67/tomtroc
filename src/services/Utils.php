@@ -12,7 +12,8 @@ use JetBrains\PhpStorm\NoReturn;
  * directement sans avoir besoin d'instancier un objet Utils.
  * Exemple : Utils::redirect('home'); 
  */
-class Utils {
+class Utils
+{
     /**
      * Convertit une date vers le format de type "samedi 15 juillet 2023" en francais.
      * @param DateTime|null $date : la date à convertir.

@@ -144,7 +144,8 @@ class MessagingDAO extends AbstractEntityDAO
      * @param string $fromUserId : identifiant.
      * @return void
      */
-    public function createNewDiscussion(string $id, string $toUserId, string $fromUserId) : void {
+    public function createNewDiscussion(string $id, string $toUserId, string $fromUserId) : void
+    {
         $sql = "INSERT INTO message_thread (id, user_id, from_user_id, created_at) VALUES (:id, :userId, :fromUserId, NOW())";
         $this->db->query($sql, [
             "id" => $id,
