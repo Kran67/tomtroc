@@ -124,9 +124,9 @@ class SignController
     public function addUser() : void
     {
         // On récupère les données du formulaire.
-        $login = Utils::request("email");
-        $password = Utils::request("password");
-        $nickname = Utils::request("nickname");
+        $login = substr(Utils::request("email"), 0, 50);
+        $password = substr(Utils::request("password"), 0, 255);
+        $nickname = substr(Utils::request("nickname"), 0, 30);
 
         // On vérifie que les données sont valides.
         if (empty($login) || empty($password) || empty($nickname)) {
@@ -170,8 +170,8 @@ class SignController
         $target_file = $target_dir.basename($avatar);
 
         // On récupère les données du formulaire.
-        $password = Utils::request("password");
-        $nickname = Utils::request("nickname");
+        $password = substr(Utils::request("password"), 0, 255);
+        $nickname = substr(Utils::request("nickname"), 0, 30);
 
         $uploadOk = true;
         if (isset($_FILES["avatarUpload"]) && !empty($_FILES["avatarUpload"]["tmp_name"])) {
@@ -275,10 +275,10 @@ class SignController
 
         // On récupère les données du formulaire.
         $id = Utils::request("id");
-        $title = Utils::request("title");
-        $author = Utils::request("author");
+        $title = substr(Utils::request("title"), 0, 100);
+        $author = substr(Utils::request("author"), 0, 30);
         $description = Utils::request("description");
-        $image = Utils::request("image");
+        $image = substr(Utils::request("image"), 0, 255);
         $availability = Utils::request("availability");
 
         $uploadOk = true;
