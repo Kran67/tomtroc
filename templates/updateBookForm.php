@@ -7,7 +7,7 @@
 ?>
 <div class="book-form-main">
     <div class="book-form-container">
-        <button type="submit" class="book-form-back" <?= Utils::changeAction("account") ?> >&#8592; retour</button>
+        <a class="book-form-back" href="javascript:history.back();">&#8592; retour</a>
         <h2><?= /** @var Book $book */
             empty($book->getId()) ? "Création d'un livre" : "Modifier les informations"?></h2>
         <div class="book-form">

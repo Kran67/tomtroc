@@ -158,7 +158,7 @@ class User extends AbstractEntity
             <div class='account-library'>BIBLIOTHEQUE</div>
             <div class='account-book-count'><img src='".IMG."livres.svg' alt='Nombre de livres possédés'>".$this->book_count." livre".($this->book_count > 1 ? "s" : "")."</div>";
 
-        if (!empty(Utils::getUserId())) {
+        if (!empty(Utils::getUserId() && Utils::getUserId() !== $this->id)) {
             $result .= "<button type='submit' class='cta cta2 account-button' ".Utils::onSendMessage()." ".
                 Utils::changeAction("createOrViewDiscussion", "{ 'id': '".$this->id."'}")
                 .">Écrire un message</button>";

@@ -19,6 +19,10 @@ class MessagingController
     {
         $userId = Utils::getUserId();
         $current_discussion_id = $_SESSION['currentDiscussionId'] ?? '';
+        $id = Utils::request("id", '');
+        if (!empty($id) && $current_discussion_id <> $id) {
+            $current_discussion_id = $id;
+        }
 
         $screenWidth = intval($_SESSION["screenWidth"], 10);
 
@@ -31,7 +35,7 @@ class MessagingController
         $discussions = $messagingDao->getDiscussionsByUserId($userId);
 
         if (empty($current_discussion_id)) {
-            $current_discussion_id = Utils::request("discussionId", '');
+            $current_discussion_id = Utils::request("id", '');
         }
 
         if (empty($current_discussion_id) && isset($discussions[0]) && $screenWidth > 377) {
